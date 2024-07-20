@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Snapps' Work Forecast</title>
+    <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    
+    <meta property="og:site_name" content="Snapps' Space">
+    <meta property="og:url" content="https://snapps.neocities.org/queue/">
+    <meta property="og:title" content="Snapps' Work Forecast">
+    <meta property="og:description" content="What's next on the chopping block?">
+    <meta property="og:type" content="website">
+    <meta property="og:image" itemprop="image" content="../img/coin.png">
+    <meta name="theme-color" content="#9225BB">
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Snapps' Work Forecast">
+    <meta name="twitter:description" content="What's next on the chopping block?">
+    <meta name="twitter:image" content="../img/coin.png">
+
+    <meta charset="UTF-8">
+    <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA">
+</head>
+<body>
+    <div id="page-content">
+        <h1>5-Group Forecast</h1>
+        <div id="forecast-container">
+            <div id="perpetual" class="forecast-section">
+                <h1>PERPETUAL</h1>
+                <ul>
+                    <li>Be cute!</li>
+                </ul>
+            </div>
+            <div id="immidiate" class="forecast-section">
+                <h1>IMMIDIATE</h1>
+                <ul>
+                    <li>Batch #3 Comms</li> 
+                    <li>Valentine's Day Follow-Up Pic</li>
+                </ul>
+            </div>
+            <div id="upcoming" class="forecast-section">
+                <h1>UPCOMING</h1>
+                <ul>
+                    <li>Savak Ref Update</li>
+                    <li>Synth OC/Sona Design</li>
+
+                </ul>
+            </div>
+            <div id="eventual"class="forecast-section">
+                <h1>EVENTUAL</h1>
+                <ul>
+                    <li>Update This Website</li>
+                </ul>
+            </div>
+            <div id="far-off"class="forecast-section">
+                <h1>FAR-OFF</h1>
+                <ul>
+                    <li>Savak VRC Model</li>
+                    <li>K&K VRC World</li>
+                </ul>
+            </div>
+        </div>
+
+        <h1>Commissions</h1>
+        <div id="current-batch">
+            <div class="batch">
+                <h1>Batch #3</h1>
+                <div class="comm-status">
+                    <span class="client">Nackle</span>
+                    <span class="current-status">Lineart</span>
+                    <span class="next-status">Color Pass</span>
+                    <div class="prog-bar-containter"><div class="prog-bar" data-progress="15"><span>0%</span></div></div>
+                </div>
+                <div class="comm-status">
+                    <span class="client">SkiesOfSilver</span>
+                    <span class="current-status">Payment Recieved</span>
+                    <span class="next-status">Keyframe Draft</span>
+                    <div class="prog-bar-containter"><div class="prog-bar" data-progress="0"><span>0%</span></div></div>
+                </div>
+                <div class="comm-status">
+                    <span class="client">CHsnake5050</span>
+                    <span class="current-status">Payment Recieved</span>
+                    <span class="next-status">Keyframe Draft</span>
+                    <div class="prog-bar-containter"><div class="prog-bar" data-progress="0"><span>0%</span></div></div>
+                </div>
+            </div>
+        </div>
+        <h1>Next In Line<br><sub>In order of contact...</sub></h1>
+        <div id="next-in-line">
+            <ol>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+    Array.from(document.getElementsByClassName("prog-bar")).forEach(element => {
+        loadBar(element);
+    });
+    function loadBar(ele){
+        ele.style.width = ele.dataset.progress+"%";
+        ele.innerHTML = "<span>"+ele.dataset.progress+"%</span>"
+    }
+    if (document.getElementById("next-in-line").children[0].children.length == 0){
+        document.getElementById("next-in-line").children[0].innerHTML = '<p style="text-align:center; width:100%;">Nobody...</p>' ;
+    }
+    </script>
+</body></html>

@@ -1,0 +1,76 @@
+body {
+    font-size: min(2.5vh, 2.5vw);
+    font-family: monospace;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    color: #eee;
+    background: url(img/prism.png);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#bg1 {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 50%);
+}
+
+#bg2 {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(0deg, rgba(153, 39, 196, 1) 0%, rgba(255, 255, 255, 0) 50%);
+    animation-duration: 5s;
+    animation-name: wave;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+#textbox {
+    margin-top: -35vh;
+    z-index: 5;
+    text-align: center;
+    padding: 1vw;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    border: solid 5px #fff;
+    background: #fff5;
+
+}
+
+#buttonbox {
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+button {
+    font-size: 1em;
+    background: #333;
+    color: #eee;
+    border: solid 1px #333;
+}
+
+button:active{
+    color: #9f0 !important;
+    border: solid 1px #9f0;
+}
+@keyframes wave {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

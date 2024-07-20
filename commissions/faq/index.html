@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Comm my scalie ass!</title>
+        <link rel="icon" href="../favicon.gif" type="image/gif" >
+        <meta content="Snapps' Commission Site (NSFW - 🔞)" property="og:title" />
+        <meta content="Your one stop shop for everything about commissioning me ❤️" property="og:description" />
+        <meta content="https://snapps.dev/commssions" property="og:url" />
+        <meta content="https://snapps.dev/heroFG.png" property="og:image" />
+        <meta content="#53ff9b" data-react-helmet="true" name="theme-color"/>
+        <meta name="twitter:card" content="summary_large_image">
+        <link rel="stylesheet" href="../index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav>
+            <a href=".."><img class="nav-img" src="../splat.png"><span>Home</span></a>
+            <a href="../terms"><img class="nav-img" src="../splat.png"><span>Terms</span></a>
+            <a href="../samples"><img class="nav-img" src="../splat.png"><span>Samples</span></a>
+            <a href="../quote"><img class="nav-img" src="../splat.png"><span>Quote</span></a>
+            <a href="../faq"><img class="nav-img" src="../splat.png"><span>FAQ</span></a>
+        </nav>
+
+        <div id="content-container">
+            <div id="content">
+                <h1>What are you willing to draw?</h1>
+                <p>In most cases, I'm alright with drawing anything I've posted online. If you are unsure of any specific thing, I have a non-exaustive list of <a href="https://e621.net/tags">e6 tags</a> that cover a few topics.</p>
+                <input id="kink-search" placeholder="Search for tags...">
+                <taglist id="kink-list">
+                </taglist>
+                <script>
+                    function shuffle(array) {
+                        let currentIndex = array.length;
+
+                        // While there remain elements to shuffle...
+                        while (currentIndex != 0) {
+
+                            // Pick a remaining element...
+                            let randomIndex = Math.floor(Math.random() * currentIndex);
+                            currentIndex--;
+
+                            // And swap it with the current element.
+                            [array[currentIndex], array[randomIndex]] = [
+                            array[randomIndex], array[currentIndex]];
+                        }
+                    }
+
+                    //f=fav, y=yes, m=maybe, n=no
+                    var kinks=[
+                        ["y","hyper_breasts"],
+                        ["f","huge_breasts"],
+                        ["f","big_breasts"],
+                        ["y","breasts"],
+                        ["f","lactating"],
+                        ["f","huge_butt"],
+                        ["f","big_butt"],
+                        ["m","hyper_butt"],
+                        ["y","anus"],
+                        ["y","puffy_anus"],
+                        ["y","humanoind_penis"],
+                        ["m","equine_penis"],
+                        ["y","tapering_penis"],
+                        ["y","humanoind_pussy"],
+                        ["m","cloaca"],
+                        ["y","balls"],
+                        ["y","big_balls"],
+                        ["f","huge_balls"],
+                        ["m","hyper_balls"],
+                        ["f","scalie"],
+                        ["m","mammal"],
+                        ["m","human"],
+                        ["n","loli"],
+                        ["n","shota"],
+                        ["n","young"],
+                        ["n","gore"],
+                        ["y","weight_gain"],
+                        ["f","slightly_chubby"],
+                        ["y","obese"],
+                        ["m","morbidly_obese"],
+                        ["y","expansion"],
+                        ["y","inflation"],
+                        ["f","size_difference"],
+                        ["f","short stack"],
+                        ["n","feces"],
+                        ["n","waterspots"],
+                        ["m","muscular"],
+                    ]
+
+                    shuffle(kinks)
+
+                    document.getElementById("kink-search").addEventListener("input", (ev)=>{ 
+                        searchKinks(ev.target.value)
+                    })
+
+                    function searchKinks(query) {
+                        regex = new RegExp(query.toLowerCase());
+                        var foundKinks = []
+                        document.getElementById("kink-list").replaceChildren() 
+                        kinks.forEach(element => {
+                            if(regex.test(element[1])){
+                                var tag = document.createElement("tagitem")
+                                tag.innerHTML = "<span>"+ iconify(element[0]) +"</span><span>"+ element[1].replace("_", " ");  +"</span>"
+                                document.getElementById("kink-list").appendChild(tag) 
+                            }
+                        });
+                    }
+
+                    function iconify(text){
+                        switch(text){
+                            case "f": return "⭐"
+                            case "y": return "✔️"
+                            case "m": return "🎲"
+                            case "n": return "🚫"
+                        }
+
+                    }
+
+                    searchKinks("")
+                    
+                </script>
+                <p>Feel free to ask about anything that you are unsure of!</p>
+                <h1 id="how-to-credit">How do I credit you?</h1>
+                <p>All you have to do is post a link to one of my accounts along side the commission media. For your convience, you can click one of the buttons below to copy the link to that account to your clipboard.</p>
+                <taglist id="link-list">
+                    <tagitem style="cursor:pointer" type="twitter" onclick='navigator.clipboard.writeText("https://x.com/SnappsOwO");'><span>⭐</span><span>NSFW Twitter</span></tagitem>
+                    <tagitem style="cursor:pointer" type="twitter" onclick='navigator.clipboard.writeText("https://x.com/SnappsUwU");'><span></span><span>Personal Twitter</span></tagitem>
+                    <tagitem style="cursor:pointer" type="fa" onclick='navigator.clipboard.writeText("https://www.furaffinity.net/user/snappsuwu");'><span></span><span>FurAffinity</span></tagitem>
+                    <tagitem style="cursor:pointer" type="itaku" onclick='navigator.clipboard.writeText("https://itaku.ee/profile/snapps");'><span></span><span>Itaku</span></tagitem>
+                    <tagitem style="cursor:pointer" type="bsky" onclick='navigator.clipboard.writeText("https://bsky.app/profile/snappsu.bsky.social");'><span></span><span>Bluesky</span></tagitem>
+                    <tagitem style="cursor:pointer" type="snappsdev" onclick='navigator.clipboard.writeText("https://snapps.dev");'><span></span><span>Website</span></tagitem>
+                </taglist>
+            </div>
+            <div class="spacer"></div>
+        </div>
+
+        <div id="theme-settings">
+            <span onclick="changeTheme(themes[0])" class="theme-icon">☀️</span>
+            <span onclick="changeTheme(themes[1])" class="theme-icon">🌑</span>
+        </div>
+
+        <script src="../scripts.js"></script>
+    </body>
+</html>

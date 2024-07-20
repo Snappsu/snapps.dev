@@ -1,0 +1,144 @@
+body {
+  margin: 0px;
+  height: 100vh;
+
+  background: rgb(19,36,0);
+  background: linear-gradient(0deg, rgba(19,36,0,1) 0%, rgba(51,136,17,1) 100%);
+  background-attachment: fixed;
+
+  font-family: sans-serif;
+}
+
+#bottom-bar {
+  position: fixed;
+  display: flex;
+  align-content: space-between;
+
+  height: 5vh;
+  width: 100%;
+  bottom: 0px;
+  z-index: 999;
+}
+
+#bottom-bar > a{
+  display: flex;
+  flex-grow: 1;
+
+  justify-content: center;
+  align-items: center;
+
+  color: #eee;
+  background: #222;
+
+  transition: .3s
+}
+
+#bottom-bar > a:hover{
+  display: flex;
+  flex-grow: 1;
+
+  justify-content: center;
+  align-items: center;
+
+  background: #eee;
+  color: #222;
+}
+
+#comic-cont {
+  position: absolute;
+
+  top: 0;
+  left: calc(100% / 2 - 375px);
+  right: calc(100% / 2 - 375px);
+
+  margin-top: 100px ;
+  max-height: 95vh;
+}
+
+.comicTitle {
+  position: absolute;
+
+  height: 300px;
+  width: 100%;
+
+  background: #fff;
+  filter: drop-shadow(0px 0px 5px #000);
+}
+
+.comicPanel {
+  position: absolute;
+  filter: drop-shadow(0px 0px 5px #000);
+}
+
+.comicPanel:last-child{
+  border-bottom:solid 7vh #0000;
+}
+
+.comicNote {
+  position: absolute;
+
+  width: 50px;
+  height: 50px;
+  border: solid 1px #fff;
+  z-index: 999;
+
+  background: #0007;
+  border-radius: 25px;
+  filter: drop-shadow(0px 0px 5px #000);
+  overflow: hidden;
+  color: #fff;
+  transition: .5s;
+  filter:opacity(30%);
+}
+
+.comicNote > h1 {
+  user-select: none;
+  pointer-events: none;
+
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+}
+
+.comicNote > p {
+  display: none;
+
+  height: 0px;
+  user-select: none;
+  pointer-events: none;
+
+  text-align: center;
+}
+
+
+.comicNote.author > h1::before {
+  content: "✏️";
+}
+
+.comicNote.lore > h1::before {
+  content: "📖";
+}
+
+.comicNote > p::after {
+  white-space: pre;
+  content: " \a \a- TAP TO CLOSE -";
+}
+
+.comicNote:hover {
+  filter:opacity(100%);
+}
+
+.comicNote.toggled {
+	width: 200px;
+  height: auto;
+	max-height: 300px;
+	padding-bottom: 1em;
+	filter: opacity(100%);
+	overflow-y: auto;
+}
+
+.comicNote.toggled > p {
+  display: inline-block;
+  border: solid 1em #0000;
+  border-top: none;
+}

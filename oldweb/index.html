@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>snapps.dev but cooler</title>
+        <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="os.js"></script>
+        <link rel="stylesheet" href="index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="os-container">
+        </div>
+        <div id="os-taskbar">
+            <div id="os-taskbar-left"></div>
+            <div id="os-taskbar-middle"></div>
+            <div id="os-taskbar-right">
+                <taskbar-tab onclick='newWindow(os,windowManager,[25,25],[300,200],"pages/settings/index.html","Settings",[false,true], "img/icons/gallery.gif")'><img><span>Settings</span></taskbar-tab>
+                <taskbar-tab onclick='newWindow(os,windowManager,[25,25],[500,250],"pages/changelog/index.html","Changelog",[false,true], "img/icons/book.gif")'><img src="img/icons/book.gif"></taskbar-tab>
+            </div>
+        </div>
+        <script>
+            
+            var windowManager = []
+            var mainWindow
+            var width = "1000px"
+            var height = "700px"
+            var os = document.getElementById("os-container")
+            
+            //Main Window
+            mainWindow = newWindow(os, windowManager, [0,0],[width,height],"pages/main/index.html", "snapps.dev", [false,false], "img/icons/icon.png")
+            centerWindow (mainWindow)
+            //Change Log
+            
+            //Gallery
+
+            function postNewWindow(targetWindow){
+                centerWindow(targetWindow)
+            }
+
+            function windowClosed(){
+                windowManager.pop()
+                updateTaskbar()
+            }
+
+            function activateLastWindow(){
+                activateWindow(windowManager[windowManager.length-1])
+            }
+            
+            // Shifting window activity
+            function windowActivated(targetWindow){
+                windowManager.splice(windowManager.indexOf(targetWindow),1)
+                windowManager.push(targetWindow)
+            }
+            window.addEventListener("resize", (event) => {centerWindow(mainWindow)})
+
+            async function loadWindow(targetWindow,src){
+                targetWindow.children[1].classList.add("temp")
+                $(".temp").load(src)
+                targetWindow.children[1].classList.remove("temp")
+                
+            }
+
+            function updateTaskbar(){
+                document.getElementById("os-taskbar-left").replaceChildren()
+                windowManager.forEach(element => {
+                    newTab = document.createElement("taskbar-tab")
+                    if(Array.from(element.classList).includes("active")){newTab.classList.add("active")}
+                    tabIcon = document.createElement("img")
+                    tabIcon.src = element.children[0].children[0].src
+                    tabTitle = document.createElement("span")
+                    tabTitle.innerHTML = element.children[0].children[1].innerHTML;
+                    newTab.appendChild(tabIcon)
+                    newTab.appendChild(tabTitle)
+                    newTab.addEventListener("click", (event) => {activateWindow(element)})
+                    document.getElementById("os-taskbar-left").appendChild(newTab)
+                });
+                
+            }
+        </script>
+    </body>
+    
+</html>

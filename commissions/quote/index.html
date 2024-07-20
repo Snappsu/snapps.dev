@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Comm my scalie ass!</title>
+        <link rel="icon" href="../favicon.gif" type="image/gif" >
+        <meta content="Snapps' Commission Site (NSFW - 🔞)" property="og:title" />
+        <meta content="Your one stop shop for everything about commissioning me ❤️" property="og:description" />
+        <meta content="https://snapps.dev/commssions" property="og:url" />
+        <meta content="https://snapps.dev/heroFG.png" property="og:image" />
+        <meta content="#53ff9b" data-react-helmet="true" name="theme-color"/>
+        <meta name="twitter:card" content="summary_large_image">
+        <link rel="stylesheet" href="../index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav>
+            <a href=".."><img class="nav-img" src="../splat.png"><span>Home</span></a>
+            <a href="../terms"><img class="nav-img" src="../splat.png"><span>Terms</span></a>
+            <a href="../samples"><img class="nav-img" src="../splat.png"><span>Samples</span></a>
+            <a href="../quote"><img class="nav-img" src="../splat.png"><span>Quote</span></a>
+            <a href="../faq"><img class="nav-img" src="../splat.png"><span>FAQ</span></a>
+        </nav>
+
+        <div id="content-container">
+            <div id="content">
+                <h1>Quote Quest v0.1</h1>
+                <p style="text-align: center;">⚠️ This feature is still under construction! ⚠️</p>
+                
+
+                <div id="quote-questions">
+                    <label for="commType">Choose a type:</label>
+                    <select name="commType" id="comm-type" onchange="loadCommQuestons()">
+                        <option value="0">Doodle</option>
+                        <option value="1">Pinup</option>
+                        <option value="2">Hand Animated Scene</option>
+                    </select> 
+                    <p id="comm-desc">Select a commission type to start!</p>
+                    <hr style="width: 40vw;">
+                    <div id="comm-questions"></div>
+                </div>
+                <div id="quote-preview"></div>
+                <p style="text-align: center;">Note: This calculator make a lot of assumtions that generally make the estimate pricier. It's somewhat likely that the actual price would be lower. (Feel free to ask me about said assumptions.)</p>
+                <h1 id="quote-estimate">To Be Calculated...
+                </h1>
+                <a class="button" href="https://forms.gle/AxpsKEq9QwhdAcZK8"><h2>Fill Out A Form</h2></a>
+            </div>
+            <div class="spacer"></div>
+        </div>
+
+        <div id="theme-settings">
+            <span onclick="changeTheme(themes[0])" class="theme-icon">☀️</span>
+            <span onclick="changeTheme(themes[1])" class="theme-icon">🌑</span>
+        </div>
+
+        <script src="../scripts.js"></script>
+        <script src="quote_quest.js"></script>
+
+    </body>
+</html>

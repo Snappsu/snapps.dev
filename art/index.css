@@ -1,0 +1,250 @@
+body {
+    color: #eee;
+    font-family: 'Jua', sans-serif;
+    margin: 0;
+    width: 100vw;
+    background: #000;
+    padding: 0;
+}
+
+img,
+p,
+h1 {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    text-align: center;
+}
+
+button {
+    font-family: inherit;
+    clip-path: polygon(calc(100% - .5em)0%, 100% .5em, 100% 100%, 0 100%, 0 0);
+    width: 50%;
+    height: 10%;
+    font-size: inherit;
+    border: 0;
+    line-height: 0;
+    cursor: pointer
+}
+
+button:active {
+    transform: translateY(min(.75vh, .75vw));
+}
+
+
+.big-card {
+    text-shadow: 0 5px 5px #000;
+    line-height: 1em;
+    font-size: min(7vw, 7vh);
+    z-index: -2;
+    background: #fff;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.big-card > img {
+    z-index: -3;
+    position: absolute;
+    align-self: center;
+    filter: blur(min(.5vw, .5vh));
+    max-width: 100%;
+    
+    width:inherit;
+    height: inherit;
+}
+
+.big-card > h1 {
+    margin: 0;
+}
+
+.big-card > p {
+    width: 80%;
+}
+
+.small-card {
+    cursor: pointer;
+    text-shadow: 0 5px 5px #000;
+    line-height: 1;
+    text-align: center;
+    font-size: min(2.5vw, 2.5vh);
+    background: #fff;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+
+#intro {
+    color: #9f0;
+    background: #333;
+}
+
+#intro > p {
+    color: #fff;
+}
+
+
+#intro > button {
+    background: #fff;
+    color: #AA70BF;
+    border-bottom: min(.75vh, .75vw) solid #ccc;
+}
+
+#intro > button:active {
+    border-color: #333;
+}
+
+#e621 {
+    color: #fcb328;
+    background: #012E57;
+}
+
+#e621 > p {
+    color: #fff;
+}
+
+#e621 > button {
+    background: #fcb328;
+    color: #fff;
+    border-bottom: min(.75vh, .75vw) solid #ec9b04;
+}
+
+#e621 > button:active {
+    border-color: #012E57;
+}
+
+#furaff {
+    background: #F8A82C;
+}
+
+#furaff.big-card {
+    background: #222;
+}
+
+#furaff.big-card > h1 {
+    color: #F8A82C;
+}
+
+#furaff > button {
+    background: #555;
+    color: #F8A82C;
+    border-bottom: min(.75vh, .75vw) solid #222;
+}
+
+#furaff a, #furaff a:visited{
+    color: #F8A82C;
+}
+
+
+#pillowfort {
+    background: #5fa4c9;
+}
+
+#pillowfort.big-card {
+    background: #222;
+}
+
+#pillowfort.big-card > h1 {
+    color: #5fa4c9;
+}
+
+#pillowfort > button {
+    background: #5fa4c9;
+    color: #fff;
+    border-bottom: min(.75vh, .75vw) solid #3d8db8;
+}
+
+#aryion {
+    color: #6f40bf;
+    background: #c0c0ff
+}
+
+#aryion > p {
+    color: #fff;
+}
+
+#aryion > img {
+height: auto;
+width: inherit;
+}
+
+#aryion > button {
+    color:#fff;
+    background: #6f40bf;
+        border-bottom: min(.75vh, .75vw) solid #583399;
+}
+
+#aryion > button:active {
+    border-color: #c0c0ff;
+}
+
+#archive {
+    color: #AA70BF;
+    background: #fff;
+}
+
+#small-card-container {
+    z-index: 2;
+}
+
+@media (orientation:portrait) {
+    #small-card-container {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        left: 0;
+        height: 100%;
+        width: 19vw;
+        border-right: solid #fff 1px;
+    }
+
+    .small-card h1 {
+        transform: rotate(-70deg);
+    }
+
+    #big-card-container {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        right: 0;
+    }
+
+    .big-card {
+        height: 80vw;
+        width: 80vw;
+
+    }
+}
+
+@media (orientation:landscape) {
+    #small-card-container {
+        position: fixed;
+        display: flex;
+        top: 0;
+        width: 100%;
+        height: 10vh;
+        border-bottom: solid #fff 1px;
+    }
+
+    #big-card-container {
+        overflow-x: auto;
+        position: absolute;
+        display: flex;
+        bottom: 0;
+    }
+
+    .big-card {
+        height: 90vh;
+        width: 90vh;
+    }
+
+}

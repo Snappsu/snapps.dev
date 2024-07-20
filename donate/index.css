@@ -1,0 +1,167 @@
+body {
+    font-size: min(2.5vw, 2.5vh);
+
+    font-family: 'Dancing Script', cursive;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+}
+
+#bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: url(img/bg.png);
+}
+
+
+
+.donation-card {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: center;
+    background: #0000;
+    transition: .2s;
+
+
+}
+
+.donation-card h1,
+.donation-card span {
+    display: block;
+    width: 100%;
+    text-shadow: 0 0 .2em #000;
+    text-align: center;
+    margin: 1em 0;
+}
+
+.donation-card:hover {
+    filter: drop-shadow(0 0 min(1vw, 1vh) #fff);
+    text-shadow: 0 0 .2em #fff;
+}
+
+
+#kofi:hover a {
+    color: #ff5c64;
+}
+
+#substar:hover a:first-child {
+    color: #009587;
+}
+
+#substar:hover a {
+    color: #ff4081;
+}
+
+#kofi iframe {
+    border: solid 1px #fff;
+    background: #0000;
+    width: 500px;
+    height: 600px;
+    max-width: min(40vw,40vh);
+        max-height: min(40vw,40vh);
+
+    margin: 0;
+    border-radius: min(1vw, 1vh);
+}
+
+#substar img {
+    width: 500px;
+    height: 500px;
+    max-width: min(40vw,40vh);
+        max-height: min(40vw,40vh);
+
+}
+
+button {
+    cursor: pointer;
+    font-size: 2em;
+    padding: .2em 2em;
+    position: absolute;
+    bottom: 2.5vh;
+    right: 2.5vw;
+    border: 0;
+    background: #fff;
+    color: rgb(138, 51, 176);
+    border-radius: 1em;
+}
+
+@media (orientation:portrait) {
+    #bg{
+        background-size:  cover;
+    }
+    #container {
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 85vh;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+    
+        .donation-card{
+            height: 40vh;
+    width: 40%;
+    }
+    
+}
+
+@media (orientation:landscape) {
+
+    #bg-fade {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 5vh;
+        height: 20vh;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(138, 51, 176, .8) 50%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    #bg-ground {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: .2vh;
+        height: 10vh;
+        background: #fff;
+
+        clip-path: polygon(25% 0, 37.5% 25%, 50% 18%, 62.5% 43%, 75% 14%, 87.5% 25%, 100% 0, 100% 100%, 0 100%, 0 0, 12.5% 16%);
+    }
+
+    #bg-ground-2 {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 10vh;
+        background: #000;
+
+        clip-path: polygon(25% 0, 37.5% 25%, 50% 18%, 62.5% 43%, 75% 14%, 87.5% 25%, 100% 0, 100% 100%, 0 100%, 0 0, 12.5% 16%);
+    }
+
+    #container {
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 85vh;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .donation-card{
+            height: 90%;
+    width: 40%;
+    }
+
+}

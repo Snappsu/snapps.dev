@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Comm my scalie ass!</title>
+        <link rel="icon" href="favicon.gif" type="image/gif">
+        <title>Website Name</title>
+        <meta content="Snapps' Commission Site (NSFW - 🔞)" property="og:title" />
+        <meta content="Your one stop shop for everything about commissioning me ❤️" property="og:description" />
+        <meta content="https://snapps.dev/commssions" property="og:url" />
+        <meta content="https://snapps.dev/heroFG.png" property="og:image" />
+        <meta content="#53ff9b" data-react-helmet="true" name="theme-color"/>
+        <meta name="twitter:card" content="summary_large_image">
+        <link rel="stylesheet" href="index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav>
+            <a href=""><img class="nav-img" src="splat.png"><span>Home</span></a>
+            <a href="terms"><img class="nav-img" src="splat.png"><span>Terms</span></a>
+            <a href="samples"><img class="nav-img" src="splat.png"><span>Samples</span></a>
+            <a href="quote"><img class="nav-img" src="splat.png"><span>Quote</span></a>
+            <a href="faq"><img class="nav-img" src="splat.png"><span>FAQ</span></a>
+        </nav>
+
+        <div id="content-container">
+            <div id="content">
+                <h1>Commissions Are Currently...</h1>
+                <h1 id="available-header">...</h1>
+                <hr>
+                <h1>Available For:</h1>
+                <taglist id="available-for-header">
+                </taglist>
+                <hr>
+                <div class="button-bar">
+                    <a class="button" href="samples"><h2>View Samples</h2></a>
+                    <a class="button" href="https://forms.gle/AxpsKEq9QwhdAcZK8"><h2>Fill Out A Form</h2></a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="theme-settings">
+            <span onclick="changeTheme(themes[0])" class="theme-icon">☀️</span>
+            <span onclick="changeTheme(themes[1])" class="theme-icon">🌑</span>
+        </div>
+
+        <script src="loadCommData.js"></script>
+        <script src="scripts.js"></script>
+        <script>loadAvailable("open")</script>
+
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<head>
+    <link rel="stylesheet" href="/not_found.css">
+    <meta charset="UTF-8">
+    <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
+    <title>404 - Page Not Found</title>
+</head>
+
+<body>
+    <div id="bg1"></div>
+    <div id="bg2"></div>
+
+    <div id="textbox">
+        <h1><span>Error - </span><span id="numb">404</span></h1>
+        <p>Whoops... Seems like you've gotten yourself lost.<br><br>Let's go back before you find something you're not supposed to.<br><br></p>
+        <div id="buttonbox">
+            <button ontouchstart="window.history.back();" onmousedown="window.history.back()">Go Back</button>
+            <button id="deeper" style="color: #444;" ontouchstart="goDeeper();" onmousedown="goDeeper();">Keep Going</button>
+        </div>
+    </div>
+    <script>
+        depth = 1;
+        garbler = setInterval(garble, 1000 / depth);
+
+        function goDeeper() {
+            depth++;
+            if(depth > 15) {
+                 depth = 15;
+                btn = document.getElementById("deeper");
+                btn.disabled = true;
+                btn.style.color = "#f00";
+                btn.style.userSelect = "false";
+            }
+            window.clearInterval(garbler);
+            garbler = setInterval(garble, 1000 / depth);
+            document.getElementById("bg2").style.animationDuration = (-1 * (depth * 5)/(depth + 2) + 5) +"s";
+
+        }
+
+        function garble() {
+
+            if (depth != 1)
+            {
+                h1 = document.getElementById("numb");
+            num = Math.floor(Math.random() * Math.pow(10,1+depth));
+            h1.innerHTML = (Math.pow(10,1+depth) + num).toString().substr(-1*(depth+1),(depth+1));
+            }
+            
+        
+
+        }
+
+    </script>
+</body>

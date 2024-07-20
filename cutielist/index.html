@@ -1,0 +1,51 @@
+<head>
+    <title>Snapps' Cutie List</title>
+    <script src="index.js"></script> 
+    <link rel="stylesheet" href="index.css" />
+    <body>
+        
+        <div id="background">
+            <div class="star_bg" style="animation: scroll 10s linear infinite; background-image: url(star3.png);"></div>
+            <div class="star_bg" style="animation: scroll 20s linear infinite; background-image: url(star2.png);"></div>
+            <div class="star_bg" style="animation: scroll 50s linear infinite; background-image: url(star1.png);"></div>
+        </div>
+
+
+        <div id="card-container">
+            
+            <div id="cardlist-container">
+            </div>
+
+            <div id="cardfocus-container">
+
+                    <span id="card-name"></span>
+                <span id="card-subname"></span>
+                <span id="card-series"></span>
+                <span id="card-desc"></span>
+                <b style="margin-top:2em;margin-bottom:1em; ">Tributes:</b>
+                <div id="card-tributes"></div>
+                <a id="card-close" onclick="closeInfo()">
+                    <span>C</span>
+                    <span>L</span>
+                    <span>O</span>
+                    <span>S</span>
+                    <span>E</span>
+                </a>
+
+                
+            </div>
+        </div>
+        <script>
+            infoOpen = false
+            cardFocusElement = document.getElementById("cardfocus-container")
+            cardName = document.getElementById("card-name")
+            cardSubname = document.getElementById("card-subname")
+            cardSeries = document.getElementById("card-series")
+            cardDesc = document.getElementById("card-desc")
+            cardTributes = document.getElementById("card-tributes")
+            cardlistContainer = document.getElementById("cardlist-container")
+            
+            loadCutieList()
+        </script>
+    </body>
+</head>

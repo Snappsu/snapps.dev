@@ -1,0 +1,117 @@
+<script>
+    var blinkies = [
+        ["3ds.gif",""],
+        ["aego.gif","https://asexuals.fandom.com/wiki/Aegosexual"],
+        ["artist.gif",""], // Gallery
+        ["assTooFat.gif",""], // EE: Savak wif the bakery!
+        ["badHandwriting.gif",""],
+        ["bakedWithLove.gif",""], // Site's Github
+        ["bestViewedOnPC.gif",""],
+        ["blinkiesCafe.gif","https://blinkies.cafe/"],
+        ["candycorn.png",""],
+        ["ccBYNCSA.gif","https://creativecommons.org/licenses/by-nc-sa/4.0/"], 
+        ["croc.png",""],
+        ["deathclaw.png",""],
+        ["discordUser.png","discord://-/users/143978133798780928"],
+        ["encouragement.png","https://inspirobot.me/mindfulnessmode"],
+        ["emotionalAboutComputers.gif","https://www.newegg.com/insider/how-to-maintain-and-clean-pc-hardware/"],
+        ["firefoxNow.gif","https://www.mozilla.org/en-US/firefox/all/"],
+        ["furret.gif","https://www.youtube.com/watch?v=ih9zBLDr_ro"],
+        ["gameboy.gif",""],
+        ["getBlender.gif","https://www.blender.org/"],
+        ["iJustLikeReptiles.gif",""], // Cutie List
+        ["jurassicPark.gif",""],
+        ["lizardTitties.png",""], 
+        ["music.gif",""], // Radio
+        ["neocities.gif","https://neocities.org/"],
+        ["noGoogleChrome.gif",""],
+        ["pokemonMysteryDungeon.gif",""],
+        ["pokeOverworld.gif",""],
+        ["ratedR.png",""], 
+        ["rightToRepair.png","https://www.repair.org/history"],
+        ["signMyGuest.gif",""], // Guestbook
+        ["snakeTitsAhead.gif",""],
+        ["snendSnoods.gif",""],
+        ["sniddy.gif","https://sniddy.zip/"], // Sniddy.zip
+        ["space.png","https://www.youtube.com/watch?v=jItnCGRsMjw"],
+        ["synthsAreCool.gif","https://synthspecies.com/"],
+        ["thisSiteSucks.gif",""],
+        ["trashCan.png","https://www.youtube.com/watch?v=FZUcpVmEHuk"],
+        ["typos.gif","https://www.merriam-webster.com/dictionary/tpyo"],
+        ["wii.gif",""],
+        
+        
+    ]
+    function shuffle(array) {
+        let currentIndex = array.length;
+
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+
+            // Pick a remaining element...
+            let randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+    }
+
+    function populateBlinkieContainer(){
+        shuffle(blinkies)
+        blinkies.forEach((element) => {
+            var link = document.createElement("a")
+            var img = document.createElement("img")
+            link.appendChild(img)
+            link.classList.add("blinkie")
+            img.src="img/blinkies/"+element[0]
+            link.href=element[1]
+            link.target="_blank"
+            document.getElementById("blinkie-container").appendChild(link)
+        })
+    }
+
+    populateBlinkieContainer()
+</script>
+<div id="bio-container">
+    <div id="bio-stats">
+        <img src="img/pfp.gif">
+        <hr>
+        <table>
+            <tr><td>level:</td><td>20+</td></tr>
+            <tr><td>species:</td><td>[REDACTED]</td></tr>
+            <tr><td>pronouns:</td><td>They/Them (idc)</td></tr>
+            <tr><td></td><td></td></tr>
+            <tr><td></td><td></td></tr>
+            <tr><td>strength:</td><td>▰▰▱▱▱▱▱▱▱▱</td></tr>
+            <tr><td>dexterity:</td><td>▰▰▰▰▰▰▱▱▱▱</td></tr>
+            <tr><td>constitution:</td><td>▰▰▰▰▱▱▱▱▱▱</td></tr>
+            <tr><td>intellijence:</td><td>▰▰▰▰▰▰▰▱▱▱</td></tr>
+            <tr><td>wisdom:</td><td>▰▰▰▰▰▱▱▱▱▱</td></tr>
+            <tr><td>charisma:</td><td>▰▰▰▱▱▱▱▱▱▱</td></tr>
+            <tr><td>ASS:</td><td>▰▰▰▰▰▰▰▰▰▰</td></tr>
+            <tr><td>cute <3:</td><td>▰▰▰▰▰▰▰▰▱▱</td></tr>
+        </table>
+
+    </div>
+    <div class="vert-divider"></div>
+
+    <div id="bio-entry">
+        <img src="img/text/aboutme.gif">
+        <p>My name is <span>Snapps</span> and welcome to my little corner of the internet!</p>
+        <p>I guess I'm a programmer by trade, but do a lot of not safe for work stuff as a hobby. I draw lizards with titties and write about lizards with titties and wish to soon model lizards with titties and make games about lizards with titties.</p>
+        <p>I'm really interested in VR stuff and worldbuilding, though I have nothing to show for it right now.</p>
+        <p>Check in later tho ❤️</p>
+        <p>Also this site is still under constuction so wear a hard hat!
+    </div>
+</div>
+<div id="link-container">
+    <a class="link-button">Contact</a>
+    <a class="link-button" onclick='newWindow(os,windowManager,[25,25],[500,300],"pages/gallery/index.html","Gallery",[false,true], "img/icons/gallery.gif")'>Gallery</a>
+    <a class="link-button">Commissions</a>
+    <a class="link-button">Projects</a>
+    <a class="link-button">Support Me!</a>
+</div>
+
+<div id="blinkie-container"><h1>The Important Stuff</h1></div>

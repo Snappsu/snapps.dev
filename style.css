@@ -1,0 +1,288 @@
+body {
+	font-family: "Aldrich", sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #000;
+	user-select: none;
+}
+
+#container {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+#container>* {
+	display: block;
+	width: 100%;
+	height: 50%;
+}
+
+#top {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+
+
+}
+
+#top img {
+
+	flex: none;
+	position: absolute;
+	image-rendering: crisp-edges;
+	width: max-content;
+	height: max-content;
+	max-width: 80%;
+	max-height: 80%;
+	transition: .25s;
+	transition-timing-function: cubic-bezier(0, .5, .5, 1);
+	transform-origin: bottom center;
+}
+
+#topBG {
+	mask-mode: alpha;
+	mask-image: url(heroMsk.png);
+}
+
+#top #topFG:hover {
+	transform: scaleX(.975) scaleY(1.025);
+}
+
+#top #topFG:active {
+	transform: scaleX(1.05) scaleY(.95);
+}
+
+#bottom {
+	display: flex;
+	justify-content: center;
+	z-index: 2;
+	background-color: #000;
+	color: #eee;
+	font-size: .9em;
+}
+
+#bottom-container {
+	margin-top: 1em;
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+}
+
+#cursor {
+	margin-left: .125em;
+	;
+	animation: 1.5s steps(1, jump-start) 0s infinite blink;
+	color: #fff !important;
+	text-shadow: 0 0 .2em #fff !important;
+}
+
+
+#bottom h1 {
+	font-family: "Zen Dots", sans-serif;
+	background-color: #000;
+	color: #53ff9b;
+	text-shadow: 0 0 .2em #53ff9b;
+	flex-basis: content;
+	align-self: baseline;
+}
+
+.fa-solid, .fa-regular {
+	color: #53ff9b;
+}
+
+#link-list {
+	display: flex;
+
+}
+
+@media (max-aspect-ratio: 4/2.3) {
+
+	#bottom-container {
+		align-items: center;
+		flex-direction: column;
+	}
+
+	#link-list {
+		font-size: 1.2em;
+		flex-direction: column;
+
+		width: 100%;
+		width: 16em;
+	}
+
+	.link-group {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+}
+
+#link-list>* {
+	flex-grow: 1;
+	width: 20%;
+	max-width: 20%;
+}
+
+.link-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.link-group>a,
+.link-group>div {
+	margin-bottom: .5em;
+	transition: .1s;
+	max-width: 80%;
+	width: 16em;
+}
+
+.link-group>a::before,
+.link-group>a:focus::before,
+.link-group>div::before,
+.link-group>div:focus::before {
+	content: "> ";
+	transform: scaleX(0);
+	/*! display: inline-block; */
+	width: 0;
+	transition: .1s;
+}
+
+.link-group>a:hover::before,
+.link-group>a:focus::before,
+.link-group>div:hover::before,
+.link-group>div:focus::before {
+	transform: scaleX(1);
+	width: 1em;
+}
+
+.link-group a:hover {
+	text-shadow: 0 0 .2em #fff;
+	color: #fff;
+}
+
+
+.link-group a:active {
+	text-shadow: 0 0 .2em #53eeff;
+	color: #53eeff;
+
+}
+
+a {
+	text-decoration: none !important;
+	color: #eee;
+}
+
+a:visited {
+	font-style: normal;
+
+}
+
+a[wip]:active {
+	text-shadow: 0 0 .2em #ff5353;
+	color: #ff5353;
+}
+
+
+#fade-bar {
+	z-index: 1;
+	position: absolute;
+	image-rendering: crisp-edges;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+	bottom: 50%;
+	background-repeat: repeat-x;
+	width: 100%;
+	height: 32px;
+}
+
+
+@keyframes blink {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+.desc-window {
+	font-size: .75em;
+	z-index: 3;
+	display: block;
+	height: 0;
+	width: 16vw;
+	transition: .25s;
+	overflow: hidden;
+	position: relative;
+	max-height: max-content;
+	max-width: 90%;
+	word-wrap: break-word;
+}
+
+div:focus>.desc-window {
+	height: 100%;
+}
+
+.desc-window:hover {
+	height: 100%;
+}
+
+.desc-window a {
+	display: block;
+}
+
+div:focus>.desc-window {
+	height: 100%;
+}
+
+
+img {
+	user-select: none;
+}
+
+#cc-tab {
+	z-index: 3;
+	bottom: 0;
+	height: 1em;
+	right: 2.5vw;
+	position: fixed;
+	display: block;
+	width: fit-content;
+	padding: .5em;
+	border: 1px solid;
+	border-bottom: none;
+	color: #aaa;
+	transition: .2s;
+}
+
+#cc-tab:hover {
+	z-index: 3;
+	bottom: 0;
+	height: calc(1em + .5em);
+	right: 2.5vw;
+	position: absolute;
+	display: block;
+	width: fit-content;
+	padding: .5em;
+	border: 1px solid #53ff9b;
+	border-bottom: none;
+	color: #53ff9b;
+	filter: drop-shadow(0 0 5px #53ff9b);
+}
+
+.fa-triangle-exclamation{
+	color: #fff653;
+}

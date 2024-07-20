@@ -1,0 +1,273 @@
+:root {
+    --main-bg: #fff;
+    --main-light: #ccc;
+    --main-dark: #999;
+    --main-text: #000;
+    --main-accent:#007acc;
+    
+    --stripe-style: linear-gradient(-45deg, rgba(0,212,255,0) 5%, var(--main-accent) 5%, var(--main-accent) 10%, rgba(0,212,255,0) 10%, rgba(0,212,255,0) 15%, var(--main-accent) 15%, var(--main-accent) 20%, rgba(0,212,255,0) 20%);
+
+    --alt-bg: #555;
+    --alt-light: #777;
+    --alt-dark: #333;
+    --alt-text: #eee;
+    --alt-accent:#ff970f;
+}
+
+a,a:visited {
+    color: var(--main-accent);
+}
+
+p, tr {
+    color: var(--main-text);;
+}
+
+body {
+    image-rendering: crisp-edges;
+    font-family: "Kode Mono", monospace;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
+    background-image: url("img/bg/bg1.png");
+    background-position: center;
+}
+
+
+
+#os-taskbar {
+    align-items: center;
+    display: flex;
+    height: 40px;
+    background: var( --main-bg);
+    border-top: solid 2px var(--main-light);
+}
+
+#os-taskbar > * {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+}
+
+#os-taskbar-left {
+    padding: 0 5px;
+    justify-content: left;
+}
+
+#os-taskbar-center {
+    justify-content: center;
+}
+
+#os-taskbar-right {
+    padding: 0 10px;
+    justify-content: right;
+}
+
+
+taskbar-tab {
+    display: flex;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    padding: .25%;
+    border: solid 3px;
+    margin: 0 2px;
+    border-color: var(--main-light) var(--main-dark) var(--main-dark) var(--main-light);
+  }
+
+#os-container{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+window {
+    position: absolute;
+    border: solid 3px;
+    background: var(--alt-bg);
+    color: var(--alt-text);
+    border-color: var(--alt-light) var(--alt-dark) var(--alt-dark) var(--alt-light);
+    display: flex;
+    flex-direction: column;
+    opacity: .5;
+    scale: .95;
+transition: .25s;
+}
+
+window:hover {
+    z-index: 999;
+    opacity: .75;
+    scale: 1.01;
+}
+
+window.active {
+    background: var(--main-bg);
+    border-color: var(--main-light) var(--main-dark) var(--main-dark) var(--main-light);
+    z-index: 999;
+    opacity: 1;
+    scale: 1;
+}
+
+window-bar {
+    display: flex;
+    align-items: center;
+    height: 2em;
+    width: 100%;
+    flex-shrink: 0;
+    font-weight: bold;
+    background: var(--stripe-style);
+    border-bottom:solid 2px #000;
+}
+
+window-bar img, taskbar-tab img {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 .25em;
+    flex-shrink: 0;
+}
+
+window-bar span, taskbar-tab span {
+    height: 1.5em;
+    width: 100%;
+    margin: 0 .25em;
+    color: var(--main-text);
+}
+
+window-content{
+    background: var(--main-light) var(--stripe-style);
+    color: var(--main-text);
+    flex-shrink: 0;
+    overflow: auto;
+}
+window-content > *{
+    width: 90%;
+    margin: 1em auto ;
+    border: solid 4px;
+    padding: 10px;
+    background: var(--main-bg);
+    border-color: var(--main-dark) var(--main-light)  var(--main-light)  var(--main-dark);
+}
+
+.ui-button {
+    cursor: pointer;
+        image-rendering: crisp-edges;
+
+}
+
+#blinkie-container {
+
+
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-evenly;
+}
+
+.blinkie {
+    margin: 5px;
+    image-rendering: crisp-edges;
+    filter: drop-shadow(0 0 0px #000);
+    transition: .2s;
+}
+
+.blinkie:hover {
+    scale:1.05;
+    filter: drop-shadow(0 0 2px #000);
+}
+
+#bio-container{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+#bio-stats
+{   
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+#bio-stats tr td:nth-child(1)
+{  
+    text-align: right;
+    font-weight: bold;
+}
+
+#bio-stats tr td:nth-child(2)
+{  
+    background: -webkit-linear-gradient(0deg, var(--main-text) 0%, var(--main-accent) 75%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#bio-stats > *
+{   font-size: .8em;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+}
+
+.vert-divider {
+    display: block;
+    width: 5px;
+    background: #000;
+}
+
+#bio-entry
+{   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#bio-entry > *
+{   
+    width: 90%;
+}
+
+img.divider{
+    max-width: 100%!;
+    margin: auto;
+} 
+
+#link-container{
+
+    display: flex;
+
+}
+
+#link-container > *{
+    flex-grow: 1;
+    height: 100%;
+    background-color: var(--main-bg);
+    border: solid 4px;
+    padding: 1em;
+    margin: 0 .2em;
+    border-color:  var(--main-light) var(--main-dark)  var(--main-dark)  var(--main-light);
+}
+
+#blinkie-container h1 {
+ width: 100%;
+ text-align: center;
+}
+
+input[type="radio"]{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .setting-theme-option{
+    display: flex
+  }

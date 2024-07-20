@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="index.css">
+    <meta charset="utf-8">
+    <title>Khaos & Kobolds</title>
+  </head>
+  <body onload="addNoteListeners();">
+    <script type="text/javascript">
+       function addNoteListeners() {
+         var comicNotes = document.getElementsByClassName("comicNote");
+         for (var i = 0; i < comicNotes.length; i++) {
+           comicNotes[i].addEventListener("click",
+           function(e) {
+             if (e.target.classList.contains("toggled")) e.target.classList.remove("toggled");
+             else e.target.classList.add("toggled");
+           });
+         }
+       }
+    </script>
+    <div id="comic-cont">
+
+      <div class="comicTitle" style="top: 0px;">
+        HERO IMAGE
+      </div>
+
+      <div id="panel-1" class="comicPanel" style="top: 350px; left: 0px;">
+        <img src="res\panels\tp1.png">
+      </div>
+
+      <div id="panel-2" class="comicPanel" style="top: 560px; left: -25px;">
+        <img src="res\panels\tp2.png">
+      </div>
+
+      <div id="panel-3" class="comicPanel" style="top: 580px; right: 20px;">
+        <img src="res\panels\tp3.png">
+      </div>
+
+      <div id="note-1" class="comicNote author" style="top: 500px; left: 100px;">
+        <h1></h1>
+        <p>Hello! This is a test author's note! I'm really hoping that this works without any extra effort on my part. Not that I'm trying to be lazy or anything, but it would validate me as a programmer. Here's hoping!</p>
+      </div>
+
+      <div id="panel-5" class="comicPanel"  style="top: 900px; right: 0px; z-index:1;">
+        <img src="res\panels\SavakIcon1Sqr.gif">
+      </div>
+      
+      <div id="note-2" class="comicNote lore" style="top: 1060px; left: 490px;">
+        <h1></h1>
+        <p>If I had some lore to put here, I think it would display correctly. Instead, I'm just gonna...
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean consectetur aliquam nisl eu imperdiet. Integer iaculis, eros sit amet varius laoreet, ipsum lacus blandit augue, eu posuere purus lacus mattis mauris. Fusce augue leo, euismod et porttitor ac, auctor vel elit. Vivamus varius tempor libero, quis pellentesque mauris posuere in. Aenean sed nisl vel velit suscipit condimentum ac tempor mauris. Aenean hendrerit sodales ornare. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce non iaculis mi.
+
+In eu arcu mauris. Aenean egestas enim elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam dictum metus nisi, eu bibendum felis pretium eget. Ut quis nisi ut purus faucibus varius at ut ligula. Fusce bibendum mollis luctus. Phasellus elementum egestas tellus vel commodo. Vivamus interdum lectus id justo pulvinar tempus. Etiam mi tortor, finibus nec felis vel, luctus elementum urna. Donec auctor sodales orci, in luctus augue dignissim at. Mauris pulvinar nibh ac ante cursus, vel gravida mi interdum. Mauris sit amet molestie urna, id finibus magna. Ut mollis lectus urna, sit amet pellentesque orci consectetur luctus. Nunc faucibus a tortor sit amet elementum. </p>
+      </div>
+
+      <div id="panel-6" class="comicPanel"  style="top: 1200px; left: 0px;">
+        <img src="res\panels\SavakIcon2Sqr.gif">
+      </div>
+
+
+
+    </div>
+
+
+    <div id="bottom-bar">
+      <a href="about">LORE</a>
+      <a href="search">SEARCH</a>
+      <a href="contact">CONTACT</a>
+    </div>
+  </body>
+</html>

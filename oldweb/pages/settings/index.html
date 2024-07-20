@@ -1,0 +1,56 @@
+<div>
+    <h1>Themes</h1>
+    <div id="setting-themes-list">
+    </div>
+
+<label class="setting-theme-option dark"><input type="radio" value="dark"></label>
+
+
+<h1>Theme Accent</h1>
+<input id="setting-theme-accent" style="height: 50px;" type="color" value="#ffffff"> 
+</div> 
+<script>
+    var themes = [{
+        'name':"default",
+        'bg':"#fff",
+        'text':"#000",
+        'light':"#ccc",
+        'dark':"#999",
+        'accent':"#007acc",
+    },{
+        'name':"dark",
+        'bg':"#555",
+        'text':"#eee",
+        'light':"#777",
+        'dark':"#333",
+        'accent':"#ff970f",
+    },{
+        'name':"black",
+        'bg':"#000",
+        'text':"#fff",
+        'light':"#222",
+        'dark':"#111",
+        'accent':"#9f0",}]
+
+    var i = 0
+    themes.forEach(element => {
+        console.log(1)
+        
+        document.getElementById("setting-themes-list").innerHTML = document.getElementById("setting-themes-list").innerHTML +'<div class="setting-theme-option" onclick="setStyle('+ i++ +')"><span>'+element.name+':</span><span style="color:'+ element.bg +';">██</span><span style="color:'+ element.text +';">█</span><span style="color:'+ element.accent +';">█</span></div>'
+    });
+
+    var style = getComputedStyle(document.body)
+    document.getElementById("setting-theme-accent").value = style.getPropertyValue('--main-accent')
+    document.getElementById("setting-theme-accent").addEventListener("change", ()=>{
+        document.documentElement.style.setProperty('--main-accent', document.getElementById("setting-theme-accent").value)
+        })
+
+    function setStyle(themeName) {
+        var theme=themes[themeName] 
+        document.documentElement.style.setProperty('--main-bg', theme.bg)
+        document.documentElement.style.setProperty('--main-light', theme.light)
+        document.documentElement.style.setProperty('--main-dark', theme.dark)
+        document.documentElement.style.setProperty('--main-text', theme.text)
+        document.documentElement.style.setProperty('--main-accent', theme.accent)
+    }
+</script>

@@ -1,0 +1,69 @@
+<head>
+    <title>Snapps' Space</title>
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
+</head>
+
+<body>
+    <div id="small-card-container">
+        <div class="small-card" id="intro" ontouchstart='document.getElementsByClassName("big-card")[0].scrollIntoView({behavior: "smooth"})' onclick='document.getElementsByClassName("big-card")[0].scrollIntoView({behavior: "smooth"})'>
+            <h1>START</h1>
+        </div>
+        <div class="small-card" id="e621" ontouchstart='document.getElementsByClassName("big-card")[1].scrollIntoView({behavior: "smooth"})' onclick='document.getElementsByClassName("big-card")[1].scrollIntoView({behavior: "smooth"})'>
+            <h1>e621</h1>
+        </div>
+        <div class="small-card" id="furaff" ontouchstart='document.getElementsByClassName("big-card")[2].scrollIntoView({behavior: "smooth"})' onclick='document.getElementsByClassName("big-card")[2].scrollIntoView({behavior: "smooth"})'>
+            <h1>Fur Affinity</h1>
+        </div>
+        <div class="small-card" id="pillowfort" ontouchstart='document.getElementsByClassName("big-card")[3].scrollIntoView({behavior: "smooth"})' onclick='document.getElementsByClassName("big-card")[3].scrollIntoView({behavior: "smooth"})'>
+            <h1>Pillowfort</h1>
+        </div>
+        <div class="small-card" id="aryion" ontouchstart='document.getElementsByClassName("big-card")[4].scrollIntoView({behavior: "smooth"})' onclick='document.getElementsByClassName("big-card")[4].scrollIntoView({behavior: "smooth"})'>
+            <h1>Aryion</h1>
+        </div>
+        <div class="small-card" id="archive" ontouchstart='document.getElementsByClassName("big-card")[5].scrollIntoView({behavior: "smooth"})' onclick='document.getElementsByClassName("big-card")[5].scrollIntoView({behavior: "smooth"})'>
+            <h1>Archive</h1>
+        </div>
+    </div>
+    <div id="big-card-container">
+        <div class="big-card" id="intro">
+            <img draggable="false" src="img/savak.png">
+            <h1>Welcome!</h1>
+            <p>Here you will find which sites I post on and what content I post there.</p>
+            <button onclick='window.location.href = "../"'>Go Back</button>
+        </div>
+        <div class="big-card" id="e621">
+            <img draggable="false" src="img/e621.jpg">
+            <h1>e621</h1>
+            <p>I upload most of my finished stuff here. Anything else of mine is free real estate.</p>
+            <button onclick='window.open("https://e621.net/posts?tags=snapps")'>Proceed</button>
+        </div>
+        <div class="big-card" id="furaff">
+            <img draggable="false" src="img/fa.png">
+            <h1>Fur Affinity</h1>
+            <p>My finished pieces will end up in the <a href="https://www.furaffinity.net/gallery/snappsuwu/">Gallery</a>. The doodles and other stuff may end up in <a href="https://www.furaffinity.net/scraps/snappsuwu/">Scraps</a>.</p>
+            <button onclick='window.open("https://www.furaffinity.net/user/snappsuwu/")'>Proceed</button>
+        </div>
+        <div class="big-card" id="pillowfort">
+            <img draggable="false" src="img/pf.png">
+            <h1>Pillowfort</h1>
+            <p>Ehhh... I'm still deciding if I want use this platform, but here it is.</p>
+            <button onclick='window.open("https://www.pillowfort.social/Snapps")'>Proceed</button>
+        </div>
+        <div class="big-card" id="aryion">
+            <img draggable="false" src="img/eka.png">
+            <h1>Aryion</h1>
+            <p>If you know what this is, you know what to expect to find here.</p>
+            <button onclick='window.open("https://aryion.com/g4/user/Snapps")'>Proceed</button>
+        </div>
+        <div class="big-card" id="archive">
+            <h1>Archive</h1>
+            <p>I'm still working on this one. Come back soon! :)</p>
+        </div>
+    </div>
+</body>
