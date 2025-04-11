@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scripts/css/global.css">
+    <link rel="stylesheet" href="index.css">
+    <title>Snapps Hyperlink Highway</title>
+    <!-- Embed Stuff -->
+    <meta content="Snapps the Scalie Artist 🔞" property="og:title">
+    <meta content="✨ Spreading scalie propaganda since 2020 ✨" property="og:description">
+    <meta content="https://snapps.dev/" property="og:url">
+    <meta content="https://snapps.dev/img/global/embed.png" property="og:image">
+    <meta content="#9463ff" data-react-helmet="true" name="theme-color">
+</head>
+<body>
+    <div id = "background">
+        <div id = "bgCheck"></div>
+        <div id = "bgVingette"></div>
+    </div>
+    
+    <div id="content-wrapper">
+        <div id="card">
+            <div id="card-ring">
+                <div id="card-ring-bg"></div>
+                <div id="card-ring-container">
+                    <div class="ring-element">
+                        <div class="ring-stuff selected">
+                            <div class="icon" style="mask: url(img/icon/questionC.svg) no-repeat center;"></div>
+                            <h1 class="ring-icon-text">About Me</h1>
+                        </div>                    
+                    </div>
+                    <div class="ring-element">
+                        <div class="ring-stuff"><div class="icon" style="mask: url(img/icon/twitter.svg) no-repeat center;"></div>
+                        <h1 class="ring-icon-text">Twitter</h1>
+                        </div>
+                    </div>
+                    <div class="ring-element">
+                        <div class="ring-stuff">
+                            <div class="icon" style="mask: url(img/icon/brush.svg) no-repeat center;"></div>
+                            <h1 class="ring-icon-text">Art</h1>
+                        </div>
+                    </div>
+                    <div class="ring-element">
+                        <div class="ring-stuff">
+                            <div class="icon" style="mask: url(img/icon/discord.svg) no-repeat center;"></div>
+                            <h1 class="ring-icon-text">Discord</h1>
+                        </div>
+                    </div>
+                    <div class="ring-element">
+                        <div class="ring-stuff">
+                            <div class="icon" style="mask: url(img/icon/bsky.svg) no-repeat center;"></div>
+                            <h1 class="ring-icon-text">Bluesky</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="card-info-wrapper">
+                <div id="card-info">
+                    <div id="card-info-bg"></div>
+                    <div id="card-info-bg2"></div>
+                    <div id="card-info-text">   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        bgs=[
+            "url(img/bg/cardBG/savak.png)",
+            "url(img/bg/cardBG/twitter.png)",
+            "",
+            "url(img/bg/cardBG/Winter.gif)",
+            "url(img/bg/cardBG/bsky.png)"
+        ]
+        content=
+        [
+            `          
+            <h1>A little about me...</h1>
+            <p>My name is <b style="color:#5ba2ff">Snapps</b>. I do a lot of things but I'm probably best known for my <b style="color:#ff5b5b">NSFW</b> <b style="color:#8fff5b">scalie</b> illustrations and animations.</p>
+            <p>If you stumbled upon this site, persnapps you are interested in my <i style="color:#ffbd5b">other</i> goings-on?</p>
+            <a class="button"><div class="btnBG"></div>Under Construction!</a>      
+            `
+            ,
+            `
+            <h1>@snappsOwO</h1>
+            <p>Not too fond of the site, but I still post art there for my oomfies who are still stuck there.</p>
+            <a class="button" href="https://x.com/SnappsOwO"><div class="btnBG"></div>Take a peep!</a>      
+            `
+            ,
+            `
+                   
+            <h1>My Drawings</h1>
+            <p>I host my artwork in several places. Some are more up-to-date than others. I recommend cheking out <b style="color: #e0b803;">Itaku</b> because that's where I can upload my work at full resolution.</p>
+            <div class="hori-wrapper">
+                <a href="https://itaku.ee/profile/snapps">Itaku</a>
+                <a href="https://e621.net/posts?tags=snapps">e621</a>
+                <a href="https://www.furaffinity.net/user/snappsuwu">FurAffinity</a>
+            </div>
+            `
+            ,
+            `            
+            <h1>Snapps' Space</h1>
+            <p>The best place to catch me! Here, a lot of stuff happens that's never seen anywhere else.</p>
+            <a class="button" href="https://discord.gg/fA9FwhnaTk"><div class="btnBG"></div>Join the Squad!</a>            
+            `
+            ,
+            `                        
+            <h1>@sniddy.snapps.dev</h1>
+            <p>My main spot for snitposting, doodles, and the rare horny yappening.</p>
+            <a class="button" href="https://bsky.app/profile/sniddy.snapps.dev"><div class="btnBG"></div>Take me there!</a>
+            `
+        ]
+
+        document.getElementById("card-info-bg").style.backgroundImage = bgs[0]
+        document.getElementById("card-info-text").innerHTML = content[0]
+
+
+        var totalIcons = document.getElementsByClassName("ring-element").length;
+        currentIcon=0
+        Array.from(document.getElementsByClassName("ring-element")).forEach((element,index) => {
+            element.style.transform = "rotateZ( "+ index/totalIcons * 360 +"deg )"
+            element.children[0].style.transform = "rotateZ( -"+ index/totalIcons * 360 +"deg )"
+        })
+
+        Array.from(document.getElementsByClassName("ring-element")).forEach((element,index) => {
+            
+            element.children[0].addEventListener("click",function(){selectIcon(event,index); currentIcon = index; })
+        })
+
+        document.getElementById("card-ring").style.transform = "rotateZ(0deg)"
+
+        function selectIcon(element, selectedIcon){
+            // Toggle select
+            removeSelectedIcon()
+            target = element.target
+            while(!target.classList.contains("ring-stuff")){
+                target = target.parentElement
+                console.log(target)
+            }
+            console.log(target.classList.add("selected"))
+            // Change Content
+            document.getElementById("card-info-bg").style.backgroundImage = bgs[selectedIcon]
+            document.getElementById("card-info-text").innerHTML = content[selectedIcon]
+            // Rotate wheel
+            console.log("moving from icon "+ currentIcon+" icon "+ selectedIcon)
+            angleOffset = 360/totalIcons
+            delta = currentIcon-selectedIcon
+            if (delta>totalIcons/2){ delta = -1* (totalIcons - delta)}
+            else if (delta<-totalIcons/2){ delta = 1* (totalIcons + delta)}
+            console.log(delta)
+            theta = delta * angleOffset
+            rotateRing(theta)
+        }
+
+        function removeSelectedIcon(){
+            Array.from(document.getElementsByClassName("ring-stuff")).forEach((element,index) => {
+            element.classList.remove("selected")
+        })
+        }
+
+        function rotateRing(deg){
+            // Get current rotation
+            regex = /\-?\d+/
+            document.getElementById("card-ring").style.transform = "rotateZ(" + ((parseInt(regex.exec(document.getElementById("card-ring").style.transform)) + deg)) + "deg)"
+            Array.from(document.getElementsByClassName("ring-element")).forEach((element,index) => {
+                element.children[0].style.transform = "rotateZ(" +(parseInt(regex.exec(element.children[0].style.transform)) - deg) + "deg)"
+                console.log(parseInt(regex.exec(element.children[0].style.transform)))
+
+            })
+        }
+    
+        function openLink(url,nsfw){
+            window.open(url,"_self")
+        }
+
+    </script>
+</body>
+</html>
