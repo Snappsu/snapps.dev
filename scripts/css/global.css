@@ -170,20 +170,29 @@ p a:not(.button):hover {
 }
 
 note {
+    --color:#0ff;
+    --text: '- Note -\a';
     width: 70%;
     background: #0ff3;
-    border-left: solid 4px #0fff;
+    border-left: solid 4px var(--color);
     padding: .5em;
-    border-right: solid 4px #0fff;
+    border-right: solid 4px var(--color);
 }
 
 note:before {
     width: 100%;
     color: #000;
     display: block;
-background: #0ff;
+background: var(--color);
     margin-bottom: .5em;
-    content: '- Note -\a';
+    content: var(--text);
     position: relative;
+    padding: .1em 0;
     white-space: pre;
+}
+
+note.warn {
+    --color:#ff0;
+    --text: '- Warning -\a';
+    background: #ff03;
 }
