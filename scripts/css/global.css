@@ -75,6 +75,28 @@ h1 {
     image-rendering: crisp-edges;
 }
 
+p a:not(.button) {
+          background-clip: text;
+      -webkit-background-clip: text;
+    color: #fffa;
+    background-image:linear-gradient(90deg, var(--accentColor2) -10%, var(--accentColor1) 110%);
+    transition: .25s;
+}
+
+p a:not(.button):hover {
+    color: #fff5;
+}
+
+@keyframes backgroundHoriScroll {
+    0% {
+        background-position:0 0;
+    }
+
+    100% {
+        background-position:100% 0;
+    }
+}
+
 @keyframes backgroundPerspective {
     0% {
         background-position: 0 0, var(--bgPosition) var(--bgPosition)
@@ -145,4 +167,23 @@ h1 {
     100% {
         transform: rotate(-360deg);
     }
+}
+
+note {
+    width: 70%;
+    background: #0ff3;
+    border-left: solid 4px #0fff;
+    padding: .5em;
+    border-right: solid 4px #0fff;
+}
+
+note:before {
+    width: 100%;
+    color: #000;
+    display: block;
+background: #0ff;
+    margin-bottom: .5em;
+    content: '- Note -\a';
+    position: relative;
+    white-space: pre;
 }
