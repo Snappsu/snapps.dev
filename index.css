@@ -52,6 +52,8 @@
 
 
 .ring-stuff {
+        cursor: pointer;
+
     position: absolute;
     width: 15vmin;
     height: 15vmin;
@@ -69,11 +71,23 @@
     -webkit-filter: drop-shadow(0 0 2vmin #000);
             filter: drop-shadow(0 0 2vmin #000);
     scale: 1.2;
-    -webkit-filter: drop-shadow(-.2em -.1em 0px var(--accentColor2)) drop-shadow(.2em .1em 0px var(--accentColor1));
-            filter: drop-shadow(-.2em -.1em 0px var(--accentColor2)) drop-shadow(.2em .1em 0px var(--accentColor1));
-
-
+    -webkit-filter: drop-shadow(-.2em -.1em 0px var(--color)) drop-shadow(.2em .1em 0px var(--color));
+            filter: drop-shadow(-.2em -.1em 0px var(--color)) drop-shadow(.2em .1em 0px var(--color));
 }
+
+.ring-element:nth-child(3n+1) .ring-stuff:hover, .ring-element:nth-child(3n+1) .ring-stuff.selected {
+--color:cyan;
+}
+
+.ring-element:nth-child(3n+2) .ring-stuff:hover, .ring-element:nth-child(3n+2) .ring-stuff.selected {
+--color:magenta;
+}
+
+
+.ring-element:nth-child(3n) .ring-stuff:hover, .ring-element:nth-child(3n) .ring-stuff.selected {
+--color:yellow;
+}
+
 
 .ring-icon-text {
     opacity: 0;
@@ -82,6 +96,8 @@
     text-shadow: 0 0 1em #000;
     transition: .3s;
     z-index: 7;
+    user-select: none;
+    cursor: pointer;
 }
 
 .ring-stuff:hover .ring-icon-text, .ring-stuff.selected .ring-icon-text{
@@ -91,6 +107,7 @@
 
 .ring-stuff .icon {
     width: 10vmin;
+    cursor: pointer;
     height: 10vmin;
     background-color: #fff;
     -webkit-mask-size: 10vmin !important;
@@ -208,14 +225,18 @@ scale: 1.1;
     color: #fff;
     background-color: #fff0;
     border-radius: 1em;
-    transition: all .2s, color 0s, backgrounn;
+    transition: all .2s, color 0s, backgroundd;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     position: relative;
     font-size: 1.5em;
     text-decoration: none;
+    -webkit-transition: all .2s, color 0s, background;
+    -moz-transition: all .2s, color 0s, background;
+    -ms-transition: all .2s, color 0s, background;
+    -o-transition: all .2s, color 0s, background;
 }
 
 

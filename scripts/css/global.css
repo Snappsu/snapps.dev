@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Gugi&family=Nova+Square&display=swap');
 
 :root {
-    --fontColor:#eee;
-    --accentColor:oklch(70% 0.37 209.65);
-    --accentColor1:rgb(0, 238, 255);
-    --accentColor2:rgb(255, 0, 255);
+    --fontColor: #eee;
+    --accentColor: oklch(70% 0.37 209.65);
+    --accentColor1: rgb(0, 238, 255);
+    --accentColor2: rgb(255, 0, 255);
 }
 
-html{
+html {
     overflow: hidden;
 }
 
-body {    
+body {
     font-family: Nova Square;
     color: var(--fontColor);
     margin: 0;
@@ -31,65 +31,118 @@ h1 {
 /* Background Stuff */
 
 #background {
-    background-color: #000;
+    background-color: #222;
     position: absolute;
     width: 100%;
     height: 100%;
-    image-rendering: crisp-edges; animation-name: backgroundPerspective;
-    /* Transform */
+    animation-name: backgroundPerspective;
+    /*Transform*/
     perspective: 100px;
 }
+
 #bgCheck {
+
+
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 200%;
+    height: 200%;
     /* Background */
-    background-color: oklch(0.45 0.26 180);
-    background-image: url(/img/bg/checkerDark.png) ;
-    background-repeat: repeat;
-    background-size: 50px;
-    image-rendering: crisp-edges; 
+
+    --dotSize: 40px;
+    --dotColor: #333;
+    --dotBlurRad: 0px;
+    --bgSize: 200px;
+    --bgPosition: calc(var(--bgSize) / 2);
+    background-image:
+        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
+    background-size: var(--bgSize) var(--bgSize);
+    background-position: 0 0, var(--bgPosition) var(--bgPosition);
     /* Animation */
-    animation-name: backgroundPerspective;        
+    animation-name: backgroundPerspective;
     animation-duration: 6s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     /* Transform */
-    transform: rotateX(2deg) rotatey(1deg) translateX(-10vw) translateY(-200px) translateZ(70px) ;
 }
+
 #bgVingette {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(ellipse, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .2) 100%);
     background-repeat: repeat;
-    image-rendering: crisp-edges; 
+    image-rendering: crisp-edges;
 }
+
 @keyframes backgroundPerspective {
-    0% { background-position: 0 0;}
-    100% { background-position: 50px 50px;}
+    0% {
+        background-position: 0 0, var(--bgPosition) var(--bgPosition)
+    }
+
+    100% {
+        background-position: calc(var(--bgSize) * 2) calc(var(--bgSize) * -1), calc(var(--bgPosition) + var(--bgSize) * 2) calc(var(--bgPosition) - var(--bgSize))
+    }
 }
 
 @keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    11% { transform: translate(-1px, -2px) rotate(-1deg); }
-    22% { transform: translate(-3px, 0px) rotate(1deg); }
-    33% { transform: translate(3px, 2px) rotate(0deg); }
-    44% { transform: translate(1px, -1px) rotate(1deg); }
-    55% { transform: translate(-1px, 2px) rotate(-1deg); }
-    66% { transform: translate(-3px, 1px) rotate(0deg); }
-    77% { transform: translate(3px, 1px) rotate(-1deg); }
-    88% { transform: translate(-1px, -1px) rotate(1deg); }
-    100% { transform: translate(1px, 1px) rotate(0deg); }
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    11% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    22% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    33% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    44% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    55% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    66% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    77% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    88% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    100% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
 }
 
 @keyframes rotate360 {
-    0% { transform:  rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes rotate360counter {
-    0% { transform:  rotate(0deg); }
-    100% { transform: rotate(-360deg); }
-}
+    0% {
+        transform: rotate(0deg);
+    }
 
+    100% {
+        transform: rotate(-360deg);
+    }
+}
