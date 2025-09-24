@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Gugi&family=Nova+Square&display=swap');
 
+@font-face {
+    font-family: "octosquare";
+    src: url("/font/octosquare.woff2") format('woff');
+}
+
+@font-face {
+    font-family: "jost";
+    src: url("/font/jost.woff") format('woff');
+}
+
 :root {
     --fontColor: #eee;
     --accentColor: oklch(70% 0.37 209.65);
@@ -12,7 +22,7 @@ html {
 }
 
 body {
-    font-family: Nova Square;
+    font-family: jost;
     color: var(--fontColor);
     margin: 0;
     background-color: #000;
@@ -25,7 +35,8 @@ body {
 }
 
 h1 {
-    font-family: Gugi;
+    font-family: octosquare;
+    text-shadow: 1px 1px #444,2px 2px   #222,3px 3px #111,4px 4px #000;
 }
 
 /* Background Stuff */
