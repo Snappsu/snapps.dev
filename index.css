@@ -52,6 +52,8 @@
 
 
 .ring-stuff {
+        cursor: pointer;
+
     position: absolute;
     width: 15vmin;
     height: 15vmin;
@@ -60,17 +62,32 @@
     justify-content: center;
     flex-direction: column;
     transition: .3s;
-    filter: drop-shadow(0 0 .3vmin #000);
+    -webkit-filter: drop-shadow(0 0 .3vmin #000);
+            filter: drop-shadow(0 0 .3vmin #000);
     z-index: 5;
 }
 
 .ring-stuff:hover, .ring-stuff.selected {
-    filter: drop-shadow(0 0 2vmin #000);
+    -webkit-filter: drop-shadow(0 0 2vmin #000);
+            filter: drop-shadow(0 0 2vmin #000);
     scale: 1.2;
-    filter: drop-shadow(-.2em -.1em 0px var(--accentColor2)) drop-shadow(.2em .1em 0px var(--accentColor1));
-
-
+    -webkit-filter: drop-shadow(-.2em -.1em 0px var(--color)) drop-shadow(.2em .1em 0px var(--color));
+            filter: drop-shadow(-.2em -.1em 0px var(--color)) drop-shadow(.2em .1em 0px var(--color));
 }
+
+.ring-element:nth-child(3n+1) .ring-stuff:hover, .ring-element:nth-child(3n+1) .ring-stuff.selected {
+--color:cyan;
+}
+
+.ring-element:nth-child(3n+2) .ring-stuff:hover, .ring-element:nth-child(3n+2) .ring-stuff.selected {
+--color:magenta;
+}
+
+
+.ring-element:nth-child(3n) .ring-stuff:hover, .ring-element:nth-child(3n) .ring-stuff.selected {
+--color:yellow;
+}
+
 
 .ring-icon-text {
     opacity: 0;
@@ -79,6 +96,8 @@
     text-shadow: 0 0 1em #000;
     transition: .3s;
     z-index: 7;
+    user-select: none;
+    cursor: pointer;
 }
 
 .ring-stuff:hover .ring-icon-text, .ring-stuff.selected .ring-icon-text{
@@ -88,19 +107,23 @@
 
 .ring-stuff .icon {
     width: 10vmin;
+    cursor: pointer;
     height: 10vmin;
     background-color: #fff;
-    mask-size: 10vmin !important;
+    -webkit-mask-size: 10vmin !important;
+            mask-size: 10vmin !important;
     transition: .3s;
 }
 
 .ring-stuff:hover .icon {
-    animation: shake 5s linear infinite forwards;
+    -webkit-animation: shake 5s linear infinite forwards;
+            animation: shake 5s linear infinite forwards;
 }
 
 
 .ring-stuff.selected .icon {
-    animation: shake 5s linear infinite forwards;
+    -webkit-animation: shake 5s linear infinite forwards;
+            animation: shake 5s linear infinite forwards;
 }
 
 
@@ -117,7 +140,7 @@
 }
 
 #card-info {
-    position: relative;
+      position: relative;
     width: 95%;
     height: 95%;
     border: solid  10px #000; 
@@ -134,27 +157,15 @@
     background-repeat: no-repeat;
     background-position: center;
     background-image:#000;
-    filter: blur(10px);
+    -webkit-filter: blur(5px);
+            filter: blur(5px);
+    opacity: .5;
     transition: .5s;
     background-size: cover;
-
-}
-
-
-#card-info-bg2{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,.5) 0px, rgba(0,0,0,.6) 5px, rgba(0,0,0,.5) 10px); 
-    filter: blur(0px);
-    animation: scrollBG .05s linear infinite;
-    transition: .5s;
 }
 
 #card-info-text {
+    filter: drop-shadow(0 0 .2em #000);
     position: relative;
     width: 100%;
     height: 100%;
@@ -164,7 +175,11 @@
     flex-direction: column;
     z-index: 3;
     font-size: 1.5em;
-    user-select: none;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-filter: drop-shadow(0 0 .2em #000);
 }
 
 #card-info-text h1{
@@ -173,7 +188,8 @@
 
 
 #card-info-text p{
-    filter: drop-shadow(2px 2px 1px #000);
+    -webkit-filter: drop-shadow(2px 2px 1px #000);
+            filter: drop-shadow(2px 2px 1px #000);
     max-width: 80%;
 }
 
@@ -209,11 +225,18 @@ scale: 1.1;
     color: #fff;
     background-color: #fff0;
     border-radius: 1em;
-    transition: all .2s, color 0s, backgrounn;
+    transition: all .2s, color 0s, backgroundd;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
     position: relative;
     font-size: 1.5em;
     text-decoration: none;
+    -webkit-transition: all .2s, color 0s, background;
+    -moz-transition: all .2s, color 0s, background;
+    -ms-transition: all .2s, color 0s, background;
+    -o-transition: all .2s, color 0s, background;
 }
 
 
@@ -242,15 +265,22 @@ scale: 1.1;
 }
 
 #card-info-text .button:hover div{
-    filter: blur(.25em);
+    -webkit-filter: blur(.25em);
+            filter: blur(.25em);
     z-index: -1;
 
 }
 
 #card-info-text .button:active div{
-    filter: blur(1em);
+    -webkit-filter: blur(1em);
+            filter: blur(1em);
     z-index: -1;
 
+}
+
+@-webkit-keyframes scrollBG {
+    0% { background-position:  0 0px; }
+    100% { background-position:  0 10px; }
 }
 
 @keyframes scrollBG {
