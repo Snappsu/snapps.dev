@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <datalist id="characterList">
+    </datalist>
+
+    <div id="background">
+
+    </div>
+
+    <div id="letter">
+        <div id="letter-container">
+            <div id="letter-recipient" class="letter-field">
+                <h1>Recipient:</h1>
+                <div class="description">To whom should this question go to? A name is not needed; A description of the
+                    person could work as well. Regardless, I left some of my characters below (just for you 💖).</div>
+
+                <input id="recipient-field" type="text" value="" list="characterList" oninput="checkRecip(this.value)"
+                    placeholder="Who is the letter for?" />
+                <div id="char-chips"></div>
+                <div id="char-tab"></div>
+            </div>
+            <div id="letter-content" class="letter-field" id="ask-field">
+                <h1>Question:</h1>
+
+                <textarea maxlength="0" id="sender-question" oninput="updateCharCount(this.value)">
+            </textarea>
+                <div id="char-count"></div>
+            </div>
+            <div id="letter-sender" class="letter-field">
+                <h1>Sender:</h1>
+
+                <input type="text" value="Anonymous" placeholder="Who is sending the letter?" />
+            </div>
+        </div>
+    </div>
+
+    <script src="ask.js"></script>
+
+</body>
+
+</html>
