@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: "octosquare";
-    src: url("/font/octosquare.woff2") format('woff');
+    src: url("/res/font/octosquare.woff2") format('woff');
 }
 
 @font-face {
     font-family: "jost";
-    src: url("/font/jost.woff") format('woff');
+    src: url("/res/font/jost.woff") format('woff');
 }
 
 :root {
