@@ -114,18 +114,26 @@ h1 {
 }
 
 #intro .border{
+    --waveSize: 120px;
     position: absolute;
     margin-top: -50px;
     background-image:  linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
     background-size: 20px 20px;background-position-y: 50px;
-       width: 100%;
+       width: 200%;
         height: 50px;
           --mask:
-    radial-gradient(34.99px at 50% 48px,#000 99%,#0000 101%) calc(50% - 60px) 0/120px 100%,
-    radial-gradient(34.99px at 50% -18px,#0000 99%,#000 101%) 50% 30px/120px 100% repeat-x;
+    radial-gradient(34.99px at 50% 48px,#000 99%,#0000 101%) calc(50% - var(--waveSize) / 2) 0/var(--waveSize) 100%,
+    radial-gradient(34.99px at 50% -18px,#0000 99%,#000 101%) 50% calc(var(--waveSize) / 4)/var(--waveSize) 100% repeat-x;
   -webkit-mask: var(--mask);
           mask: var(--mask);
+              animation: wavyBorderScroll 5s linear infinite;
 
+
+}
+
+@keyframes wavyBorderScroll {
+    0% {mask-position: calc(50% - 60px) 0,50% 30px;}
+    100% {mask-position: calc(50% - 60px + 120px) 0,calc(50% + 120px) 30px;}
 }
 
 .hori {
