@@ -82,7 +82,7 @@ function updateCharCount(input) {
     if (charsLeft / MAX_QUESTION_LENGTH < .1) node.style.color = "red";
     else if (charsLeft / MAX_QUESTION_LENGTH < .25) node.style.color = "orange";
     else if (charsLeft / MAX_QUESTION_LENGTH < .5) node.style.color = "yellow";
-    else node.style.color = "white";
+    else node.style.color = "#333";
     //else if 
 }
 

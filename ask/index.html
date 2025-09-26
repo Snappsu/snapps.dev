@@ -4,8 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+     <!-- Stuff to Import-->
+    <link rel="stylesheet" href="/res/style/global.css">
+    <link rel="stylesheet" href="index.css">
+    <!-- Page Appearance -->
+    <title>home - snapps.dev</title>
+    <link rel="icon" href="/res/img/global/embed.png">
+    <link rel="apple-touch-icon" href="/res/img/global/embed.png">
+    <!-- Embed Stuff -->
+    <meta content="Snapps the Scalie Artist 🔞" property="og:title">
+    <meta content="✨ Spreading scalie propaganda since 2020 ✨" property="og:description">
+    <meta content="https://snapps.dev/" property="og:url">
+    <meta content="https://snapps.dev/img/global/embed.png" property="og:image">
+    <meta content="#9463ff" data-react-helmet="true" name="theme-color">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+    </style>
 </head>
 
 <body>
@@ -31,9 +45,7 @@
             </div>
             <div id="letter-content" class="letter-field" id="ask-field">
                 <h1>Question:</h1>
-
-                <textarea maxlength="0" id="sender-question" oninput="updateCharCount(this.value)">
-            </textarea>
+                <textarea maxlength="0" id="sender-question" oninput="updateCharCount(this.value)"></textarea>
                 <div id="char-count"></div>
             </div>
             <div id="letter-sender" class="letter-field">
@@ -44,7 +56,7 @@
         </div>
     </div>
 
-    <script src="ask.js"></script>
+    <script src="/res/js/ask.js"></script>
 
 </body>
 

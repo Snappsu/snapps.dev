@@ -1,20 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-@font-face {
-    font-family: "octosquare";
-    src: url("res/fonts/octosquare.woff2") format('woff');
-}
-
-@font-face {
-    font-family: "jost";
-    src: url("res/fonts/jost.ttf") format('ttf');
-}
 
 h1 {
     font-family: octosquare;
     color: #fff;
-    text-shadow: 0 0 .1em #000;
-    -webkit-text-stroke: .01em #000;
     margin: 0px !important;
     -webkit-user-select: none;
        -moz-user-select: none;
