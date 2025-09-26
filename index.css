@@ -233,10 +233,10 @@ scale: 1.1;
     position: relative;
     font-size: 1.5em;
     text-decoration: none;
-    -webkit-transition: all .2s, color 0s, background;
-    -moz-transition: all .2s, color 0s, background;
-    -ms-transition: all .2s, color 0s, background;
-    -o-transition: all .2s, color 0s, background;
+    -webkit-transition: all .2s, color 0s;
+    -moz-transition: all .2s, color 0s ;
+    -ms-transition: all .2s, color 0s;
+    -o-transition: all .2s, color 0s;
 }
 
 
@@ -286,4 +286,29 @@ scale: 1.1;
 @keyframes scrollBG {
     0% { background-position:  0 0px; }
     100% { background-position:  0 10px; }
+}
+
+#data-warn{
+    max-width: 250px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    right: 1em;
+    text-align: center;
+    bottom: 1em;
+    position: absolute;
+    color: #fff;
+    padding: 1em;
+    background-color: #0004;
+    backdrop-filter: blur(10px);
+}
+
+#data-warn summary {
+    text-align: center;;
+    color: #ff0;
+}
+
+
+#data-warn details {
+    text-align: justify;
 }
