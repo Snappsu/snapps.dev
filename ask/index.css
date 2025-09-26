@@ -17,7 +17,7 @@ h1 {
             -ms-user-select: none;
                 user-select: none;
 
-    color: #666;
+    color: var(--textColorSoft);
     font-family: jost;
 }
 
@@ -84,18 +84,17 @@ body {
 }
 
 #letter-container{
-    background-color: #fff;
+    background-color: var(--bgCont2);
     border-radius: 1em;
     padding: 1em;
 }
 
 #letter {
-background: #FFF;
-background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(200, 255, 255, 1) 40%, rgba(200, 255, 255, 1) 45%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0) 46%, rgba(255, 200, 255, 1) 46%, rgba(255, 200, 255, 1) 51%, rgba(255, 255, 255, 0) 51%, rgba(255, 255, 255, 0) 52%, rgba(255, 255, 200, 1) 52%, rgba(255, 255, 200, 1) 57%, rgba(255, 255, 255, 0) 57%, rgba(255, 255, 255, 0) 58%, rgba(200, 200, 200, 1) 58%, rgba(200, 200, 200, 1) 63%, rgba(255, 255, 255, 0) 63%)
-#fff;    
+background: var(--bgCont2);
+background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgb(0, 255, 255) 40%, rgb(0, 255, 255) 45%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0) 46%, rgb(255, 0, 255) 46%, rgb(255, 0, 255) 51%, rgba(255, 255, 255, 0) 51%, rgba(255, 255, 255, 0) 52%, rgb(255, 255, 0) 52%, rgb(255, 255, 0) 57%, rgba(255, 255, 255, 0) 57%, rgba(255, 255, 255, 0) 58%, rgb(0, 0, 0) 58%, rgb(0, 0, 0) 63%, rgba(255, 255, 255, 0) 63%)
+var(--bgCont1);;    
 -webkit-filter: drop-shadow(0 10px 10px #000a);    
         filter: drop-shadow(0 10px 10px #000a);
-    border: solid 2px #aaa;
     border-radius: 10px;
     padding: 2em;
     width: min(70vw, 700px);
@@ -116,7 +115,7 @@ input,
 textarea {
     border: none;
     border-radius: .25em;
-    background: #ddd;
+    background: #bbb;
     color: #000;
     width: 100%;
         box-sizing: border-box;
@@ -174,13 +173,14 @@ scale:1.1;
     align-items: center;
     font-weight: bold;
     font-size: 30px;
+    font-family: jost;
     color: #fff;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
     transition: 1s;
-    background: linear-gradient(#fff 0%, #fff0 20%, #fff0 80%, #fff), var(--bg) ;
+    background: linear-gradient(var(--bgCont2) 0%, #fff0 20%, #fff0 80%, var(--bgCont2)), var(--bg) ;
     background-origin: 0, 0;
     background-position: 0px 0px, 0px -350px;
     text-shadow: 0 0 1px #000;

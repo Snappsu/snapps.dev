@@ -17,6 +17,8 @@
     --bgCont2: #555;
 
     --textColor: #eee;
+    --textColorSoft: #bbb;
+
     --accentColor: oklch(70% 0.37 209.65);
     --accentColor1: rgb(0, 238, 255);
     --accentColor2: rgb(255, 0, 255);

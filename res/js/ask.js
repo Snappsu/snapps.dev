@@ -19,7 +19,7 @@ var characters = {
         "name": "Snavak",
         "theme": "#9f6dbd",
         "icon": "",
-        "desc": "Oh? A question for me? How delightful!"
+        "desc": "Oh? A question for me? How delightful~"
     },
     "emma": {
         "name": "Emma",
@@ -82,7 +82,7 @@ function updateCharCount(input) {
     if (charsLeft / MAX_QUESTION_LENGTH < .1) node.style.color = "red";
     else if (charsLeft / MAX_QUESTION_LENGTH < .25) node.style.color = "orange";
     else if (charsLeft / MAX_QUESTION_LENGTH < .5) node.style.color = "yellow";
-    else node.style.color = "#333";
+    else node.style.color = "white";
     //else if 
 }
 
