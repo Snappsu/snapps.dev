@@ -11,7 +11,12 @@
 }
 
 :root {
-    --fontColor: #eee;
+    --bg1: #222;
+    --bg2: #333;
+    --bgCont1: #444;
+    --bgCont2: #555;
+
+    --textColor: #eee;
     --accentColor: oklch(70% 0.37 209.65);
     --accentColor1: rgb(0, 238, 255);
     --accentColor2: rgb(255, 0, 255);
@@ -66,7 +71,7 @@ note.warn {
     }
 }
 
-@keyframes backgroundPerspective {
+@keyframes backgroundDotScroll {
     0% {
         background-position: 0 0, var(--bgPosition) var(--bgPosition)
     }
@@ -74,6 +79,17 @@ note.warn {
     100% {
         background-position: calc(var(--bgSize) * 2) calc(var(--bgSize) * -1), calc(var(--bgPosition) + var(--bgSize) * 2) calc(var(--bgPosition) - var(--bgSize))
     }
+}
+
+
+@-webkit-keyframes scrollBG {
+    0% { background-position:  0 0px; }
+    100% { background-position:  0 10px; }
+}
+
+@keyframes scrollBG {
+    0% { background-position:  0 0px; }
+    100% { background-position:  0 10px; }
 }
 
 /* Generic Animations */
@@ -170,6 +186,7 @@ note.warn {
 /*Navbar*/
 
 nav {
+    opacity: .5;
             user-select: none;
         -moz-user-select: none;
         -webkit-user-select: none;
@@ -182,12 +199,16 @@ nav {
     height: 50px;    
     justify-content: space-around;
     align-items: center;
+    transition: .25s;
 }
 
+nav:hover {
+    opacity: 1;
+}
 
 nav a {
     background: rgba(187, 187, 187, 1);
-    background: radial-gradient(circle, #555 50%, #333 100%);
+    background: radial-gradient(circle, var(--bgCont2) 50%, var(--bgCont1) 100%);
     width: 100%;
     height: 100%;
     text-decoration: none;

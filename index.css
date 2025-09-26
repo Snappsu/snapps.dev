@@ -5,7 +5,7 @@ html {
 
 body{
     font-family: jost;
-    color: var(--fontColor);
+    color: var(--textColor);
     margin: 0;
     background-color: #000;
     position: absolute;
@@ -18,7 +18,7 @@ body{
 
 
 #background {
-    background-color: #222;
+    background-color: var(--bg1);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -26,12 +26,12 @@ body{
 
 #bgCheck {
     position: absolute;
-    width: 200%;
-    height: 200%;
+    width: 100%;
+    height: 100%;
     /* Background */
 
     --dotSize: 40px;
-    --dotColor: #333;
+    --dotColor: var(--bg2);
     --dotBlurRad: 0px;
     --bgSize: 200px;
     --bgPosition: calc(var(--bgSize) / 2);
@@ -41,7 +41,7 @@ body{
     background-size: var(--bgSize) var(--bgSize);
     background-position: 0 0, var(--bgPosition) var(--bgPosition);
     /* Animation */
-    animation-name: backgroundPerspective;
+    animation-name: backgroundDotScroll;
     animation-duration: 6s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -332,16 +332,6 @@ scale: 1.1;
             filter: blur(1em);
     z-index: -1;
 
-}
-
-@-webkit-keyframes scrollBG {
-    0% { background-position:  0 0px; }
-    100% { background-position:  0 10px; }
-}
-
-@keyframes scrollBG {
-    0% { background-position:  0 0px; }
-    100% { background-position:  0 10px; }
 }
 
 #data-warn{
