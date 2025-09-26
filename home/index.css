@@ -112,10 +112,6 @@ transform: rotateZ(5deg);
 
 h1 {
     font-size: 10vmin;
-    font-family: "Octosquares", sans-serif;
-    color: #fff;
-    -webkit-text-stroke: #000 px ;
-    text-shadow: 0 0 5px #000;
 }
 
 #intro .border{
@@ -324,7 +320,6 @@ nav a:nth-child(3n+2):hover {
 
 nav a:hover {
     padding-top: 1em; 
-    border-bottom: solid 1px #aaa;
     color: #fff;
     text-shadow: 0 0 3px #000;
 }
