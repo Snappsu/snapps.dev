@@ -17,84 +17,44 @@
     --accentColor2: rgb(255, 0, 255);
 }
 
-html {
-    overflow: hidden;
-}
-
-body {
-    font-family: jost;
-    color: var(--fontColor);
-    margin: 0;
-    background-color: #000;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    text-align: center;
-    font-size: 1.25vmin;
-}
-
 h1 {
     font-family: octosquare;
     text-shadow: 1px 1px #444,2px 2px   #222,3px 3px #111,4px 4px #000;
+    filter: drop-shadow(0 0 1px #000);
 }
 
 /* Background Stuff */
 
-#background {
-    background-color: #222;
-    position: absolute;
+note {
+    --color:#0ff;
+    --text: '- Note -\a';
+    width: 70%;
+    background: #0ff3;
+    border-left: solid 4px var(--color);
+    padding: .5em;
+    border-right: solid 4px var(--color);
+    margin-bottom: 1em;
+}
+
+note:before {
     width: 100%;
-    height: 100%;
-    animation-name: backgroundPerspective;
-    /*Transform*/
-    perspective: 100px;
+    color: #000;
+    display: block;
+background: var(--color);
+    margin-bottom: .5em;
+    content: var(--text);
+    position: relative;
+    padding: .1em 0;
+    white-space: pre;
 }
 
-#bgCheck {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    /* Background */
-
-    --dotSize: 40px;
-    --dotColor: #333;
-    --dotBlurRad: 0px;
-    --bgSize: 200px;
-    --bgPosition: calc(var(--bgSize) / 2);
-    background-image:
-        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
-        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
-    background-size: var(--bgSize) var(--bgSize);
-    background-position: 0 0, var(--bgPosition) var(--bgPosition);
-    /* Animation */
-    animation-name: backgroundPerspective;
-    animation-duration: 6s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    /* Transform */
+note.warn {
+    --color:#ff0;
+    --text: '- Warning -\a';
+    background: #ff03;
 }
 
-#bgVingette {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .2) 100%);
-    background-repeat: repeat;
-    image-rendering: crisp-edges;
-}
-
-p a:not(.button) {
-          background-clip: text;
-      -webkit-background-clip: text;
-    color: #fffa;
-    background-image:linear-gradient(90deg, var(--accentColor2) -10%, var(--accentColor1) 110%);
-    transition: .25s;
-}
-
-p a:not(.button):hover {
-    color: #fff5;
-}
+/* Background Animations */
 
 @keyframes backgroundHoriScroll {
     0% {
@@ -115,6 +75,8 @@ p a:not(.button):hover {
         background-position: calc(var(--bgSize) * 2) calc(var(--bgSize) * -1), calc(var(--bgPosition) + var(--bgSize) * 2) calc(var(--bgPosition) - var(--bgSize))
     }
 }
+
+/* Generic Animations */
 
 @keyframes shake {
     0% {
@@ -178,31 +140,29 @@ p a:not(.button):hover {
     }
 }
 
-note {
-    --color:#0ff;
-    --text: '- Note -\a';
-    width: 70%;
-    background: #0ff3;
-    border-left: solid 4px var(--color);
-    padding: .5em;
-    border-right: solid 4px var(--color);
-    margin-bottom: 1em;
+/**/
+
+@keyframes sqoob {
+    0% {transform: scaleX(1.05) scaleY(1);}
+    50% {transform: scaleX(1) scaleY(1.1);}
+    100% {transform: scaleX(1.05) scaleY(1);}
 }
 
-note:before {
-    width: 100%;
-    color: #000;
-    display: block;
-background: var(--color);
-    margin-bottom: .5em;
-    content: var(--text);
-    position: relative;
-    padding: .1em 0;
-    white-space: pre;
+.text-sqoob {
+    display: inline-block;
+    animation: sqoob 1s ease-in-out infinite;
 }
 
-note.warn {
-    --color:#ff0;
-    --text: '- Warning -\a';
-    background: #ff03;
+.text-sqoob-off {
+    display: inline-block;
+    animation: sqoob 1s ease-in-out -.5s infinite;
+}
+
+/* Text Classes */
+
+.text-icon {
+    position: absolute;
+    filter: drop-shadow(0 0 1px #000);
+    max-height: 1.2em;
+    margin:0 .1em ;
 }
