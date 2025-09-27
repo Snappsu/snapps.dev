@@ -25,10 +25,27 @@
 }
 
 h1 {
+    color: #fff;
+    text-align: center;
     font-family: octosquare;
     text-shadow: 1px 1px #444,2px 2px   #222,3px 3px #111,4px 4px #000;
     filter: drop-shadow(0 0 1px #000);
 }
+
+p,span,li {color: var(--textColor); font-family: jost;}
+
+.gradient{
+          background-clip: text;
+      -webkit-background-clip: text;
+    color: #fffa;
+    background-image:linear-gradient(90deg, var(--accentColor2) -10%, var(--accentColor1) 110%);
+    transition: .25s;
+}
+
+.gradient:hover {
+    color: #fff5;
+}
+
 
 /* Background Stuff */
 
@@ -82,7 +99,6 @@ note.warn {
         background-position: calc(var(--bgSize) * 2) calc(var(--bgSize) * -1), calc(var(--bgPosition) + var(--bgSize) * 2) calc(var(--bgPosition) - var(--bgSize))
     }
 }
-
 
 @-webkit-keyframes scrollBG {
     0% { background-position:  0 0px; }

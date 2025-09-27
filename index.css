@@ -16,7 +16,6 @@ body{
     font-size: 1.25vmin;
 }
 
-
 #background {
     background-color: var(--bg1);
     position: absolute;

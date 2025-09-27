@@ -1,3 +1,9 @@
+html, body {
+    background-color: #000;
+                overflow-x: hidden;
+
+}
+
 .content{
     position: relative;;
     width: 100%;
@@ -144,6 +150,15 @@ h1 {
  margin: auto;
 }
 
+.vert {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ max-width: 80%;
+ margin: auto;
+}
+
 #avatar {
     margin-right: 4em;
     min-width: 50vmin;
@@ -193,8 +208,6 @@ body, html {
         background-color: var(--bg1);
     }
 
-
-
     .dot {
         --s: 2vw; /* control the size*/
         --c1: var(--bg2);
@@ -242,3 +255,18 @@ body, html {
         100% { background-position: 2vw 4vw}
     }
 
+#thingies {
+    position: relative;
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    height: 70vh;
+    background: linear-gradient(#000,#fff), linear-gradient(90deg,var(--accentColor1),var(--accentColor2));
+    background-attachment:local,local;
+    background-blend-mode:screen,normal;
+}
+
+.thingies-tab {
+    flex: none;
+    width: 100vw;
+}
