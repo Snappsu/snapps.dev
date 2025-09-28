@@ -120,6 +120,26 @@ body {
     }
 }
 
+@media (min-width: 1500px) {
+
+}
+
+@media (max-width: 1500px) {
+
+#intro .hori{
+    flex-direction: column !important;
+}
+#intro vr{
+    display: none;
+}
+
+#intro .vert {
+    margin: 0;
+}
+
+}
+
+
 #intro {
     width: 100%;
     background-image: linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
@@ -131,6 +151,9 @@ body {
     font-family: "jost";
     color: var(--textColor);
     z-index: 1;
+}
+
+#intro .vert{    margin-right: 4em;
 }
 
 h1 {
@@ -179,7 +202,6 @@ h1 {
 
 }
 
-
 @keyframes wavyBorderScroll {
     0% {
         mask-position: calc(50% - 60px) 0, 50% 30px;
@@ -193,10 +215,14 @@ h1 {
 
 .hori {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    justify-content: start;
     max-width: 80%;
     margin: auto;
+}
+
+.hori > *{
+    margin: 0 20px;
 }
 
 .vert {

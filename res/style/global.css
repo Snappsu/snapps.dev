@@ -37,7 +37,8 @@ h1 {
     text-shadow: 1px 1px #444, 2px 2px #222, 3px 3px #111, 4px 4px #000;
     filter: drop-shadow(0 0 1px #000);
     user-select: none;
-    margin: .5em;
+
+    margin-bottom: 1em;
 }
 
 p,
@@ -47,8 +48,14 @@ li {
     font-family: jost;
 }
 
-a {text-decoration: none;
-color: var(--accentColor1)}
+a {
+    text-decoration: none;
+color: var(--accentColor1);
+transition: .25s;
+}
+
+a:hover {color: var(--accentColor2)}
+
 
 .gradient {
     background-clip: text;
@@ -264,6 +271,11 @@ background-size: 200px;
 }
 
 @media (max-width: 1300px) {
+    :root{
+            --navbarPos: 0px;
+
+    }   
+
     #sidebars {
         display: none !important;
     }
@@ -616,7 +628,9 @@ sidebar.right .sidebar-section {
         aspect-ratio: 1;
 
     position: relative;
-    margin-right: 4em;
+    max-width: 50vmin;
+    max-height: 50vmin;
+
     min-width: 50vmin;
     min-height: 50vmin;
     background-image: 
@@ -640,10 +654,18 @@ sidebar.right .sidebar-section {
 }
 
 .avatar img {
+
+
     position: absolute;
     image-rendering: crisp-edges;
     left: 0;
     top: 0;
     transform: translateX(-50%) translateY(-50%);
     filter: drop-shadow(0 0 5px #000);
+}
+
+vr {
+    height: 80%;
+    border-left: dotted 2px var(--textColorSoft);;
+
 }
