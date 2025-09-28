@@ -130,14 +130,14 @@ body {
     text-align: center;
     font-family: "jost";
     color: var(--textColor);
-
+    z-index: 1;
 }
 
 h1 {
     font-size: 10vmin;
 }
 
-#intro .border {
+#intro .border:nth-child(2n+1) {
     --waveSize: 120px;
     position: absolute;
     margin-top: -50px;
@@ -157,6 +157,29 @@ h1 {
 
 }
 
+#intro .border:nth-child(2n) {
+    --waveSize: 120px;
+    transform: rotate(180deg) translateX(-16px) translateY(3px);
+    position: absolute;
+    margin-top: -50px;
+    right: 0;
+    bottom: -50px;
+    background-image: linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
+    background-size: 20px 20px;
+    background-position-y: 50px;
+    width: 200%;
+    height: 50px;
+    --mask:
+        radial-gradient(34.99px at 50% 48px, #000 99%, #0000 101%) calc(50% - var(--waveSize) / 2) 0/var(--waveSize) 100%,
+        radial-gradient(34.99px at 50% -18px, #0000 99%, #000 101%) 50% calc(var(--waveSize) / 4)/var(--waveSize) 100% repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    animation: wavyBorderScroll 5s linear infinite;
+
+
+}
+
+
 @keyframes wavyBorderScroll {
     0% {
         mask-position: calc(50% - 60px) 0, 50% 30px;
@@ -166,6 +189,7 @@ h1 {
         mask-position: calc(50% - 60px + 120px) 0, calc(50% + 120px) 30px;
     }
 }
+
 
 .hori {
     display: flex;
@@ -184,15 +208,29 @@ h1 {
     margin: auto;
 }
 
-#avatar {
-    margin-right: 4em;
-    min-width: 50vmin;
-    min-height: 50vmin;
-    background-color: #f00;
+
+.avi-text {
+    transform: translateX(-50%) translateY(120%) !important;
+
+}
+
+#avi-contact {
+    font-size: 2em;
+    margin-top: 13vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 6vh;
+}
+
+#avi-contact img{
+width: 100px;
+height: 100px;
+fill: #fff;
+    
 }
 
 p {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 
@@ -225,7 +263,6 @@ background {
     transform: translateZ(-px);
     top: 0;
     left: 0;
-    ;
     z-index: -1;
     perspective: 50vmax;
     overflow: hidden;
@@ -303,3 +340,4 @@ background {
     flex: none;
     width: 100vw;
 }
+

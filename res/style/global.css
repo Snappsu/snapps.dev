@@ -36,6 +36,8 @@ h1 {
     font-family: octosquare;
     text-shadow: 1px 1px #444, 2px 2px #222, 3px 3px #111, 4px 4px #000;
     filter: drop-shadow(0 0 1px #000);
+    user-select: none;
+    margin: .5em;
 }
 
 p,
@@ -44,6 +46,9 @@ li {
     color: var(--textColor);
     font-family: jost;
 }
+
+a {text-decoration: none;
+color: var(--accentColor1)}
 
 .gradient {
     background-clip: text;
@@ -230,6 +235,27 @@ note.warn {
     margin: 0 .1em;
 }
 
+.rainbow {
+  background-image: linear-gradient(135deg,rgba(0, 255, 255, 1) 0%, rgba(255, 0, 255, 1) 33%, rgba(255, 255, 0, 1) 66%, rgba(0, 255, 255, 1) 100%);
+  color: #de466c; /* Fallback color */
+  -webkit-background-clip: text;
+      background-clip: text;
+background-size: 200px;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowText 1s linear infinite;
+}
+
+@keyframes rainbowText {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+/* Conitional Navbar Stuff*/
 
 @media (min-width: 1300px) {
     nav {
@@ -342,6 +368,35 @@ nav a:hover {
 
 /* Sidebar (for landscape) */
 
+.center {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+sidebar .avatar{
+    margin: 0;
+    min-width: 150px;
+    min-height: 150px;
+    margin-bottom: .5em;
+    background: var(--bg2);
+}
+
+sidebar .avatar img{
+    width: 150px;
+    height: 150px;
+}
+
+sidebar p {
+    width: 100%;
+    font-size: 1.2em;
+    margin: 0;
+        margin-bottom: .5em;
+        text-align: center;
+
+}
+
 #sidebars {
     z-index: 1;
     position: sticky;
@@ -378,7 +433,7 @@ sidebar.right {
     width: 100%;
     padding: 10px;
     color: var(--textColor);
-    margin-bottom: 0;
+    margin-bottom: 10px;
     transition: .25s;
     overflow: hidden;
 
@@ -386,6 +441,8 @@ sidebar.right {
 
 sidebar.left .sidebar-section {
     background-image: linear-gradient(90deg, var(--bg1), #0000);
+        padding-left: 20px;
+
 
 }
 
@@ -394,8 +451,13 @@ sidebar.right .sidebar-section {
     background-image: linear-gradient(270deg, var(--bg1), #0000);
     padding-right: 30px;
 
+}
+
+.sidebar-section > * {
+        margin-bottom: .5em;
 
 }
+
 
 .sidebar-section-header {
     font-weight: bold;
@@ -427,7 +489,9 @@ sidebar.right .sidebar-section {
 
 .sidebar-section h2 {
     margin: .2em;
+    font-size: 1.4em;
 }
+
 
 #nav {
     user-select: none;
@@ -514,6 +578,7 @@ sidebar.right .sidebar-section {
 }
 
 .button {
+    image-rendering: crisp-edges;
     width: 88px;
     height: 31px;
     transition: .1s;
@@ -539,4 +604,46 @@ sidebar.right .sidebar-section {
     100% {
         transform: translate(-100%);
     }
+}
+
+/* Avatar Stuff */
+
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        aspect-ratio: 1;
+
+    position: relative;
+    margin-right: 4em;
+    min-width: 50vmin;
+    min-height: 50vmin;
+    background-image: 
+        radial-gradient(circle at center, #fff var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, #fff var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        linear-gradient(var(--accentColor1), var(--accentColor2));
+
+    --dotSize: 20px;
+    --dotColor: var(--bg2);
+    --dotBlurRad: 0px;
+    --bgSize: 100px;
+    --bgPosition: calc(var(--bgSize) / 2);
+    background-size: var(--bgSize) var(--bgSize), var(--bgSize) var(--bgSize), 100%;
+    background-position: 0 0, var(--bgPosition) var(--bgPosition);
+    border-radius: 25px;
+}
+
+.avatar > div {
+    position: relative;
+    height: fit-content;
+}
+
+.avatar img {
+    position: absolute;
+    image-rendering: crisp-edges;
+    left: 0;
+    top: 0;
+    transform: translateX(-50%) translateY(-50%);
+    filter: drop-shadow(0 0 5px #000);
 }
