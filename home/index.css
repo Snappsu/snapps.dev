@@ -5,6 +5,16 @@ body {
 
 }
 
+#under-construction {
+    position: absolute;
+    top: 25px;
+    width: 400px;
+    color: var(--textColor);
+    margin: auto;
+    left: calc(50% - 200px);
+    z-index: 2;
+}
+
 .content {
     position: relative;
     width: 100%;

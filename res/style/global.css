@@ -86,6 +86,7 @@ note {
     padding: .5em;
     border-right: solid 4px var(--color);
     margin-bottom: 1em;
+    font-family: jost;
 }
 
 note:before {
@@ -98,6 +99,7 @@ note:before {
     position: relative;
     padding: .1em 0;
     white-space: pre;
+    text-align: center;
 }
 
 note.warn {
@@ -595,7 +597,7 @@ sidebar.right .sidebar-section {
     animation-play-state: paused;
 }
 
-.button {
+.r-button {
     image-rendering: crisp-edges;
     width: 88px;
     height: 31px;
@@ -609,7 +611,7 @@ sidebar.right .sidebar-section {
     height: 31px;
 }
 
-.button:hover {
+.r-button:hover {
     scale: 1.2;
     filter: drop-shadow(0 0 3x #000);
 }
@@ -679,6 +681,7 @@ vr {
 /* Footer Stuff */
 
 #footer{
+    background-color: var(--bg2);
     box-sizing: border-box;
     display: flex;
     padding: .25em 3em;
@@ -705,4 +708,8 @@ vr {
 
 #footer > div:nth-child(3){
     justify-content: end;
+}
+
+sidebar {
+    margin: 0 !important;
 }
