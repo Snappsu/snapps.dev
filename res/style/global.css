@@ -10,6 +10,11 @@
     src: url("/res/font/jost.woff") format('woff');
 }
 
+body, html {
+        background-color: var(--bg1);
+
+}
+
 :root {
 
 
@@ -25,7 +30,7 @@
     --accentColor1: rgb(0, 238, 255);
     --accentColor2: rgb(255, 0, 255);
 
-    --navbarPos: 250px;
+    --navbarPos: 300px;
 
 
 }
@@ -393,6 +398,7 @@ sidebar .avatar{
     min-height: 150px;
     margin-bottom: .5em;
     background: var(--bg2);
+    border-radius: 0px;
 }
 
 sidebar .avatar img{
@@ -668,4 +674,35 @@ vr {
     height: 80%;
     border-left: dotted 2px var(--textColorSoft);;
 
+}
+
+/* Footer Stuff */
+
+#footer{
+    box-sizing: border-box;
+    display: flex;
+    padding: .25em 3em;
+    width: 100vw;
+    font-size: .75em;
+}
+
+#footer > div{
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+
+}
+
+#footer > div:nth-child(1){
+        justify-content: start;
+
+}
+
+#footer > div:nth-child(2){
+    justify-content: center;
+}
+
+#footer > div:nth-child(3){
+    justify-content: end;
 }
