@@ -1,11 +1,13 @@
-html, body {
+html,
+body {
+    width: 100vw;
     background-color: #000;
-                overflow-x: hidden;
+    overflow-x: hidden;
 
 }
 
-.content{
-    position: relative;;
+.content {
+    position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -13,13 +15,17 @@ html, body {
     justify-content: flex-start;
     flex-direction: column;
     transform: translateZ(0px);
+    width: calc(100% - var(--navbarPos) * 2);
+    padding: 0 var(--navbarPos);
+    transition: padding .5s;
 }
 
-.content > * {
+.content>* {
     flex: none;
+    padding: 0 var(--navbarPos);
 }
 
-#hero{
+#hero {
     user-select: none;
     height: 60vh;
     width: 100%;
@@ -29,20 +35,20 @@ html, body {
     justify-content: center;
 }
 
-#hero span{
+#hero span {
     font-size: 8vmin;
-        display: flex;
+    display: flex;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    color:#fff;
-    -webkit-text-stroke:  .25px #000;
+    color: #fff;
+    -webkit-text-stroke: .25px #000;
     text-shadow: 0 0 5px #000;
     font-family: "jost";
 }
 
 #hero-sign {
-    filter: drop-shadow( 0 0 4px #000);
+    filter: drop-shadow(0 0 4px #000);
     position: relative;
     width: 40vmin;
     height: 40vmin;
@@ -64,14 +70,14 @@ html, body {
     bottom: 0;
 }
 
-#hero-sign:active #hero-sign-text{
-scale: 1.1; 
-transform: rotateZ(-5deg);
+#hero-sign:active #hero-sign-text {
+    scale: 1.1;
+    transform: rotateZ(-5deg);
 }
 
-#hero-sign:active #hero-sign-star{
-scale: 2.2; 
-transform: rotateZ(5deg);
+#hero-sign:active #hero-sign-star {
+    scale: 2.2;
+    transform: rotateZ(5deg);
 }
 
 
@@ -93,25 +99,37 @@ transform: rotateZ(5deg);
 
 
 @keyframes sign-star {
-    0%   {opacity: 0; transform: rotateZ(-60deg);}
-    100% {opacity: 1;}
+    0% {
+        opacity: 0;
+        transform: rotateZ(-60deg);
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes sign-text {
-    0%   {opacity: 0; transform: translateX(-40px);}
-    100% {opacity: 1;}
+    0% {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
-#intro{
+#intro {
     width: 100%;
-    background-image:  linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
-    background-size: 20px 20px;         
+    background-image: linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
+    background-size: 20px 20px;
     filter: drop-shadow(0 0 5px);
     display: flex;
     flex-direction: column;
     text-align: center;
     font-family: "jost";
-        color: var(--textColor);
+    color: var(--textColor);
 
 }
 
@@ -119,44 +137,51 @@ h1 {
     font-size: 10vmin;
 }
 
-#intro .border{
+#intro .border {
     --waveSize: 120px;
     position: absolute;
     margin-top: -50px;
-    background-image:  linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
-    background-size: 20px 20px;background-position-y: 50px;
-       width: 200%;
-        height: 50px;
-          --mask:
-    radial-gradient(34.99px at 50% 48px,#000 99%,#0000 101%) calc(50% - var(--waveSize) / 2) 0/var(--waveSize) 100%,
-    radial-gradient(34.99px at 50% -18px,#0000 99%,#000 101%) 50% calc(var(--waveSize) / 4)/var(--waveSize) 100% repeat-x;
-  -webkit-mask: var(--mask);
-          mask: var(--mask);
-              animation: wavyBorderScroll 5s linear infinite;
+    left: 0;
+    background-image: linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
+    background-size: 20px 20px;
+    background-position-y: 50px;
+    width: 200%;
+    height: 50px;
+    --mask:
+        radial-gradient(34.99px at 50% 48px, #000 99%, #0000 101%) calc(50% - var(--waveSize) / 2) 0/var(--waveSize) 100%,
+        radial-gradient(34.99px at 50% -18px, #0000 99%, #000 101%) 50% calc(var(--waveSize) / 4)/var(--waveSize) 100% repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    animation: wavyBorderScroll 5s linear infinite;
 
 
 }
 
 @keyframes wavyBorderScroll {
-    0% {mask-position: calc(50% - 60px) 0,50% 30px;}
-    100% {mask-position: calc(50% - 60px + 120px) 0,calc(50% + 120px) 30px;}
+    0% {
+        mask-position: calc(50% - 60px) 0, 50% 30px;
+    }
+
+    100% {
+        mask-position: calc(50% - 60px + 120px) 0, calc(50% + 120px) 30px;
+    }
 }
 
 .hori {
- display: flex;
- align-items: center;
- justify-content: center;
- max-width: 80%;
- margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%;
+    margin: auto;
 }
 
 .vert {
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
- max-width: 80%;
- margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%;
+    margin: auto;
 }
 
 #avatar {
@@ -172,98 +197,106 @@ p {
 
 
 
-body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
-    img {
+img {
     pointer-events: none;
-            -webkit-user-drag: none;
-        user-select: none;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+body {
+    height: 100%;
+    perspective: 1px;
+    perspective-origin: 50% 0;
+    transform-style: preserve-3d;
+}
+
+
+background {
+    transform: translateZ(-px);
+    top: 0;
+    left: 0;
+    ;
+    z-index: -1;
+    perspective: 50vmax;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-color: var(--bg1);
+}
+
+.dot {
+    --s: 2vw;
+    /* control the size*/
+    --c1: var(--bg2);
+    --c2: #0000;
+
+    background: radial-gradient(var(--c1) 24%, var(--c2) 25%), radial-gradient(var(--c1) 24%, var(--c2) 25%) calc(var(--s)/2) calc(var(--s)/2);
+    background-size: var(--s) var(--s);
+    background-position: center;
+    transform: rotateZ(45deg) rotateX(30deg) rotateY(-10deg);
+    min-width: 200vmax;
+    min-height: 200vmax;
+    margin-top: -90vmax;
+    margin-left: -30vmax;
+    animation: dotSlide 10s linear infinite;
+}
+
+.stripes {
+    position: absolute;
+    filter: drop-shadow(0 0 2px #000);
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(125deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0) 74%,
+            rgba(0, 255, 255, 1) 74%,
+            rgba(0, 255, 255, 1) 76%,
+            rgba(255, 255, 255, 0) 76%,
+            rgba(255, 255, 255, 0) 77%,
+            rgba(255, 0, 255, 1) 77%,
+            rgba(255, 0, 255, 1) 79%,
+            rgba(255, 255, 255, 0) 79%,
+            rgba(255, 255, 255, 0) 80%,
+            rgba(255, 255, 0, 1) 80%,
+            rgba(255, 255, 0, 1) 82%,
+            rgba(255, 255, 255, 0) 82%,
+            rgba(255, 255, 255, 0) 83%,
+            rgba(50, 50, 50, 1) 83%,
+            rgba(50, 50, 50, 1) 85%,
+            rgba(255, 255, 255, 0) 85%);
+}
+
+@keyframes dotSlide {
+    0% {
+        background-position: 0px 0px
     }
 
-    body {
-        height: 100%;
-        perspective: 1px;
-        perspective-origin: 50% 0;
-        transform-style: preserve-3d;
+    100% {
+        background-position: 2vw 4vw
     }
-
-
-    background {
-        transform: translateZ(-px);
-        top:0;
-        left: 0;;
-        z-index: -1;
-        perspective: 50vmax;
-        overflow:hidden;
-        width: 100%;
-        height: 100vh;
-        position:absolute;
-        background-color: var(--bg1);
-    }
-
-    .dot {
-        --s: 2vw; /* control the size*/
-        --c1: var(--bg2);
-        --c2: #0000;
-        
-        background: radial-gradient(var(--c1) 24%,var(--c2) 25%), radial-gradient(var(--c1) 24%,var(--c2)  25%) calc(var(--s)/2) calc(var(--s)/2);
-        background-size: var(--s) var(--s);
-        background-position: center;
-        transform: rotateZ(45deg) rotateX(30deg) rotateY(-10deg);
-        min-width:200vmax;
-        min-height: 200vmax;
-        margin-top: -90vmax;
-        margin-left: -30vmax;
-        animation: dotSlide 10s linear infinite;
-    }
-
-    .stripes{
-        position: absolute;
-        filter: drop-shadow(0 0 2px #000);
-        top: 0;
-        width: 100%;
-        height: 100vh;
-        background: linear-gradient(125deg,
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0) 74%, 
-        rgba(0, 255, 255, 1) 74%, 
-        rgba(0, 255, 255, 1) 76%, 
-        rgba(255, 255, 255, 0) 76%, 
-        rgba(255, 255, 255, 0) 77%, 
-        rgba(255, 0, 255, 1) 77%, 
-        rgba(255, 0, 255, 1) 79%, 
-        rgba(255, 255, 255, 0) 79%, 
-        rgba(255, 255, 255, 0) 80%, 
-        rgba(255, 255, 0, 1) 80%, 
-        rgba(255, 255, 0, 1) 82%, 
-        rgba(255, 255, 255, 0) 82%, 
-        rgba(255, 255, 255, 0) 83%, 
-        rgba(50, 50, 50, 1) 83%, 
-        rgba(50, 50, 50, 1) 85%, 
-        rgba(255, 255, 255, 0) 85%);
-    }
-
-    @keyframes dotSlide {
-        0% { background-position: 0px 0px}
-        100% { background-position: 2vw 4vw}
-    }
+}
 
 #thingies {
     position: relative;
     display: flex;
     width: 100%;
     overflow-x: scroll;
-    height: 70vh;
-    background: linear-gradient(#000,#fff), linear-gradient(90deg,var(--accentColor1),var(--accentColor2));
-    background-attachment:local,local;
-    background-blend-mode:screen,normal;
+    height: 80vh;
+    background: linear-gradient(#000, #fff), linear-gradient(90deg, var(--accentColor1), var(--accentColor2));
+    background-attachment: local, local;
+    background-blend-mode: screen, normal;
 }
 
 .thingies-tab {
