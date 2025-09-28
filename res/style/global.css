@@ -1,0 +1,715 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Nova+Square&display=swap');
+
+@font-face {
+    font-family: "octosquare";
+    src: url("/res/font/octosquare.woff2") format('woff');
+}
+
+@font-face {
+    font-family: "jost";
+    src: url("/res/font/jost.woff") format('woff');
+}
+
+body, html {
+        background-color: var(--bg1);
+
+}
+
+:root {
+
+
+    --bg1: #222;
+    --bg2: #333;
+    --bgCont1: #444;
+    --bgCont2: #555;
+
+    --textColor: #eee;
+    --textColorSoft: #bbb;
+
+    --accentColor: oklch(70% 0.37 209.65);
+    --accentColor1: rgb(0, 238, 255);
+    --accentColor2: rgb(255, 0, 255);
+
+    --navbarPos: 300px;
+
+
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    font-family: octosquare;
+    text-shadow: 1px 1px #444, 2px 2px #222, 3px 3px #111, 4px 4px #000;
+    filter: drop-shadow(0 0 1px #000);
+    user-select: none;
+
+    margin-bottom: 1em;
+}
+
+p,
+span,
+li {
+    color: var(--textColor);
+    font-family: jost;
+}
+
+a {
+    text-decoration: none;
+color: var(--accentColor1);
+transition: .25s;
+}
+
+a:hover {color: var(--accentColor2)}
+
+
+.gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #fffa;
+    background-image: linear-gradient(90deg, var(--accentColor2) -10%, var(--accentColor1) 110%);
+    transition: .25s;
+}
+
+.gradient:hover {
+    color: #fff5;
+}
+
+
+/* Background Stuff */
+
+note {
+    --color: #0ff;
+    --text: '- Note -\a';
+    width: 70%;
+    background: #0ff3;
+    border-left: solid 4px var(--color);
+    padding: .5em;
+    border-right: solid 4px var(--color);
+    margin-bottom: 1em;
+    font-family: jost;
+}
+
+note:before {
+    width: 100%;
+    color: #000;
+    display: block;
+    background: var(--color);
+    margin-bottom: .5em;
+    content: var(--text);
+    position: relative;
+    padding: .1em 0;
+    white-space: pre;
+    text-align: center;
+}
+
+note.warn {
+    --color: #ff0;
+    --text: '- Warning -\a';
+    background: #ff03;
+}
+
+/* Background Animations */
+
+@keyframes backgroundHoriScroll {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+@keyframes backgroundDotScroll {
+    0% {
+        background-position: 0 0, var(--bgPosition) var(--bgPosition)
+    }
+
+    100% {
+        background-position: calc(var(--bgSize) * 2) calc(var(--bgSize) * -1), calc(var(--bgPosition) + var(--bgSize) * 2) calc(var(--bgPosition) - var(--bgSize))
+    }
+}
+
+@-webkit-keyframes scrollBG {
+    0% {
+        background-position: 0 0px;
+    }
+
+    100% {
+        background-position: 0 10px;
+    }
+}
+
+@keyframes scrollBG {
+    0% {
+        background-position: 0 0px;
+    }
+
+    100% {
+        background-position: 0 10px;
+    }
+}
+
+/* Generic Animations */
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    11% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    22% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    33% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    44% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    55% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    66% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    77% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    88% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    100% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+}
+
+@keyframes rotate360 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate360counter {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Text Animations */
+
+@keyframes sqoob {
+    0% {
+        transform: scaleX(1.05) scaleY(1);
+    }
+
+    50% {
+        transform: scaleX(1) scaleY(1.1);
+    }
+
+    100% {
+        transform: scaleX(1.05) scaleY(1);
+    }
+}
+
+.text-sqoob {
+    display: inline-block;
+    animation: sqoob 1s ease-in-out infinite;
+}
+
+.text-sqoob-off {
+    display: inline-block;
+    animation: sqoob 1s ease-in-out -.5s infinite;
+}
+
+/* Text Classes */
+
+.text-icon {
+    position: absolute;
+    filter: drop-shadow(0 0 1px #000);
+    max-height: 1.2em;
+    margin: 0 .1em;
+}
+
+.rainbow {
+  background-image: linear-gradient(135deg,rgba(0, 255, 255, 1) 0%, rgba(255, 0, 255, 1) 33%, rgba(255, 255, 0, 1) 66%, rgba(0, 255, 255, 1) 100%);
+  color: #de466c; /* Fallback color */
+  -webkit-background-clip: text;
+      background-clip: text;
+background-size: 200px;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowText 1s linear infinite;
+}
+
+@keyframes rainbowText {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+/* Conitional Navbar Stuff*/
+
+@media (min-width: 1300px) {
+    nav {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1300px) {
+    :root{
+            --navbarPos: 0px;
+
+    }   
+
+    #sidebars {
+        display: none !important;
+    }
+
+}
+
+/* Navbar (for portait) */
+
+nav {
+    opacity: .5;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    z-index: 1;
+    position: sticky;
+    top: 0;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: space-around;
+    align-items: center;
+    transition: .25s;
+}
+
+nav:hover {
+    opacity: 1;
+}
+
+nav a {
+    background: rgba(187, 187, 187, 1);
+    background: radial-gradient(circle, var(--bgCont2) 50%, var(--bgCont1) 100%);
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s, background-color 0s, color 0s;
+    border: solid 1px #222;
+    border-bottom: solid 1px #000;
+    font-size: 4vmin;
+    font-family: "octosquare", sans-serif;
+    color: #fff;
+    -webkit-text-stroke: #000 .3px;
+    text-shadow: 0 0 2px #000;
+}
+
+nav a:nth-child(3n+1):hover {
+    --color-A: #0ff;
+    --color-B: #0cc;
+    background-color: var(--color-B);
+    background-image:
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 6px, transparent 0px),
+        radial-gradient(var(--color-A) 4px, transparent 0px),
+        radial-gradient(var(--color-A) 2px, transparent 0px);
+    background-position-y: 5px, 15px, 25px, 35px, 45px;
+    background-position-x: 0, 10px;
+    background-repeat: repeat-x;
+    background-size: 20px 20px;
+}
+
+nav a:nth-child(3n+3):hover {
+    --color-A: #ff0;
+    --color-B: #cc0;
+    background-color: var(--color-B);
+    background-image:
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 6px, transparent 0px),
+        radial-gradient(var(--color-A) 4px, transparent 0px),
+        radial-gradient(var(--color-A) 2px, transparent 0px);
+    background-position-y: 5px, 15px, 25px, 35px, 45px;
+    background-position-x: 0, 10px;
+    background-repeat: repeat-x;
+    background-size: 20px 20px;
+}
+
+nav a:nth-child(3n+2):hover {
+    --color-A: #f0f;
+    --color-B: #c0c;
+    background-color: var(--color-B);
+    background-image:
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 6px, transparent 0px),
+        radial-gradient(var(--color-A) 4px, transparent 0px),
+        radial-gradient(var(--color-A) 2px, transparent 0px);
+    background-position-y: 5px, 15px, 25px, 35px, 45px;
+    background-position-x: 0, 10px;
+    background-repeat: repeat-x;
+    background-size: 20px 20px;
+}
+
+nav a:hover {
+    padding-top: 1em;
+    color: #fff;
+    text-shadow: 0 0 3px #000;
+}
+
+/* Sidebar (for landscape) */
+
+.center {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+sidebar .avatar{
+    margin: 0;
+    min-width: 150px;
+    min-height: 150px;
+    margin-bottom: .5em;
+    background: var(--bg2);
+    border-radius: 0px;
+}
+
+sidebar .avatar img{
+    width: 150px;
+    height: 150px;
+}
+
+sidebar p {
+    width: 100%;
+    font-size: 1.2em;
+    margin: 0;
+        margin-bottom: .5em;
+        text-align: center;
+
+}
+
+#sidebars {
+    z-index: 1;
+    position: sticky;
+    top: 0;
+}
+
+sidebar {
+    top: 10vh;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    max-width: 250px;
+}
+
+sidebar.left {
+    left: 0;
+    margin-left: calc(var(--navbarPos) - 250px);
+
+}
+
+sidebar.right {
+    right: 0;
+    margin-right: calc(var(--navbarPos) - 250px);
+}
+
+.sidebar-section {
+    background-color: #0000;
+    filter: drop-shadow(0 0 1px #000);
+    font-family: jost;
+    position: relative;
+    opacity: .5;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    color: var(--textColor);
+    margin-bottom: 10px;
+    transition: .25s;
+    overflow: hidden;
+
+}
+
+sidebar.left .sidebar-section {
+    background-image: linear-gradient(90deg, var(--bg1), #0000);
+        padding-left: 20px;
+
+
+}
+
+sidebar.right .sidebar-section {
+    text-align: right;
+    background-image: linear-gradient(270deg, var(--bg1), #0000);
+    padding-right: 30px;
+
+}
+
+.sidebar-section > * {
+        margin-bottom: .5em;
+
+}
+
+
+.sidebar-section-header {
+    font-weight: bold;
+    font-size: 2em;
+    display: block;
+    font-family: octosquare;
+
+    color: var(--textColor);
+    transition: .25s;
+    filter: drop-shadow(0 0 1px #000);
+}
+
+.sidebar-section:nth-child(3n+1):hover .sidebar-section-header {
+    color: #0ff;
+}
+
+.sidebar-section:nth-child(3n+2):hover .sidebar-section-header {
+    color: #f0f;
+}
+
+.sidebar-section:nth-child(3n):hover .sidebar-section-header {
+    color: #ff0;
+}
+
+.sidebar-section:hover {
+    opacity: 1;
+    background-color: var(--bg1);
+}
+
+.sidebar-section h2 {
+    margin: .2em;
+    font-size: 1.4em;
+}
+
+
+#nav {
+    user-select: none;
+}
+
+.nav-cont {
+    position: relative;
+    display: flex;
+    justify-self: end;
+    align-items: end;
+    flex-direction: column;
+}
+
+.nav-cont a {
+    position: relative;
+    text-shadow: 0 0 2px #000;
+    left: 0;
+    font-family: octosquare;
+    font-size: 1.5em;
+    width: 150%;
+    transform: translateX(30px);
+    padding-right: 1em;
+    color: #fff;
+    text-decoration: none;
+    filter: drop-shadow(0 0 1px #000);
+    transition: .25s;
+}
+
+.nav-cont a:hover {
+    padding-right: 1.5em;
+    background-color: var(--color);
+    --dotSize: 3px;
+    --dotColor: var(--bg2);
+    --dotBlurRad: 0px;
+    --bgSize: 20px;
+    --bgPosition: calc(var(--bgSize) / 2);
+    background-color: var(--bg2);
+    background-image:
+        radial-gradient(circle at center, var(--color) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--color) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
+    background-size: var(--bgSize) var(--bgSize);
+    background-position: 0 0, var(--bgPosition) var(--bgPosition);
+    /* Animation */
+    animation-name: backgroundDotScroll;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.nav-cont a:nth-child(3n+1) {
+    --color: #0ff5;
+}
+
+.nav-cont a:nth-child(3n+2) {
+    --color: #f0f5;
+}
+
+.nav-cont a:nth-child(3n) {
+    --color: #ff05;
+}
+
+/* Button Stuffs*/
+
+.button-reel {
+    width: 100%;
+    height: 40px;
+    mask-image: linear-gradient(90deg, #fff0 10%, #fff, #fff, #fff0 90%);
+}
+
+.button-reel-cont {
+    display: flex;
+    white-space: nowrap;
+    width: fit-content;
+    height: 100%;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    animation: buttonScroll 10s infinite linear;
+}
+
+.button-reel:hover .button-reel-cont {
+    animation: buttonScroll 10s infinite linear;
+    animation-play-state: paused;
+}
+
+.r-button {
+    image-rendering: crisp-edges;
+    width: 88px;
+    height: 31px;
+    transition: .1s;
+    margin: 0 5px;
+}
+
+.button-spacer {
+    flex: none;
+    min-width: 100%;
+    height: 31px;
+}
+
+.r-button:hover {
+    scale: 1.2;
+    filter: drop-shadow(0 0 3x #000);
+}
+
+@keyframes buttonScroll {
+    0% {
+        transform: translate(100%);
+    }
+
+    100% {
+        transform: translate(-100%);
+    }
+}
+
+/* Avatar Stuff */
+
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        aspect-ratio: 1;
+
+    position: relative;
+    max-width: 50vmin;
+    max-height: 50vmin;
+
+    min-width: 50vmin;
+    min-height: 50vmin;
+    background-image: 
+        radial-gradient(circle at center, #fff var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, #fff var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        linear-gradient(var(--accentColor1), var(--accentColor2));
+
+    --dotSize: 20px;
+    --dotColor: var(--bg2);
+    --dotBlurRad: 0px;
+    --bgSize: 100px;
+    --bgPosition: calc(var(--bgSize) / 2);
+    background-size: var(--bgSize) var(--bgSize), var(--bgSize) var(--bgSize), 100%;
+    background-position: 0 0, var(--bgPosition) var(--bgPosition);
+    border-radius: 25px;
+}
+
+.avatar > div {
+    position: relative;
+    height: fit-content;
+}
+
+.avatar img {
+
+
+    position: absolute;
+    image-rendering: crisp-edges;
+    left: 0;
+    top: 0;
+    transform: translateX(-50%) translateY(-50%);
+    filter: drop-shadow(0 0 5px #000);
+}
+
+vr {
+    height: 80%;
+    border-left: dotted 2px var(--textColorSoft);;
+
+}
+
+/* Footer Stuff */
+
+#footer{
+    background-color: var(--bg2);
+    box-sizing: border-box;
+    display: flex;
+    padding: .25em 3em;
+    width: 100vw;
+    font-size: .75em;
+}
+
+#footer > div{
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+
+}
+
+#footer > div:nth-child(1){
+        justify-content: start;
+
+}
+
+#footer > div:nth-child(2){
+    justify-content: center;
+}
+
+#footer > div:nth-child(3){
+    justify-content: end;
+}
+
+sidebar {
+    margin: 0 !important;
+}

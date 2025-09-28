@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+h1 {
+    font-family: octosquare;
+    color: #fff;
+    margin: 0px !important;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.description {
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+
+    color: var(--textColorSoft);
+    font-family: jost;
+}
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* Background */
+    --dotSize: 40px;
+    --dotColor: var(--bg2);
+    --dotBlurRad: 0px;
+    --bgSize: 200px;
+    --bgPosition: calc(var(--bgSize) / 2);
+    background-color: var(--bg1);
+    background-image:
+        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
+    background-size: var(--bgSize) var(--bgSize);
+    background-position: 0 0, var(--bgPosition) var(--bgPosition);
+    /* Animation */
+    animation-name: backgroundDotScroll;
+    animation-duration: 6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    /* Transform */
+
+}
+
+@-webkit-keyframes scrollDots {
+    0% {
+        background-position: 0 0, 0 0, calc(var(--s)/2) calc(var(--s)/2);
+    }
+
+    100% {
+        background-position: 0 0, calc(var(--s)) calc(var(--s)), calc(3 * var(--s)/2) calc(3 * var(--s)/2);
+    }
+}
+
+@keyframes scrollDots {
+    0% {
+        background-position: 0 0, 0 0, calc(var(--s)/2) calc(var(--s)/2);
+    }
+
+    100% {
+        background-position: 0 0, calc(var(--s)) calc(var(--s)), calc(3 * var(--s)/2) calc(3 * var(--s)/2);
+    }
+}
+
+#letter-container{
+    background-color: var(--bgCont2);
+    border-radius: 1em;
+    padding: 1em;
+}
+
+#letter {
+background: var(--bgCont2);
+background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgb(0, 255, 255) 40%, rgb(0, 255, 255) 45%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0) 46%, rgb(255, 0, 255) 46%, rgb(255, 0, 255) 51%, rgba(255, 255, 255, 0) 51%, rgba(255, 255, 255, 0) 52%, rgb(255, 255, 0) 52%, rgb(255, 255, 0) 57%, rgba(255, 255, 255, 0) 57%, rgba(255, 255, 255, 0) 58%, rgb(0, 0, 0) 58%, rgb(0, 0, 0) 63%, rgba(255, 255, 255, 0) 63%)
+var(--bgCont1);;    
+-webkit-filter: drop-shadow(0 10px 10px #000a);    
+        filter: drop-shadow(0 10px 10px #000a);
+    border-radius: 10px;
+    padding: 2em;
+    width: min(70vw, 700px);
+}
+
+.letter-field {
+    margin: 1em 0;
+    position: relative;
+    z-index: 1;
+}
+
+.letter-field>* {
+    margin-bottom: 1em;
+
+}
+
+input,
+textarea {
+    border: none;
+    border-radius: .25em;
+    background: #bbb;
+    color: #000;
+    width: 100%;
+        box-sizing: border-box;
+    padding: .5em;
+
+}
+
+input {
+ text-align: center;
+}
+
+textarea {
+    width: 100%;
+    height: 10em;
+    resize: none;
+}
+
+
+#char-count {
+    font-family: monospace;
+    position: absolute;
+    bottom: .5em;
+    right: .5em;
+    font-weight: bold;
+    text-shadow: 0 0 1px #000;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.char-chip {
+    font-family: jost;
+    color: #fff;
+    text-shadow: 0 0 2px #000;
+    padding: .25em .5em;
+    border-radius: 1em;
+    margin-right: .5em;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    transition: .25s;
+}
+
+.char-chip:hover {
+scale:1.1;
+}
+
+#char-tab {
+    --bg:url('https://static1.e621.net/data/2a/65/2a65978b134468ea19f08eddbc3ec142.gif');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: jost;
+    color: #fff;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    transition: 1s;
+    background: linear-gradient(var(--bgCont2) 0%, #fff0 20%, #fff0 80%, var(--bgCont2)), var(--bg) ;
+    background-origin: 0, 0;
+    background-position: 0px 0px, 0px -350px;
+    text-shadow: 0 0 1px #000;
+
+}
+
+#char-chips{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+}
+
+sidebar {
+    margin: 0 !important;
+}

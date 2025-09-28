@@ -1,5 +1,60 @@
 
+html {
+    overflow: hidden;
+}
 
+body{
+    font-family: jost;
+    color: var(--textColor);
+    margin: 0;
+    background-color: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: 1.25vmin;
+}
+
+#background {
+    background-color: var(--bg1);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#bgCheck {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* Background */
+
+    --dotSize: 40px;
+    --dotColor: var(--bg2);
+    --dotBlurRad: 0px;
+    --bgSize: 200px;
+    --bgPosition: calc(var(--bgSize) / 2);
+    background-image:
+        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
+    background-size: var(--bgSize) var(--bgSize);
+    background-position: 0 0, var(--bgPosition) var(--bgPosition);
+    /* Animation */
+    animation-name: backgroundDotScroll;
+    animation-duration: 6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    /* Transform */
+}
+
+#bgVingette {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .2) 100%);
+    background-repeat: repeat;
+    image-rendering: crisp-edges;
+}
 
 /* Card Stuff */
 
@@ -233,10 +288,10 @@ scale: 1.1;
     position: relative;
     font-size: 1.5em;
     text-decoration: none;
-    -webkit-transition: all .2s, color 0s, background;
-    -moz-transition: all .2s, color 0s, background;
-    -ms-transition: all .2s, color 0s, background;
-    -o-transition: all .2s, color 0s, background;
+    -webkit-transition: all .2s, color 0s;
+    -moz-transition: all .2s, color 0s ;
+    -ms-transition: all .2s, color 0s;
+    -o-transition: all .2s, color 0s;
 }
 
 
@@ -278,12 +333,39 @@ scale: 1.1;
 
 }
 
-@-webkit-keyframes scrollBG {
-    0% { background-position:  0 0px; }
-    100% { background-position:  0 10px; }
+#data-warn{
+    max-width: 250px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    right: 1em;
+    text-align: center;
+    bottom: 1em;
+    position: absolute;
+    color: #fff;
+    padding: 1em;
+    background-color: #0004;
+    backdrop-filter: blur(10px);
 }
 
-@keyframes scrollBG {
-    0% { background-position:  0 0px; }
-    100% { background-position:  0 10px; }
+#data-warn summary {
+    text-align: center;;
+    color: #ff0;
+}
+
+
+#data-warn details {
+    text-align: justify;
+}
+
+p a:not(.button) {
+          background-clip: text;
+      -webkit-background-clip: text;
+    color: #fffa;
+    background-image:linear-gradient(90deg, var(--accentColor2) -10%, var(--accentColor1) 110%);
+    transition: .25s;
+}
+
+p a:not(.button):hover {
+    color: #fff5;
 }

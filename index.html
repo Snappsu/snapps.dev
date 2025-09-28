@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="scripts/css/global.css">
+    <!-- Stuff to Import-->
+    <link rel="stylesheet" href="/res/style/global.css">
     <link rel="stylesheet" href="index.css">
-    <title>Snapps Hyperlink Highway</title>
+    <!-- Page Appearance -->
+    <title>snapps.dev</title>
+    <link rel="icon" href="/res/img/global/embed.png">
+    <link rel="apple-touch-icon" href="/res/img/global/embed.png">
     <!-- Embed Stuff -->
     <meta content="Snapps the Scalie Artist 🔞" property="og:title">
     <meta content="✨ Spreading scalie propaganda since 2020 ✨" property="og:description">
@@ -26,36 +30,36 @@
                 <div id="card-ring-container">
                     <div class="ring-element">
                         <div class="ring-stuff selected">
-                            <div class="icon" style="mask: url(img/icon/questionC.svg) no-repeat center;"></div>
+                            <div class="icon" style="mask: url(/res/img/icon/svg/questionC.svg) no-repeat center;"></div>
                             <h1 class="ring-icon-text">About Me</h1>
                         </div>                    
                     </div>
                     <div class="ring-element">
-                        <div class="ring-stuff"><div class="icon" style="mask: url(img/icon/twitter.svg) no-repeat center;"></div>
+                        <div class="ring-stuff"><div class="icon" style="mask: url(/res/img/icon/svg/twitter.svg) no-repeat center;"></div>
                         <h1 class="ring-icon-text">Twitter</h1>
                         </div>
                     </div>
                     <div class="ring-element">
                         <div class="ring-stuff">
-                            <div class="icon" style="mask: url(img/icon/brush.svg) no-repeat center;"></div>
+                            <div class="icon" style="mask: url(/res/img/icon/svg/brush.svg) no-repeat center;"></div>
                             <h1 class="ring-icon-text">Art</h1>
                         </div>
                     </div>
                     <div class="ring-element">
                         <div class="ring-stuff">
-                            <div class="icon" style="mask: url(img/icon/discord.svg) no-repeat center;"></div>
+                            <div class="icon" style="mask: url(/res/img/icon/svg/discord.svg) no-repeat center;"></div>
                             <h1 class="ring-icon-text">Discord</h1>
                         </div>
                     </div>
                     <div class="ring-element">
                         <div class="ring-stuff">
-                            <div class="icon" style="mask: url(img/icon/bsky.svg) no-repeat center;"></div>
+                            <div class="icon" style="mask: url(/res/img/icon/svg/bsky.svg) no-repeat center;"></div>
                             <h1 class="ring-icon-text">Bluesky</h1>
                         </div>
                     </div>
                     <div class="ring-element">
                         <div class="ring-stuff">
-                            <div class="icon" style="mask: url(img/icon/mail.svg) no-repeat center;"></div>
+                            <div class="icon" style="mask: url(/res/img/icon/svg/mail.svg) no-repeat center;"></div>
                             <h1 class="ring-icon-text">Contact</h1>
                         </div>
                     </div>
@@ -71,14 +75,23 @@
             </div>
         </div>
     </div>
+    
+    <div id="data-warn">
+        <span><b>Obligatory Cookie Warning</b></span>
+        <span>Hello! This site uses cookies in order to fuction correctly.</span>
+        <details>
+  <summary>Click here for more info</summary>
+  Cookies are used purely so that this site can remember your preferences (such as theme, accessabilty feaures, explicit content preferece), entered info (for commissions and asks), and login stuff (which you should NOT give out to ANYONE btw).
+</details>
+    </div>
     <script>
 
         bgs=[
-            "url(img/bg/cardBG/savak.png)",
-            "url(img/bg/cardBG/twitter.png)",
+            "url(/res/img/bg/cardBG/savak.png)",
+            "url(/res/img/bg/cardBG/twitter.png)",
             "",
-            "url(img/bg/cardBG/discord.gif)",
-            "url(img/bg/cardBG/bsky.png)",
+            "url(/res/img/bg/cardBG/discord.gif)",
+            "url(/res/img/bg/cardBG/bsky.png)",
             ""
         ]
         content=
@@ -87,7 +100,7 @@
             <h1>A little about me...</h1>
             <p>My name is <b style="color:#5ba2ff">Snapps</b>. I do a lot of things but I'm probably best known for my <b style="color:#ff5b5b">NSFW</b> <b style="color:#8fff5b">scalie</b> illustrations and animations.</p>
             <p>If you stumbled upon this site, persnapps you are interested in my <i style="color:#ffbd5b">other</i> goings-on?</p>
-            <a class="button"><div class="btnBG"></div>Under Construction!</a>      
+            <a class="button" href="/home"><div class="btnBG"></div>Heck yeah!</a>      
             `
             ,
             `
