@@ -599,10 +599,16 @@ sidebar.right .sidebar-section {
 
 .r-button {
     image-rendering: crisp-edges;
-    width: 88px;
-    height: 31px;
+    max-width: 88px;
+    max-height: 31px;
     transition: .1s;
     margin: 0 5px;
+}
+
+.r-button img {
+        image-rendering: crisp-edges;
+    max-width: 88px;
+    max-height: 31px;
 }
 
 .button-spacer {
