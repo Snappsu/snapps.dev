@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OC Gallery</title>
+    <!-- Stuff to Import-->
+    <link rel="stylesheet" href="https://cdn.snapps.dev/global-style.css">
+    <link rel="stylesheet" href="index.css">
+    <!-- Page Appearance -->
+    <title>oc gallery - snapps.dev</title>
+    <link rel="icon" href="/res/img/global/embed.png">
+    <link rel="apple-touch-icon" href="/res/img/global/embed.png">
+    <!-- Embed Stuff -->
+    <meta content="Character Gallery" property="og:title">
+    <meta content="✨ Spreading scalie propaganda since 2020 ✨" property="og:description">
+    <meta content="https://snapps.dev/" property="og:url">
+    <meta content="https://snapps.dev/img/global/embed.png" property="og:image">
+    <meta content="#9463ff" data-react-helmet="true" name="theme-color">
 </head>
 <body>
-   <script src="/res/js/characters.js"></script> 
+    <div id="nav-cont">
+        <a class="nav-icon selected" onclick="displaySearch()">Search</a>
+    </div>
+    <div id="info-cont">
+        <div class="info-tab" id="search">
+            <div id="search-bar">
+                <input type="text" id="search-name">
+                <a onclick="submitSearch()">submit</a>
+            </div>
+            <div id="search-results"></div>
+
+        </div>
+        <div class="info-tab" id="information">
+        </div>
+    </div>
+    <div id="gallery-cont"></div>
+    <script src="/res/js/characters.js"></script> 
 </body>
 </html>
