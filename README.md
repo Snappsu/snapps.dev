@@ -3,6 +3,7 @@ Oh boy...
 
 ## Theory
 - Decide on what deserves to be in the navigation page
+
 ## Structure
 - Home > Design the widgets for the "thingies"
 - Charaters > Make page
@@ -20,6 +21,7 @@ Oh boy...
 - Commissions > Commissions quote calculator
 - Asks > Develop system for getting asks
 - General > Accessibility features 
+- General > Implement CDN
 
 ## Style
 - Home > Add some flavor to text
