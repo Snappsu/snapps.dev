@@ -3,9 +3,11 @@ Oh boy...
 
 ## Theory
 - Decide on what deserves to be in the navigation page
+
 ## Structure
 - Home > Design the widgets for the "thingies"
-- Charaters > Make page
+- Charaters > Charater info layout
+- Charaters > Charater gallery layout
 - "Wall of Oomfies"
 - Art > Make page
 - General > Webring + Button sidebar section 
@@ -19,13 +21,16 @@ Oh boy...
 - General > Global NSFW check/redirect 
 - Commissions > Commissions quote calculator
 - Asks > Develop system for getting asks
-- General > Accessibility features 
+- General > Accessibility features
+- Characters > Implement production database
 
 ## Style
 - Home > Add some flavor to text
 - General > Make it look good on mobile 
+
 ## Assets
-- General > Pfp icons
+- General > Pfp icon(s)
 - Ask > Banners
 - Home > Header images for my thingies
 - Landing > New images for all cards
+- Characters > Oh god so many images
