@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.snapps.dev/fonts.css">
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Roulette</title>
+</head>
+
+<body>
+    <style>
+
+    </style>
+    <!-- JS Warning -->
+    <sub id="jswarn"><i>this tool requires javascript to work...</i></sub>
+    <!-- Settings -->
+    <div><span>How much time do you have? </span><input id="diff" style="width: 2em;" type="number" min="1" value="1"><span> Minutes</span></div>
+    <div><span>Max spice? </span><input id="lvl" style="width: 2em;" type="number" min="1" value="1"
+            onchange="updateTagPool()"></div>
+    <span>Tags in pool:
+        <pre id="tag-count"></pre><button onclick="toggleTagPool()">Show Pool</button></span>
+    <div id="tag-pool" class="closed"></div>
+
+    <hr style="width: 300px;">
+    <!-- Rolls -->
+    <button id="uRoll" onclick="rollTagUniform()">Uniform Roll</button>
+    <hr style="width: 300px;">
+    <span>Your lucky tag is...</span>
+    <b>
+        <pre id="result">[Not Yet Rolled]</pre></b>
+    <span>...after <span id="rerolls"></span> roll(s)!</span>
+    <span>Dated:
+        <pre style="display: inline; background-color: #444; padding: 4px;
+    border-radius: 3px;" id="date"></pre></span>
+
+    <hr style="width: 300px;">
+    <div id="timer"><button id="startTimerBtn" onclick="startTimer()">Start Timer</button></div>
+    <div id="timer"><button id="pauseTimer" onclick="pauseTime()" disabled>Pause Timer</button></div>
+
+    <progress id="timeBar" value="0"></progress>
+    <span>Time elapsed:
+        <pre id="elapsedTime"></pre></span>
+
+    <footer>
+        <div><a href="https://snapps.dev/toys/">← return to toy box</a></div>
+        <div><i>made with the finest spaghetti...</i> 💖</div>
+        <div>
+             <input type="file" id="tag-file-btn" style="display:none" name="tag-file" accept=".txt,.csv,.json" />
+        <label id="tag-file-btn-lbl" for="tag-file-btn">load tag list</label>
+        <a style="color:#ff0"
+            onclick="alert('What is a tag list?\nIn this case, a tag list is a text file that contains a list of tags/topics and a number indicating how \'spicy\' they are (interpret that however you please~) with the minimum being 1. The list should be formatted as such:\n\nscalie,1\nbig_boobs,2\n...\n\nCurrently characters like \'-\' and \'/\' don\'t work. Get creative!')">tag
+            list?</a>
+            <a onclick="exportTags()">export tags</a>
+            <a id="saveBtn" onclick="saveToCookies()">save stuff</a>
+            <a onclick="changeBGColor()">change bg</a>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
