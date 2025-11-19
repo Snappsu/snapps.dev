@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.snapps.dev/style/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page not found...</title>
+</head>
+
+<body>
+    <style>
+        body {
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            font-family: jost, sans-serif;
+        }
+
+        #hero img {
+            height: 100px;
+            image-rendering: pixelated;
+        }
+
+        #container {
+            height: 80vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--textColor)
+        }
+
+        #desc {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            margin-top: 2em;
+            background: linear-gradient(30deg, #0006, #3336, #0006);
+            border: solid 2px #000;
+            border-radius: 10px;
+            background-attachment: fixed;
+            backdrop-filter: blur(5px);
+            padding: 10px 20px;
+        }
+
+        footer {
+            width: 100%;
+            box-sizing: border-box;
+            background-color: var(--bg2);
+            filter: drop-shadow(0 0 10px #000);
+            border-top: solid 2px #000;
+            z-index: 1;
+            padding: 1em 2em;
+        }
+
+        #footer-left {
+            display: flex;
+            max-height: 200px;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: left;
+            justify-items: flex-start;
+            align-content: flex-start;
+        }
+
+        #footer-left span {
+            font-family: octosquare;
+            font-size: 1.5em;
+        }
+
+
+        #footer-left a {
+            color: var(--textColor);
+        }
+
+        #footer-left a:nth-of-type(3n+1) {
+            --hoverColor: #0ff;
+        }
+
+        #footer-left a:nth-of-type(3n+2) {
+            --hoverColor: #f0f;
+        }
+
+        #footer-left a:nth-of-type(3n+3) {
+            --hoverColor: #ff0;
+        }
+
+        #footer-left a:hover {
+            text-decoration: underline;
+            color: var(--hoverColor);
+        }
+
+        .button-list {
+            margin: 1em;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .button-list a {
+            cursor: pointer;
+            user-select: none;
+            background: #444;
+            color: var(--textColor);
+            margin: 0em 1em;
+            padding: .25em .5em;
+            border-radius: 10px;
+            border-bottom: solid 5px #333;
+        }
+
+        .button-list a:hover {
+            transform: translateY(2px);
+            color: #0ff;
+            background: #233;
+            border-bottom: solid 3px #122;
+        }
+    </style>
+    <div id="container" class="dot-bg">
+        <div id="hero">
+            <img src="https://cdn.snapps.dev/images/counter/4.gif">
+            <img src="https://cdn.snapps.dev/images/counter/0.gif">
+            <img src="https://cdn.snapps.dev/images/counter/4.gif">
+        </div>
+        <div id="desc">
+            <span>seems like you may be a little lost...</span>
+            <div class="button-list">
+                <a tabindex="1" onclick="history.back()">go back</a>
+                <a tabindex="2" href="https://snapps.dev/home">go home</a>
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div id="footer-left">
+            <span>directory</span>
+            <a href="https://snapps.dev">top</a>
+            <a href="https://snapps.dev/home">home</a>
+            <a href="https://gallery.snapps.dev">gallery</a>
+            <a href="https://space.snapps.dev/">snapps' space</a>
+            <a href="https://snapps.dev/toys">toys</a>
+            <a href="https://snapps.dev/woo">wall of oomfs</a>
+        </div>
+        <div id="footer-right"></div>
+    </footer>
+</body>
+
+</html>
