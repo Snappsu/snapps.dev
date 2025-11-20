@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +18,13 @@
     <meta content="https://snapps.dev/img/global/embed.png" property="og:image">
     <meta content="#9463ff" data-react-helmet="true" name="theme-color">
 </head>
+
 <body>
-    <div id = "background">
-        <div id = "bgCheck"></div>
-        <div id = "bgVingette"></div>
+    <div id="background">
+        <div id="bgCheck"></div>
+        <div id="bgVingette"></div>
     </div>
-    
+
     <div id="content-wrapper">
         <div id="card">
             <div id="card-ring">
@@ -30,13 +32,15 @@
                 <div id="card-ring-container">
                     <div class="ring-element">
                         <div class="ring-stuff selected">
-                            <div class="icon" style="mask: url(/res/img/icon/svg/questionC.svg) no-repeat center;"></div>
+                            <div class="icon" style="mask: url(/res/img/icon/svg/questionC.svg) no-repeat center;">
+                            </div>
                             <h1 class="ring-icon-text">About Me</h1>
-                        </div>                    
+                        </div>
                     </div>
                     <div class="ring-element">
-                        <div class="ring-stuff"><div class="icon" style="mask: url(/res/img/icon/svg/twitter.svg) no-repeat center;"></div>
-                        <h1 class="ring-icon-text">Twitter</h1>
+                        <div class="ring-stuff">
+                            <div class="icon" style="mask: url(/res/img/icon/svg/twitter.svg) no-repeat center;"></div>
+                            <h1 class="ring-icon-text">Twitter</h1>
                         </div>
                     </div>
                     <div class="ring-element">
@@ -69,24 +73,30 @@
             <div id="card-info-wrapper">
                 <div id="card-info">
                     <div id="card-info-bg"></div>
-                    <div id="card-info-text">   
+                    <div id="card-info-text">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="data-warn">
         <span><b>Obligatory Cookie Warning</b></span>
         <span>Hello! This site uses cookies in order to fuction correctly.</span>
         <details>
-  <summary>Click here for more info</summary>
-  Cookies are used purely so that this site can remember your preferences (such as theme, accessabilty feaures, explicit content preferece), entered info (for commissions and asks), and login stuff (which you should NOT give out to ANYONE btw).
-</details>
+            <summary>Click here for more info</summary>
+            Cookies are used purely so that this site can remember your preferences (such as theme, accessabilty
+            feaures, explicit content preferece), entered info (for commissions and asks), and login stuff (which you
+            should NOT give out to ANYONE btw).
+        </details>
     </div>
+    <link rel="preload" href="/res/img/bg/cardBG/savak.png" as="image">
+    <link rel="preload" href="/res/img/bg/cardBG/twitter.png" as="image">
+    <link rel="preload" href="/res/img/bg/cardBG/discord.gif" as="image">
+    <link rel="preload" href="/res/img/bg/cardBG/bsky.png" as="image">
     <script>
-
-        bgs=[
+        // remember to preload these
+        bgs = [
             "url(/res/img/bg/cardBG/savak.png)",
             "url(/res/img/bg/cardBG/twitter.png)",
             "",
@@ -94,21 +104,18 @@
             "url(/res/img/bg/cardBG/bsky.png)",
             ""
         ]
-        content=
-        [
+        content = [
             `          
             <h1>A little about me...</h1>
             <p>My name is <b style="color:#5ba2ff">Snapps</b>. I do a lot of things but I'm probably best known for my <b style="color:#ff5b5b">NSFW</b> <b style="color:#8fff5b">scalie</b> illustrations and animations.</p>
             <p>If you stumbled upon this site, persnapps you are interested in my <i style="color:#ffbd5b">other</i> goings-on?</p>
             <a class="button" href="/home"><div class="btnBG"></div>Heck yeah!</a>      
-            `
-            ,
+            `,
             `
             <h1>@snappsOwO</h1>
             <p>Not too fond of the site, but I still post art there for my oomfies who are still stuck there.</p>
             <a class="button" href="https://x.com/SnappsOwO"><div class="btnBG"></div>Take a peep!</a>      
-            `
-            ,
+            `,
             `
                    
             <h1>My Drawings</h1>
@@ -118,20 +125,17 @@
                 <a href="https://e621.net/posts?tags=snapps">e621</a>
                 <a href="https://www.furaffinity.net/user/snappsuwu">FurAffinity</a>
             </div>
-            `
-            ,
+            `,
             `            
             <h1>Snapps' Space</h1>
             <p>The best place to catch me! Here, a lot of stuff happens that's never seen anywhere else.</p>
             <a class="button" href="https://discord.gg/fA9FwhnaTk"><div class="btnBG"></div>Join the Squad!</a>            
-            `
-            ,
+            `,
             `                        
             <h1>@sniddy.snapps.dev</h1>
             <p>My main spot for snitposting, doodles, and the rare horny yappening.</p>
             <a class="button" href="https://bsky.app/profile/sniddy.snapps.dev"><div class="btnBG"></div>Take me there!</a>
-            `
-            ,
+            `,
             `                        
             <h1>How to reach me...</h1>
             <p>The best and fastest way to reach me is to poke me via discord <a href="https://discord.com/users/143978133798780928">@snapps</a></p>
@@ -147,63 +151,71 @@
 
 
         var totalIcons = document.getElementsByClassName("ring-element").length;
-        currentIcon=0
-        Array.from(document.getElementsByClassName("ring-element")).forEach((element,index) => {
-            element.style.transform = "rotateZ( "+ index/totalIcons * 360 +"deg )"
-            element.children[0].style.transform = "rotateZ( -"+ index/totalIcons * 360 +"deg )"
+        currentIcon = 0
+        Array.from(document.getElementsByClassName("ring-element")).forEach((element, index) => {
+            element.style.transform = "rotateZ( " + index / totalIcons * 360 + "deg )"
+            element.children[0].style.transform = "rotateZ( -" + index / totalIcons * 360 + "deg )"
         })
 
-        Array.from(document.getElementsByClassName("ring-element")).forEach((element,index) => {
-            
-            element.children[0].addEventListener("click",function(){selectIcon(event,index); currentIcon = index; })
+        Array.from(document.getElementsByClassName("ring-element")).forEach((element, index) => {
+
+            element.children[0].addEventListener("click", function () {
+                selectIcon(event, index);
+                currentIcon = index;
+            })
         })
 
         document.getElementById("card-ring").style.transform = "rotateZ(0deg)"
 
-        function selectIcon(element, selectedIcon){
+        function selectIcon(element, selectedIcon) {
             // Toggle select
             removeSelectedIcon()
             target = element.target
-            while(!target.classList.contains("ring-stuff")){
+            while (!target.classList.contains("ring-stuff")) {
                 target = target.parentElement
-                console.log(target)
+
             }
-            console.log(target.classList.add("selected"))
+
             // Change Content
             document.getElementById("card-info-bg").style.backgroundImage = bgs[selectedIcon]
             document.getElementById("card-info-text").innerHTML = content[selectedIcon]
             // Rotate wheel
-            console.log("moving from icon "+ currentIcon+" icon "+ selectedIcon)
-            angleOffset = 360/totalIcons
-            delta = currentIcon-selectedIcon
-            if (delta>totalIcons/2){ delta = -1* (totalIcons - delta)}
-            else if (delta<-totalIcons/2){ delta = 1* (totalIcons + delta)}
-            console.log(delta)
+
+            angleOffset = 360 / totalIcons
+            delta = currentIcon - selectedIcon
+            if (delta > totalIcons / 2) {
+                delta = -1 * (totalIcons - delta)
+            } else if (delta < -totalIcons / 2) {
+                delta = 1 * (totalIcons + delta)
+            }
+
             theta = delta * angleOffset
             rotateRing(theta)
         }
 
-        function removeSelectedIcon(){
-            Array.from(document.getElementsByClassName("ring-stuff")).forEach((element,index) => {
-            element.classList.remove("selected")
-        })
+        function removeSelectedIcon() {
+            Array.from(document.getElementsByClassName("ring-stuff")).forEach((element, index) => {
+                element.classList.remove("selected")
+            })
         }
 
-        function rotateRing(deg){
+        function rotateRing(deg) {
             // Get current rotation
             regex = /\-?\d+/
-            document.getElementById("card-ring").style.transform = "rotateZ(" + ((parseInt(regex.exec(document.getElementById("card-ring").style.transform)) + deg)) + "deg)"
-            Array.from(document.getElementsByClassName("ring-element")).forEach((element,index) => {
-                element.children[0].style.transform = "rotateZ(" +(parseInt(regex.exec(element.children[0].style.transform)) - deg) + "deg)"
-                console.log(parseInt(regex.exec(element.children[0].style.transform)))
+            document.getElementById("card-ring").style.transform = "rotateZ(" + ((parseInt(regex.exec(document
+                .getElementById("card-ring").style.transform)) + deg)) + "deg)"
+            Array.from(document.getElementsByClassName("ring-element")).forEach((element, index) => {
+                element.children[0].style.transform = "rotateZ(" + (parseInt(regex.exec(element.children[0]
+                    .style.transform)) - deg) + "deg)"
+
 
             })
         }
-    
-        function openLink(url,nsfw){
-            window.open(url,"_self")
-        }
 
+        function openLink(url, nsfw) {
+            window.open(url, "_self")
+        }
     </script>
 </body>
+
 </html>
