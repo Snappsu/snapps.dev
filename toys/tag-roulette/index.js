@@ -159,7 +159,7 @@
  function parseFile(data) {
      var tagsFound = 0
      var pretags = data.split(';')
-     //console.log(pretags)
+     console.log(pretags)
      for (let index = 0; index < pretags.length; index++) {
         //console.log(pretags[index])
          pretags[index].replace(/ /g, "")
@@ -176,29 +176,11 @@
 
  }
 
-
- async function readFile(event) {
-     var file = event.target.files[0]
-     var reader = new FileReader()
-     var fileContent;
-     reader.onload = () => {
-         //console.log("reading file...")
-         fileContent = reader.result
-                 document.getElementById("tag-file-btn-lbl").style.animation= ""
-
-                 document.getElementById("tag-file-btn-lbl").style.animation= ""
-
-         parseFile(fileContent)
-     }
-     reader.readAsText(file);
-     promptUserToSave();
-
- }
-
  async function readTagsFromText() {
      var userIn = prompt().replace(/ /g,"")
      //console.log(userIn)
      parseFile(userIn)
+     document.getElementById("tag-file-btn-lbl").style.animation = ""
      promptUserToSave();
 
  }
@@ -231,6 +213,8 @@
          date.setFullYear(date.getFullYear() + 1)
          document.cookie = `tags=${JSON.stringify(tags)}; expires=${date.toUTCString()}`;
          if (Object.keys(tags).length) document.getElementById("tag-file-btn-lbl").innerText = `${Object.keys(tags).length} tags loaded!`
+        document.getElementById("tag-file-btn-lbl").style.animation = ""
+
 
      }
 
