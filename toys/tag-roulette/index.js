@@ -184,6 +184,8 @@
      reader.onload = () => {
          //console.log("reading file...")
          fileContent = reader.result
+                 document.getElementById("tag-file-btn-lbl").style.animation= ""
+
          parseFile(fileContent)
      }
      reader.readAsText(file);
@@ -282,6 +284,7 @@
  }
 
  // setup stuffs
+ document.getElementById("tag-file-btn-lbl").style.animation= "bounce 1s linear infinite "
  document.getElementById("jswarn").remove() //js warning
  document.getElementById("startTimerBtn").disabled = true
  document.getElementById("pauseTimer").disabled = true
