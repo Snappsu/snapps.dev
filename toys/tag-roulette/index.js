@@ -186,6 +186,8 @@
          fileContent = reader.result
                  document.getElementById("tag-file-btn-lbl").style.animation= ""
 
+                 document.getElementById("tag-file-btn-lbl").style.animation= ""
+
          parseFile(fileContent)
      }
      reader.readAsText(file);

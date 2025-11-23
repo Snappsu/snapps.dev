@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="https://cdn.snapps.dev/style/fonts.css">
+    <link rel="stylesheet" href="https://cdn.snapps.dev/style/fonts.css">
     <link rel="stylesheet" href="index.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +17,7 @@
     <!-- JS Warning -->
     <sub id="jswarn"><i>this tool requires javascript to work...</i></sub>
     <!-- Settings -->
-    <div><span>How much time do you have? </span><input id="diff" style="width: 3.5em;" onchange="updateTagPool()" type="number" min="1" value="60"><span> Minutes</span></div>
+    <div><span>How much time do you have? </span><input id="diff" style="width: 3.5em;" onchange="updateTagPool()" onchange="updateTagPool()" type="number" min="1" value="60"><span> Minutes</span></div>
     <div><span>Max spice? </span><input id="lvl" style="width: 2em;" type="number" min="1" value="1"
             onchange="updateTagPool()"></div>
     <span>Tags in pool:
