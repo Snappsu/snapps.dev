@@ -16,7 +16,7 @@
     <!-- JS Warning -->
     <sub id="jswarn"><i>this tool requires javascript to work...</i></sub>
     <!-- Settings -->
-    <div><span>How much time do you have? </span><input id="diff" style="width: 3.5em;" type="number" min="1" value="1"><span> Minutes</span></div>
+    <div><span>How much time do you have? </span><input id="diff" style="width: 3.5em;" type="number" min="1" value="60"><span> Minutes</span></div>
     <div><span>Max spice? </span><input id="lvl" style="width: 2em;" type="number" min="1" value="1"
             onchange="updateTagPool()"></div>
     <span>Tags in pool:
@@ -47,10 +47,10 @@
         <div><a href="https://snapps.dev/toys/">← return to toy box</a></div>
         <div><i>made with the finest spaghetti...</i> 💖</div>
         <div>
-             <input type="file" id="tag-file-btn" style="display:none" name="tag-file" accept=".txt,.csv,.json" />
-        <label id="tag-file-btn-lbl" for="tag-file-btn">load tag list</label>
+             
+        <label id="tag-file-btn-lbl" for="tag-file-btn" onclick="readTagsFromText()">load tag list</label>
         <a style="color:#ff0"
-            onclick="alert('What is a tag list?\nIn this case, a tag list is a text file that contains a list of tags/topics and a number indicating how \'spicy\' they are (interpret that however you please~) with the minimum being 1. The list should be formatted as such:\n\nscalie,1\nbig_boobs,2\n...\n\nI have a sample tag list here: https:\/\/snapps.dev\/toys/tag-roulette/sample_tag_list.txt \n\nCurrently characters like \'-\' and \'/\' don\'t work. Get creative!')">tag
+            onclick="alert('What is a tag list?\nIn this case, a tag list is a text file that contains a list of tags/topics and a number indicating how \'spicy\' they are (interpret that however you please~) with the minimum being 1. The list should be formatted as such:\n\nscalie,1;\nbig_boobs,2;\n...\n\nI have a sample tag list here: https:\/\/snapps.dev\/toys/tag-roulette/sample_tag_list.txt \n\nCurrently characters like \'-\' and \'/\' don\'t work. Get creative!')">tag
             list?</a>
             <a onclick="exportTags()">export tags</a>
             <a id="saveBtn" onclick="saveToCookies()">save stuff</a>

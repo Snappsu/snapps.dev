@@ -50,7 +50,7 @@
      }
 
      tagList.sort()
-     console.log(tagList)
+     //console.log(tagList)
      document.getElementById("tag-count").innerHTML = tagList.length
      updateTagPoolPool()
      if (tagList.length == 0) document.getElementById("uRoll").disabled = true;
@@ -102,7 +102,7 @@
      window.clearTimeout(timer)
      document.getElementById("pauseTimer").disabled = true
      document.getElementById("startTimerBtn").disabled = true
-     document.getElementById("elapsedTime").style.color = timeUpShown?"rgba(255, 145, 0, 1)":"#9f0"
+     document.getElementById("elapsedTime").style.color = timeUpShown ? "rgba(255, 145, 0, 1)" : "#9f0"
 
  }
 
@@ -158,10 +158,11 @@
 
  function parseFile(data) {
      var tagsFound = 0
-     var pretags = data.split("\r\n")
-     console.log(pretags)
+     var pretags = data.split(';')
+     //console.log(pretags)
      for (let index = 0; index < pretags.length; index++) {
-         pretags[index].replace(" ", "")
+        //console.log(pretags[index])
+         pretags[index].replace(/ /g, "")
          if (pretags[index] == "") continue
          var tagParts = pretags[index].split(",")
          tags[tagParts[0]] = {
@@ -175,13 +176,13 @@
 
  }
 
- 
+
  async function readFile(event) {
      var file = event.target.files[0]
      var reader = new FileReader()
      var fileContent;
      reader.onload = () => {
-         console.log("reading file...")
+         //console.log("reading file...")
          fileContent = reader.result
          parseFile(fileContent)
      }
@@ -190,14 +191,22 @@
 
  }
 
- function promptUserToSave(){
-    document.getElementById("saveBtn").style.animation= "bounce 1s linear infinite "
+ async function readTagsFromText() {
+     var userIn = prompt().replace(/ /g,"")
+     //console.log(userIn)
+     parseFile(userIn)
+     promptUserToSave();
+
+ }
+
+ function promptUserToSave() {
+     document.getElementById("saveBtn").style.animation = "bounce 1s linear infinite "
 
  }
 
 
  function saveToCookies() {
-        document.getElementById("saveBtn").style.animation= ""
+     document.getElementById("saveBtn").style.animation = ""
 
      if (confirm("This will store your tags + background color in your cookies for a year since the last time you visit this site. Are you sure?"))
          var date = new Date()
@@ -209,30 +218,30 @@
  function readFromCookies() {
      const tagRegex = /tags=({.+})/g;
      var results = tagRegex.exec(document.cookie)
-     console.log(results)
+     //console.log(results)
      //if cookie exists...
      if (results) {
-         console.log("cookie found! yum!")
+         //console.log("cookie found! yum!")
          tags = JSON.parse(results[1])
          var date = new Date()
          date.setFullYear(date.getFullYear() + 1)
          document.cookie = `tags=${JSON.stringify(tags)}; expires=${date.toUTCString()}`;
-          if (Object.keys(tags).length) document.getElementById("tag-file-btn-lbl").innerText = `${Object.keys(tags).length} tags loaded!`
+         if (Object.keys(tags).length) document.getElementById("tag-file-btn-lbl").innerText = `${Object.keys(tags).length} tags loaded!`
 
      }
 
      const bgRegex = /bgColor=(#.{6})/g;
      var results = bgRegex.exec(document.cookie)
-     console.log(results)
+     //console.log(results)
      //if cookie exists...
      if (results) {
-         console.log("cookie found! yum!")
+         //console.log("cookie found! yum!")
          bgColor = results[1]
          var date = new Date()
          date.setFullYear(date.getFullYear() + 1)
-                  document.querySelector(':root').style.setProperty('--bgColor', bgColor);
+         document.querySelector(':root').style.setProperty('--bgColor', bgColor);
 
-        document.cookie = `bgColor=${bgColor}; expires=${date.toUTCString()}`
+         document.cookie = `bgColor=${bgColor}; expires=${date.toUTCString()}`
      }
  }
 
@@ -242,13 +251,13 @@
          const tagsRegex = /"([A-z|_]+)":{"l":(\d+)}/gm
          var results = [...JSON.stringify(tags).matchAll(tagsRegex)]
          results.forEach((tag) => {
-             outstr += `${tag[1]},${tag[2]}\n`
+             outstr += `${tag[1]},${tag[2]};\n`
          })
          try {
              await navigator.clipboard.writeText(outstr);
          } catch (error) {
              console.error(error.message);
-            alert("oops... something went wrong while putting the tags in your clipboard...")
+             alert("oops... something went wrong while putting the tags in your clipboard...")
          }
      }
      // parse 
@@ -260,7 +269,7 @@
      const hexRegex = /^#[A-F|a-f|0-9]{6}$/
      var userin = prompt("enter the desired color in 6-digit hex format:", "#202020");
      var results = hexRegex.exec(userin)
-     console.log(results)
+     //console.log(results)
 
      if (!results) {
          alert("invalid color entered")
@@ -276,6 +285,6 @@
  document.getElementById("jswarn").remove() //js warning
  document.getElementById("startTimerBtn").disabled = true
  document.getElementById("pauseTimer").disabled = true
- document.getElementById("tag-file-btn").addEventListener("change", readFile);
+ //document.getElementById("tag-file-btn").addEventListener("change", readFile);
  readFromCookies();
  updateTagPool()
