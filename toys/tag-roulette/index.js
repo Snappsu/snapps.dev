@@ -157,6 +157,7 @@
  }
 
  function parseFile(data) {
+    var tags={}
      var tagsFound = 0
      var pretags = data.split(';')
      console.log(pretags)
@@ -207,6 +208,7 @@
      //console.log(results)
      //if cookie exists...
      if (results) {
+        tags={}
          //console.log("cookie found! yum!")
          tags = JSON.parse(results[1])
          var date = new Date()
@@ -215,6 +217,9 @@
          if (Object.keys(tags).length) document.getElementById("tag-file-btn-lbl").innerText = `${Object.keys(tags).length} tags loaded!`
         document.getElementById("tag-file-btn-lbl").style.animation = ""
 
+
+     } else {
+         document.getElementById("tag-file-btn-lbl").style.animation= "bounce 1s linear infinite "
 
      }
 
@@ -236,7 +241,7 @@
  async function exportTags() {
      if (confirm("this will export the tags to your clipboard. continue?")) {
          var outstr = ""
-         const tagsRegex = /"([A-z|_]+)":{"l":(\d+)}/gm
+         const tagsRegex = /"(.+)":{"l":(\d+)}/gm
          var results = [...JSON.stringify(tags).matchAll(tagsRegex)]
          results.forEach((tag) => {
              outstr += `${tag[1]},${tag[2]};\n`
@@ -270,7 +275,6 @@
  }
 
  // setup stuffs
- document.getElementById("tag-file-btn-lbl").style.animation= "bounce 1s linear infinite "
  document.getElementById("jswarn").remove() //js warning
  document.getElementById("startTimerBtn").disabled = true
  document.getElementById("pauseTimer").disabled = true
