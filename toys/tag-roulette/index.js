@@ -29,11 +29,46 @@
  }
 
  function updateTagPoolPool() {
-     document.getElementById("tag-pool").innerHTML = ""
+     document.getElementById("tag-pool").innerHTML = `<span class="tag add-tag" onclick="addToPool()">+</span>`
      tagList.forEach(tag => {
-         var element = `<span class="tag" data-spice="${tags[tag].l}">${tag}</span>`
+         var element = `<span class="tag" data-tag-name="${tag}"data-spice="${tags[tag].l}">${tag}<span class="del-tag" onclick="removeFromPool(this)">remove</span></span>`
          document.getElementById("tag-pool").innerHTML += element
      });
+ }
+
+ function removeFromPool(event) {
+     //console.log(event.parentNode.dataset["tagName"])
+     var tag = event.parentNode.dataset["tagName"]
+     if (confirm(`Delete tag '${tag}'?`)) {
+         delete tags[tag]
+         promptUserToSave()
+         updateTagPool()
+     }
+ }
+
+ function addToPool() {
+     tagData = prompt("Enter a tag and it's 'spice', separated by a comma.\nFor example:'sniddy,2'")
+     if (tagData === null) {
+         return;
+     }
+     tagData = tagData.replace(/ /g, "")
+     tagData = tagData.split(",")
+     if (!(tagData[0] in tags)) {
+         tags[tagData[0]] = {
+             l: tagData[1]
+         }
+     } else {
+         if (confirm("Seems like that tag is already in here...\nReplace it?")) {
+             tags[tagData[0]] = {
+                 l: parseInt(tagData[1])
+             }
+         } else {
+             return;
+         }
+     }
+     document.getElementById("tag-file-btn-lbl").style.animation = ""
+     promptUserToSave()
+     updateTagPool()
  }
 
  function updateTagPool() {
@@ -157,12 +192,11 @@
  }
 
  function parseFile(data) {
-    var tags={}
      var tagsFound = 0
      var pretags = data.split(';')
      console.log(pretags)
      for (let index = 0; index < pretags.length; index++) {
-        //console.log(pretags[index])
+         //console.log(pretags[index])
          pretags[index].replace(/ /g, "")
          if (pretags[index] == "") continue
          var tagParts = pretags[index].split(",")
@@ -178,7 +212,7 @@
  }
 
  async function readTagsFromText() {
-     var userIn = prompt().replace(/ /g,"")
+     var userIn = prompt("Enter/paste your tag list here (Don't worry if it has multiple lines)!").replace(/ /g, "")
      //console.log(userIn)
      parseFile(userIn)
      document.getElementById("tag-file-btn-lbl").style.animation = ""
@@ -208,18 +242,17 @@
      //console.log(results)
      //if cookie exists...
      if (results) {
-        tags={}
          //console.log("cookie found! yum!")
          tags = JSON.parse(results[1])
          var date = new Date()
          date.setFullYear(date.getFullYear() + 1)
          document.cookie = `tags=${JSON.stringify(tags)}; expires=${date.toUTCString()}`;
          if (Object.keys(tags).length) document.getElementById("tag-file-btn-lbl").innerText = `${Object.keys(tags).length} tags loaded!`
-        document.getElementById("tag-file-btn-lbl").style.animation = ""
+         document.getElementById("tag-file-btn-lbl").style.animation = ""
 
 
      } else {
-         document.getElementById("tag-file-btn-lbl").style.animation= "bounce 1s linear infinite "
+         document.getElementById("tag-file-btn-lbl").style.animation = "bounce 1s linear infinite "
 
      }
 
@@ -241,7 +274,7 @@
  async function exportTags() {
      if (confirm("this will export the tags to your clipboard. continue?")) {
          var outstr = ""
-         const tagsRegex = /"(.+)":{"l":(\d+)}/gm
+         const tagsRegex = /"([^":{},]+)":{"l":(\d+)}/g
          var results = [...JSON.stringify(tags).matchAll(tagsRegex)]
          results.forEach((tag) => {
              outstr += `${tag[1]},${tag[2]};\n`
