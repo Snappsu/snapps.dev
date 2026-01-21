@@ -7,7 +7,7 @@ body{
     font-family: jost;
     color: var(--textColor);
     margin: 0;
-    background-color: #000;
+    background-color: var(--color-background-1);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -17,7 +17,7 @@ body{
 }
 
 #background {
-    background-color: var(--bg1);
+    background-color: var(--color-background-1);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,35 +25,42 @@ body{
 
 #bgCheck {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 200%;
+    height: 200%;
+    left: -50%;
+    bottom: -50%;
+    transform-origin: center;
     /* Background */
 
-    --dotSize: 40px;
-    --dotColor: var(--bg2);
-    --dotBlurRad: 0px;
+    --dotSize: 10px;
+    --dotOpacity: 25%;
+    filter: opacity(var(--dotOpacity));
+    transform: rotate(-15deg);
+    --dotColor: var(--color-background-1);
+    --dotBlurRad: 1px;
     --bgSize: 200px;
     --bgPosition: calc(var(--bgSize) / 2);
     background-image:
-        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
-        radial-gradient(circle at center, var(--dotColor) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
-    background-size: var(--bgSize) var(--bgSize);
-    background-position: 0 0, var(--bgPosition) var(--bgPosition);
+        radial-gradient(circle at center, var(--color-cyan) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--color-magenta) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--color-yellow) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--color-key) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
+    background-size: 
+        var(--bgSize) var(--bgSize),
+        var(--bgSize) var(--bgSize),
+        var(--bgSize) var(--bgSize),
+        var(--bgSize) var(--bgSize);
+    background-position:  
+        var(--bgPosition) var(--bgPosition),
+        calc(var(--bgPosition) + var(--bgSize) / 2) var(--bgPosition),
+        var(--bgPosition) calc(var(--bgPosition) + var(--bgSize) / 2),
+        calc(var(--bgPosition) + var(--bgSize) / 2) calc(var(--bgPosition) + var(--bgSize) / 2);
     /* Animation */
-    animation-name: backgroundDotScroll;
+   /* animation-name: backgroundDotScroll;*/
     animation-duration: 6s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     /* Transform */
-}
-
-#bgVingette {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .2) 100%);
-    background-repeat: repeat;
-    image-rendering: crisp-edges;
 }
 
 /* Card Stuff */
@@ -79,10 +86,14 @@ body{
 
 #card-ring-bg {
     position: absolute;
-    background: radial-gradient(circle, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0.5) 70%, rgba(0,0,0,0) 70%); 
+    background: url(/res/img/ring_light.gif);
     background-size: 100%;
+    scale: 1.1;
     width: 100%;
     height: 100%;
+    image-rendering: pixelated;
+    filter: drop-shadow(1px 1px 0px #000); 
+    z-index: -1;
 }
 
 .ring-element {
@@ -97,10 +108,11 @@ body{
 
 
 #card-ring{
+    pointer-events: none;
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 10;
     transform: rotateZ(0deg);
     transition: .3s;
 }
@@ -108,7 +120,7 @@ body{
 
 .ring-stuff {
         cursor: pointer;
-
+pointer-events:all;
     position: absolute;
     width: 15vmin;
     height: 15vmin;
@@ -119,7 +131,7 @@ body{
     transition: .3s;
     -webkit-filter: drop-shadow(0 0 .3vmin #000);
             filter: drop-shadow(0 0 .3vmin #000);
-    z-index: 5;
+    z-index: 6;
 }
 
 .ring-stuff:hover, .ring-stuff.selected {
@@ -131,16 +143,16 @@ body{
 }
 
 .ring-element:nth-child(3n+1) .ring-stuff:hover, .ring-element:nth-child(3n+1) .ring-stuff.selected {
---color:cyan;
+--color:var(--color-cyan)
 }
 
 .ring-element:nth-child(3n+2) .ring-stuff:hover, .ring-element:nth-child(3n+2) .ring-stuff.selected {
---color:magenta;
+--color:var(--color-magenta)
 }
 
 
 .ring-element:nth-child(3n) .ring-stuff:hover, .ring-element:nth-child(3n) .ring-stuff.selected {
---color:yellow;
+--color:var(--color-yellow)
 }
 
 
@@ -185,9 +197,8 @@ body{
 
 #card-info-wrapper {
     position: relative;
-    width: 70%;
-    height: 70%;
-    background-image:conic-gradient(from 135deg, var(--accentColor1) 0%, var(--accentColor2) 50%, var(--accentColor1) 100%);
+    width: 90%;
+    height: 90%;
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -199,7 +210,7 @@ body{
     width: 95%;
     height: 95%;
     border: solid  10px #000; 
-    background-color: #333 ;
+    background-color: var(--color-background-1);
     border-radius: 100%;
     overflow: hidden;
    
@@ -328,6 +339,7 @@ scale: 1.1;
 
 #card-info-text .button:active div{
     -webkit-filter: blur(1em);
+    
             filter: blur(1em);
     z-index: -1;
 
@@ -342,10 +354,25 @@ scale: 1.1;
     text-align: center;
     bottom: 1em;
     position: absolute;
-    color: #fff;
+    color: var(--color-text-1);
     padding: 1em;
-    background-color: #0004;
+    background-color: var(--color-background-1); 
     backdrop-filter: blur(10px);
+
+border-image-slice:
+8 8 8 8;
+border-image-width:
+8px 8px 8px 8px;
+border-image-outset:
+4px 4px 4px 4px; 
+border-image-repeat:
+stretch stretch;
+image-rendering: pixelated;
+border-image-source:
+url(/res/img/border.gif);
+border-style:
+solid;
+
 }
 
 #data-warn summary {
@@ -369,3 +396,4 @@ p a:not(.button) {
 p a:not(.button):hover {
     color: #fff5;
 }
+

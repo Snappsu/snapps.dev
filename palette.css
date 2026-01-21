@@ -5,11 +5,23 @@
     --color-magenta: #ff0080;
     --color-yellow:  #ffd000;
     --color-key:     #272838;
+    /* signature colors (to be used in a gradient*/
+    --color-sign-1:  #00eeff;
+    --color-sign-2:  #ff00ff;
     /* aux-colors*/
     --color-lime:    #90f000;
     --color-orange:  #f09c00;
     --color-red:     #f01c00;
     --color-purple:  #d800f0;
+    /* background colors */
+    --color-background-1:#101012;
+    /* ui colors */
+    --color-container-1:#112;
+    --color-text-1:#eee;
+    --color-text-2:#bbb;
+
+     
+
     /* aliases */
     --color-confirm: var(--color-lime);
 }
@@ -17,5 +29,11 @@
 /* light theme colors (ew...)*/
 @media (prefers-color-scheme: light) {
     :root {
+    /* background colors */
+    --color-background-1:#ffffff;
+    /* ui colors */
+    --color-container-1:#ffffff;
+    --color-text-1:#000;
+    --color-text-2:#555;
     }
 }
