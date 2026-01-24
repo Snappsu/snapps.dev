@@ -1,399 +1,104 @@
-
-html {
-    overflow: hidden;
-}
-
-body{
-    font-family: jost;
-    color: var(--textColor);
+html, body  {
+    user-select: none;
     margin: 0;
-    background-color: var(--color-background-1);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    text-align: center;
-    font-size: 1.25vmin;
+    height: 100vh;
 }
 
-#background {
-    background-color: var(--color-background-1);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-#bgCheck {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    left: -50%;
-    bottom: -50%;
-    transform-origin: center;
-    /* Background */
-
-    --dotSize: 10px;
-    --dotOpacity: 25%;
-    filter: opacity(var(--dotOpacity));
-    transform: rotate(-15deg);
-    --dotColor: var(--color-background-1);
-    --dotBlurRad: 1px;
-    --bgSize: 200px;
-    --bgPosition: calc(var(--bgSize) / 2);
-    background-image:
-        radial-gradient(circle at center, var(--color-cyan) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
-        radial-gradient(circle at center, var(--color-magenta) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
-        radial-gradient(circle at center, var(--color-yellow) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
-        radial-gradient(circle at center, var(--color-key) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
-    background-size: 
-        var(--bgSize) var(--bgSize),
-        var(--bgSize) var(--bgSize),
-        var(--bgSize) var(--bgSize),
-        var(--bgSize) var(--bgSize);
-    background-position:  
-        var(--bgPosition) var(--bgPosition),
-        calc(var(--bgPosition) + var(--bgSize) / 2) var(--bgPosition),
-        var(--bgPosition) calc(var(--bgPosition) + var(--bgSize) / 2),
-        calc(var(--bgPosition) + var(--bgSize) / 2) calc(var(--bgPosition) + var(--bgSize) / 2);
-    /* Animation */
-   /* animation-name: backgroundDotScroll;*/
-    animation-duration: 6s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    /* Transform */
-}
-
-/* Card Stuff */
-
-#content-wrapper {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-#card{
-    position: relative;
-    width: 80vmin;
-    height: 80vmin;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#card-ring-bg {
-    position: absolute;
-    background: url(/res/img/ring_light.gif);
-    background-size: 100%;
-    scale: 1.1;
-    width: 100%;
-    height: 100%;
-    image-rendering: pixelated;
-    filter: drop-shadow(1px 1px 0px #000); 
+#bg {
+    position: fixed;
     z-index: -1;
+    left: -200px;
+    top: -200px;
+    width: calc(100vw + 200px);
+    height: calc(100vh + 200px);
 }
 
-.ring-element {
+.hero {
     position: absolute;
-    margin-top: -3vmin;
-    transform-origin: 0 43vmin;
-    left:50%;
-    display: flex;
-    justify-content: center;
-}
-
-
-
-#card-ring{
-    pointer-events: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    transform: rotateZ(0deg);
-    transition: .3s;
-}
-
-
-.ring-stuff {
-        cursor: pointer;
-pointer-events:all;
-    position: absolute;
-    width: 15vmin;
-    height: 15vmin;
+    top: 50vh;
+    left: 0vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    transition: .3s;
-    -webkit-filter: drop-shadow(0 0 .3vmin #000);
-            filter: drop-shadow(0 0 .3vmin #000);
-    z-index: 6;
-}
-
-.ring-stuff:hover, .ring-stuff.selected {
-    -webkit-filter: drop-shadow(0 0 2vmin #000);
-            filter: drop-shadow(0 0 2vmin #000);
-    scale: 1.2;
-    -webkit-filter: drop-shadow(-.2em -.1em 0px var(--color)) drop-shadow(.2em .1em 0px var(--color));
-            filter: drop-shadow(-.2em -.1em 0px var(--color)) drop-shadow(.2em .1em 0px var(--color));
-}
-
-.ring-element:nth-child(3n+1) .ring-stuff:hover, .ring-element:nth-child(3n+1) .ring-stuff.selected {
---color:var(--color-cyan)
-}
-
-.ring-element:nth-child(3n+2) .ring-stuff:hover, .ring-element:nth-child(3n+2) .ring-stuff.selected {
---color:var(--color-magenta)
-}
-
-
-.ring-element:nth-child(3n) .ring-stuff:hover, .ring-element:nth-child(3n) .ring-stuff.selected {
---color:var(--color-yellow)
-}
-
-
-.ring-icon-text {
-    opacity: 0;
-    position: absolute;
-    transform:translateY(5vmin);
-    text-shadow: 0 0 1em #000;
-    transition: .3s;
-    z-index: 7;
-    user-select: none;
-    cursor: pointer;
-}
-
-.ring-stuff:hover .ring-icon-text, .ring-stuff.selected .ring-icon-text{
-    opacity: 1;
-    transform:translateY(7vmin);
-}
-
-.ring-stuff .icon {
-    width: 10vmin;
-    cursor: pointer;
-    height: 10vmin;
-    background-color: #fff;
-    -webkit-mask-size: 10vmin !important;
-            mask-size: 10vmin !important;
-    transition: .3s;
-}
-
-.ring-stuff:hover .icon {
-    -webkit-animation: shake 5s linear infinite forwards;
-            animation: shake 5s linear infinite forwards;
-}
-
-
-.ring-stuff.selected .icon {
-    -webkit-animation: shake 5s linear infinite forwards;
-            animation: shake 5s linear infinite forwards;
-}
-
-
-
-#card-info-wrapper {
     position: relative;
-    width: 90%;
-    height: 90%;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
+    filter: drop-shadow(5px 5px 0#0004);
 }
 
-#card-info {
-      position: relative;
-    width: 95%;
-    height: 95%;
-    border: solid  10px #000; 
-    background-color: var(--color-background-1);
-    border-radius: 100%;
-    overflow: hidden;
-   
-}
-
-#card-info-bg {
+.hero h1 {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image:#000;
-    -webkit-filter: blur(5px);
-            filter: blur(5px);
-    opacity: .5;
-    transition: .5s;
-    background-size: cover;
+    font-size: 8vw;
 }
 
-#card-info-text {
-    filter: drop-shadow(0 0 .2em #000);
-    position: relative;
-    width: 100%;
-    height: 100%;
+.hero img {
+    position: absolute;
+    width: 60vw;
+    height: auto;
+}
+
+
+.content {
+    position: absolute;
     display: flex;
+    flex-direction: column;
+    width: 100vw;
+    position: absolute;
+    overflow: auto;
+    min-height: 100%;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    z-index: 3;
-    font-size: 1.5em;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    -webkit-filter: drop-shadow(0 0 .2em #000);
 }
 
-#card-info-text h1{
-    margin-bottom: 0;
+.content > *{
+    flex-shrink: 0;
 }
 
-
-#card-info-text p{
-    -webkit-filter: drop-shadow(2px 2px 1px #000);
-            filter: drop-shadow(2px 2px 1px #000);
-    max-width: 80%;
-}
-
-.hori-wrapper a{
-    text-decoration: none;
-    color: #000000;
-    font-weight: bold;
-}
-
-.hori-wrapper {
-    width: 80%;
-    display: flex;
-    justify-content:space-around;
+.window{
+    max-height: 80vh;
+    overflow: scroll;
     align-items: center;
 }
 
-.hori-wrapper * {
-    background: #fff;
+.window,
+.subwindow {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-container-1);
+    width: min(80vw, 600px);
     padding: 1em;
-    border-radius: 1em;
+}
+
+#pfp {
     transition: .2s;
+    filter: drop-shadow(4px 0px 0 #0004);
+    transform-origin: bottom center;
+    background-image: url(/res/img/avatar/tempIcon.png);
+    background-size: 100%;
 }
 
-.hori-wrapper *:hover {
-
-    background: #ddd;
-scale: 1.1;
-}
-
-#card-info-text .button{
-    margin-top: .5em;
-    padding: 1em;
-    color: #fff;
-    background-color: #fff0;
-    border-radius: 1em;
-    transition: all .2s, color 0s, backgroundd;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    position: relative;
-    font-size: 1.5em;
-    text-decoration: none;
-    -webkit-transition: all .2s, color 0s;
-    -moz-transition: all .2s, color 0s ;
-    -ms-transition: all .2s, color 0s;
-    -o-transition: all .2s, color 0s;
-}
-
-
-#card-info-text .button div{
-    margin: -1em;
-    transition: .3s;
-    position: absolute;
-    border-radius: 1em;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    background-image:linear-gradient( 135deg, var(--accentColor2) 0%, var(--accentColor1) 100%);
-}
-
-#card-info-text .button:hover{
-    background-color: #fff;
-    color: #fff;
-    transform: scale(1.1);
+#pfp:hover {
+    transform: scale3d(1,1.025,1);
+        background-image: url(/res/img/avatar/tempIcon2.png);
 
 }
 
-#card-info-text .button:active{
-    background-color: #fff;
-    color: #fff;
-    transform: scaleX(1.2);
+#pfp:active {
+    transform: scale3d(1.05,0.95,1);
+    background-image: url(/res/img/avatar/tempIcon3.png);
 }
 
-#card-info-text .button:hover div{
-    -webkit-filter: blur(.25em);
-            filter: blur(.25em);
-    z-index: -1;
+@media (orientation: portrait) {
+ #pfp {order: -1;}
 
 }
 
-#card-info-text .button:active div{
-    -webkit-filter: blur(1em);
-    
-            filter: blur(1em);
-    z-index: -1;
-
+.subwindow {
+    width: auto;
+    margin: .5em;
 }
 
-#data-warn{
-    max-width: 250px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    right: 1em;
-    text-align: center;
-    bottom: 1em;
-    position: absolute;
-    color: var(--color-text-1);
-    padding: 1em;
-    background-color: var(--color-background-1); 
-    backdrop-filter: blur(10px);
-
-border-image-slice:
-8 8 8 8;
-border-image-width:
-8px 8px 8px 8px;
-border-image-outset:
-4px 4px 4px 4px; 
-border-image-repeat:
-stretch stretch;
-image-rendering: pixelated;
-border-image-source:
-url(/res/img/border.gif);
-border-style:
-solid;
-
+.padding{
+    display: block;
+    height: 50px;
+    width: 50px;
 }
-
-#data-warn summary {
-    text-align: center;;
-    color: #ff0;
-}
-
-
-#data-warn details {
-    text-align: justify;
-}
-
-p a:not(.button) {
-          background-clip: text;
-      -webkit-background-clip: text;
-    color: #fffa;
-    background-image:linear-gradient(90deg, var(--accentColor2) -10%, var(--accentColor1) 110%);
-    transition: .25s;
-}
-
-p a:not(.button):hover {
-    color: #fff5;
-}
-

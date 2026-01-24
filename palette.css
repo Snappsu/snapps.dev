@@ -1,26 +1,25 @@
 :root {
 
     /* main colors */
-    --color-cyan:    #00bcd4;
+    --color-cyan: #00bcd4;
     --color-magenta: #ff0080;
-    --color-yellow:  #ffd000;
-    --color-key:     #272838;
+    --color-yellow: #ffd000;
+    --color-key: #272838;
     /* signature colors (to be used in a gradient*/
-    --color-sign-1:  #00eeff;
-    --color-sign-2:  #ff00ff;
+    --color-sign-1: #00eeff;
+    --color-sign-2: #ff00ff;
     /* aux-colors*/
-    --color-lime:    #90f000;
-    --color-orange:  #f09c00;
-    --color-red:     #f01c00;
-    --color-purple:  #d800f0;
+    --color-lime: #90f000;
+    --color-orange: #f09c00;
+    --color-red: #ee4d38;
+    --color-purple: #d800f0;
     /* background colors */
-    --color-background-1:#101012;
+    --color-background-1: #101113;
+    --color-background-2: #1c1e22;
     /* ui colors */
-    --color-container-1:#112;
-    --color-text-1:#eee;
-    --color-text-2:#bbb;
-
-     
+    --color-container-1: #101113;
+    --color-text-1: #fff;
+    --color-text-2: #aaaaaa;
 
     /* aliases */
     --color-confirm: var(--color-lime);
@@ -29,11 +28,299 @@
 /* light theme colors (ew...)*/
 @media (prefers-color-scheme: light) {
     :root {
-    /* background colors */
-    --color-background-1:#ffffff;
-    /* ui colors */
-    --color-container-1:#ffffff;
-    --color-text-1:#000;
-    --color-text-2:#555;
+        /* background colors */
+        --color-background-1: #ffffff;
+        --color-background-2: #ddd;
+
+        /* ui colors */
+        --color-container-1: #ffffff;
+        --color-text-1: #000;
+        --color-text-2: #555;
     }
+}
+
+/* fonts and text*/
+
+html {
+    font-family: jost;
+    color: var(--color-text-1);
+    text-align: center;
+    font-size: max(1.6vmin, 13px);
+
+
+}
+
+h1 {
+    font-size: 3em;
+    color: #fff;
+    font-family: "octosquare";
+    filter:
+        drop-shadow(2px 1px 0 #000) drop-shadow(4px 2px 0 #000) drop-shadow(5px 3px 0 #000);
+
+}
+
+h1::before {
+    content: attr(data-label);
+    color: #fff;
+    position: absolute;
+    z-index: -1;
+    font-family: "octosquare";
+    -webkit-text-stroke: .1em black;
+}
+
+sub {
+    color: var(--color-text-2);
+}
+
+/* custom elements */
+
+
+
+.window {
+    background-color: var(--color-background-1);
+    border-image-slice:
+        8 8 8 8;
+    border-image-width:
+        24px 24px 24px 24px;
+    border-image-outset:
+        12px 12px 12px 12px;
+    border-image-repeat:
+        stretch stretch;
+    image-rendering: pixelated;
+    border-image-source:
+        url(/res/img/border.gif);
+    border-style:
+        solid;
+    filter: drop-shadow(10px 10px 0 #0004);
+}
+
+.subwindow {
+    background-color: var(--color-background-1);
+    border-image-slice:
+        8 8 8 8;
+    border-image-width:
+        8px 8px 8px 8px;
+    border-image-outset:
+        4px 4px 4px 4px;
+    border-image-repeat:
+        stretch stretch;
+    image-rendering: pixelated;
+    border-image-source:
+        url(/res/img/border.gif);
+    border-style:
+        solid;
+    filter: drop-shadow(4px 4px 0 #0004);
+}
+
+.section-title {
+    
+    --color: #fff;
+    color: var(--color-text-1);
+    display: inline-block;
+    text-align: left;
+    font-size: 1.5em;
+    width: 90%;
+    border-bottom: solid .12em var(--color);
+    border-image: repeating-linear-gradient(90deg, var(--color), #0000 100%) 10;
+    margin-bottom: .5em;
+}
+
+div .section-title:nth-of-type(3n+1) {
+    --color: var(--color-cyan);
+}
+
+div .section-title:nth-of-type(3n+2) {
+    --color: var(--color-magenta);
+}
+
+div .section-title:nth-of-type(3n+3) {
+    --color: var(--color-yellow);
+}
+
+.link-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link-list a {
+        text-decoration: none;
+color: var(--color-text-1);
+    transition: .1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 3em;
+    background: var(--color-background-1);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    background-color: var(--color-background-1);
+    border-image-slice:
+        8 8 8 8;
+    border-image-width:
+        8px 8px 8px 8px;
+    border-image-outset:
+        4px 4px 4px 4px;
+    border-image-repeat:
+        stretch stretch;
+    image-rendering: pixelated;
+    border-image-source:
+        url(/res/img/border.gif);
+    border-style:
+        solid;
+    filter: drop-shadow(4px 4px 0 #0004);
+}
+
+.link-list a:hover {
+    font-weight: bold;
+    scale: 1.05;
+}
+
+.link-list a:hover:nth-of-type(3n+1) {
+    background-color: var(--color-cyan);
+}
+
+.link-list a:hover:nth-of-type(3n+2) {
+    background-color: var(--color-magenta);
+    color: #fff;
+}
+
+.link-list a:hover:nth-of-type(3n+3) {
+    background-color: var(--color-yellow);
+    color: #000;
+
+}
+
+.bi-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.bi-flex>* {
+    width: 50% !important;
+}
+
+@media (orientation: portrait) {
+    .bi-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .bi-flex>* {
+        width: 100% !important;
+    }
+
+}
+
+.textbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.textbox p {
+margin: .25em;
+}
+
+.cool-button {
+    text-decoration: none;
+    transition: .1s;
+    display: block;
+    color:#fff;
+    text-shadow: 0px 0px 2px #000;
+    font-size: 1.5em;
+    background-position-x: -4px;
+    background-size: calc(100% + 8px);    
+    background-image: linear-gradient(75deg,var(--color-sign-1),var(--color-sign-2));
+    padding: .5em;
+    margin: .25em auto;
+    font-family: octosquare;
+        border-image-slice:
+        8 8 8 8;
+    border-image-width:
+        8px 8px 8px 8px;
+    border-image-outset:
+        4px 4px 4px 4px;
+    border-image-repeat:
+        stretch stretch;
+    image-rendering: pixelated;
+    border-image-source:
+        url(/res/img/border.gif);
+    border-style:
+        solid;
+    filter: drop-shadow(4px 4px 0 #0004);
+}
+
+.cool-button:hover {
+    scale: 1.05;
+}
+
+
+
+
+/* backgrounds */
+
+body {
+    background-color: var(--color-background-1);
+}
+
+.grid-bg {
+    --s: 168px;
+    /* control the size*/
+    --c1: var(--color-background-2);
+    --c2: var(--color-background-1);
+    --_g: #0000 90deg, var(--c1) 0;
+    background:
+        conic-gradient(from 90deg at 2px 2px, var(--_g)),
+        conic-gradient(from 90deg at 1px 1px, var(--_g)),
+        var(--c2);
+    background-size: var(--s) var(--s), calc(var(--s)/5) calc(var(--s)/5);
+}
+
+#bg.dot-bg {
+    --dotSize: 10px;
+    --dotOpacity: 25%;
+    filter: opacity(var(--dotOpacity));
+    --dotColor: var(--color-background-1);
+    --dotBlurRad: 1px;
+    --bgSize: 200px;
+    --bgPosition: calc(var(--bgSize) / 2 + 25px);
+    background-image:
+        radial-gradient(circle at center, var(--color-cyan) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--color-magenta) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--color-yellow) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
+        radial-gradient(circle at center, var(--color-key) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
+    background-size:
+        var(--bgSize) var(--bgSize),
+        var(--bgSize) var(--bgSize),
+        var(--bgSize) var(--bgSize),
+        var(--bgSize) var(--bgSize);
+    background-position:
+        var(--bgPosition) var(--bgPosition),
+        calc(var(--bgPosition) + var(--bgSize) / 2) var(--bgPosition),
+        var(--bgPosition) calc(var(--bgPosition) + var(--bgSize) / 2),
+        calc(var(--bgPosition) + var(--bgSize) / 2) calc(var(--bgPosition) + var(--bgSize) / 2);
+}
+
+/* common element */
+hr {
+    width: 90%;
+    border-image-slice: 8 8 8 8;
+    border-image-width: 8px 0px 0px 0px;
+    border-image-outset: 4px 4px 4px 4px;
+    border-image-repeat: stretch stretch;
+    image-rendering: pixelated;
+    border-image-source: url(/res/img/border.gif);
+    border-style: solid;
+}
+
+img{
+    user-select: none;
 }
