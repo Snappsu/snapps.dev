@@ -55,7 +55,7 @@ html, body  {
 
 .window{
     max-height: 80vh;
-    overflow: scroll;
+    overflow: auto;
     align-items: center;
 }
 
