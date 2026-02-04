@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Nova+Square&display=swap');
+
+img{
+    user-select: none;
+}
 
 @font-face {
     font-family: "octosquare";
-    src: url("/res/font/octosquare.woff2") format('woff');
+    src: url("https://cdn.snapps.dev/misc/octosquare.woff2") format('woff');
 }
 
 @font-face {
     font-family: "jost";
-    src: url("/res/font/jost.woff") format('woff');
+    src: url("https://cdn.snapps.dev/misc/jost.woff") format('woff');
 }
 
-body, html {
-        background-color: var(--bg1);
 
-}
 
 :root {
 
@@ -46,20 +46,15 @@ h1 {
     margin-bottom: 1em;
 }
 
-p,
-span,
-li {
-    color: var(--textColor);
-    font-family: jost;
-}
-
 a {
     text-decoration: none;
-color: var(--accentColor1);
-transition: .25s;
+    color: var(--accentColor1);
+    transition: .25s;
 }
 
-a:hover {color: var(--accentColor2)}
+a:hover {
+    color: var(--accentColor2)
+}
 
 
 .gradient {
@@ -74,14 +69,12 @@ a:hover {color: var(--accentColor2)}
     color: #fff5;
 }
 
-
-/* Background Stuff */
-
 note {
-    --color: #0ff;
+    --color: var(--color-cyan) ;
     --text: '- Note -\a';
     width: 70%;
-    background: #0ff3;
+    color: #fff;
+    background: color-mix(in srgb, var(--color-container-1),#000c);
     border-left: solid 4px var(--color);
     padding: .5em;
     border-right: solid 4px var(--color);
@@ -103,51 +96,8 @@ note:before {
 }
 
 note.warn {
-    --color: #ff0;
+    --color: var(--color-yellow) ;
     --text: '- Warning -\a';
-    background: #ff03;
-}
-
-/* Background Animations */
-
-@keyframes backgroundHoriScroll {
-    0% {
-        background-position: 0 0;
-    }
-
-    100% {
-        background-position: 100% 0;
-    }
-}
-
-@keyframes backgroundDotScroll {
-    0% {
-        background-position: 0 0, var(--bgPosition) var(--bgPosition)
-    }
-
-    100% {
-        background-position: calc(var(--bgSize) * 2) calc(var(--bgSize) * -1), calc(var(--bgPosition) + var(--bgSize) * 2) calc(var(--bgPosition) - var(--bgSize))
-    }
-}
-
-@-webkit-keyframes scrollBG {
-    0% {
-        background-position: 0 0px;
-    }
-
-    100% {
-        background-position: 0 10px;
-    }
-}
-
-@keyframes scrollBG {
-    0% {
-        background-position: 0 0px;
-    }
-
-    100% {
-        background-position: 0 10px;
-    }
 }
 
 /* Generic Animations */
@@ -250,13 +200,14 @@ note.warn {
 }
 
 .rainbow {
-  background-image: linear-gradient(135deg,rgba(0, 255, 255, 1) 0%, rgba(255, 0, 255, 1) 33%, rgba(255, 255, 0, 1) 66%, rgba(0, 255, 255, 1) 100%);
-  color: #de466c; /* Fallback color */
-  -webkit-background-clip: text;
-      background-clip: text;
-background-size: 200px;
-  -webkit-text-fill-color: transparent;
-  animation: rainbowText 1s linear infinite;
+    background-image: linear-gradient(135deg, var(--color-cyan)  0%, var(--color-magenta)  33%, var(--color-yellow)  66%, var(--color-cyan)  100%);
+    color: #de466c;
+    /* Fallback color */
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: 200px;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowText 1s linear infinite;
 }
 
 @keyframes rainbowText {
@@ -278,10 +229,10 @@ background-size: 200px;
 }
 
 @media (max-width: 1300px) {
-    :root{
-            --navbarPos: 0px;
+    :root {
+        --navbarPos: 0px;
 
-    }   
+    }
 
     #sidebars {
         display: none !important;
@@ -332,57 +283,39 @@ nav a {
 }
 
 nav a:nth-child(3n+1):hover {
-    --color-A: #0ff;
-    --color-B: #0cc;
-    background-color: var(--color-B);
-    background-image:
-        radial-gradient(var(--color-A) 8px, transparent 0px),
-        radial-gradient(var(--color-A) 8px, transparent 0px),
-        radial-gradient(var(--color-A) 6px, transparent 0px),
-        radial-gradient(var(--color-A) 4px, transparent 0px),
-        radial-gradient(var(--color-A) 2px, transparent 0px);
-    background-position-y: 5px, 15px, 25px, 35px, 45px;
-    background-position-x: 0, 10px;
-    background-repeat: repeat-x;
-    background-size: 20px 20px;
+    --color-A: var(--color-cyan) ;
+
 }
 
 nav a:nth-child(3n+3):hover {
-    --color-A: #ff0;
-    --color-B: #cc0;
-    background-color: var(--color-B);
-    background-image:
-        radial-gradient(var(--color-A) 8px, transparent 0px),
-        radial-gradient(var(--color-A) 8px, transparent 0px),
-        radial-gradient(var(--color-A) 6px, transparent 0px),
-        radial-gradient(var(--color-A) 4px, transparent 0px),
-        radial-gradient(var(--color-A) 2px, transparent 0px);
-    background-position-y: 5px, 15px, 25px, 35px, 45px;
-    background-position-x: 0, 10px;
-    background-repeat: repeat-x;
-    background-size: 20px 20px;
+    --color-A: var(--color-yellow) ;
+
+
 }
 
 nav a:nth-child(3n+2):hover {
-    --color-A: #f0f;
-    --color-B: #c0c;
-    background-color: var(--color-B);
-    background-image:
-        radial-gradient(var(--color-A) 8px, transparent 0px),
-        radial-gradient(var(--color-A) 8px, transparent 0px),
-        radial-gradient(var(--color-A) 6px, transparent 0px),
-        radial-gradient(var(--color-A) 4px, transparent 0px),
-        radial-gradient(var(--color-A) 2px, transparent 0px);
-    background-position-y: 5px, 15px, 25px, 35px, 45px;
-    background-position-x: 0, 10px;
-    background-repeat: repeat-x;
-    background-size: 20px 20px;
+    --color-A: var(--color-magenta) ;
+
+   
 }
 
 nav a:hover {
     padding-top: 1em;
+        --color-B: color-mix(in srgb,  var(--color-A) , #000000);
+
     color: #fff;
     text-shadow: 0 0 3px #000;
+     background-color: var(--color-B);
+    background-image:
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 8px, transparent 0px),
+        radial-gradient(var(--color-A) 6px, transparent 0px),
+        radial-gradient(var(--color-A) 4px, transparent 0px),
+        radial-gradient(var(--color-A) 2px, transparent 0px);
+    background-position-y: 5px, 15px, 25px, 35px, 45px;
+    background-position-x: 0, 10px;
+    background-repeat: repeat-x;
+    background-size: 20px 20px;
 }
 
 /* Sidebar (for landscape) */
@@ -394,7 +327,7 @@ nav a:hover {
     justify-content: center;
 }
 
-sidebar .avatar{
+sidebar .avatar {
     margin: 0;
     min-width: 150px;
     min-height: 150px;
@@ -403,7 +336,7 @@ sidebar .avatar{
     border-radius: 0px;
 }
 
-sidebar .avatar img{
+sidebar .avatar img {
     width: 150px;
     height: 150px;
 }
@@ -412,8 +345,8 @@ sidebar p {
     width: 100%;
     font-size: 1.2em;
     margin: 0;
-        margin-bottom: .5em;
-        text-align: center;
+    margin-bottom: .5em;
+    text-align: center;
 
 }
 
@@ -452,7 +385,7 @@ sidebar.right {
     box-sizing: border-box;
     width: 100%;
     padding: 10px;
-    color: var(--textColor);
+    color: var(--color-text-1);
     margin-bottom: 10px;
     transition: .25s;
     overflow: hidden;
@@ -460,21 +393,21 @@ sidebar.right {
 }
 
 sidebar.left .sidebar-section {
-    background-image: linear-gradient(90deg, var(--bg1), #0000);
-        padding-left: 20px;
+    background-image: linear-gradient(90deg, var(--color-background-2), #0000);
+    padding-left: 20px;
 
 
 }
 
 sidebar.right .sidebar-section {
     text-align: right;
-    background-image: linear-gradient(270deg, var(--bg1), #0000);
+    background-image: linear-gradient(270deg, var(--color-background-2), #0000);
     padding-right: 30px;
 
 }
 
-.sidebar-section > * {
-        margin-bottom: .5em;
+.sidebar-section>* {
+    margin-bottom: .5em;
 
 }
 
@@ -487,24 +420,33 @@ sidebar.right .sidebar-section {
 
     color: var(--textColor);
     transition: .25s;
-    filter: drop-shadow(0 0 1px #000);
+    filter: drop-shadow(2px 1px 0 #000) drop-shadow(4px 2px 0 #000) drop-shadow(5px 3px 0 #000);
+}
+
+.sidebar-section-header::before{
+    content: attr(data-label);
+  color: #fff;
+  position: absolute;
+  z-index: -1;
+  font-family: "octosquare";
+  -webkit-text-stroke: .1em black;
 }
 
 .sidebar-section:nth-child(3n+1):hover .sidebar-section-header {
-    color: #0ff;
+    color: var(--color-cyan) ;
 }
 
 .sidebar-section:nth-child(3n+2):hover .sidebar-section-header {
-    color: #f0f;
+    color: var(--color-magenta) ;
 }
 
 .sidebar-section:nth-child(3n):hover .sidebar-section-header {
-    color: #ff0;
+    color: var(--color-yellow) ;
 }
 
 .sidebar-section:hover {
     opacity: 1;
-    background-color: var(--bg1);
+    background-color: var(--color-background-2);
 }
 
 .sidebar-section h2 {
@@ -542,7 +484,7 @@ sidebar.right .sidebar-section {
 
 .nav-cont a:hover {
     padding-right: 1.5em;
-    background-color: var(--color);
+    background-color: var(--color-text-1);
     --dotSize: 3px;
     --dotColor: var(--bg2);
     --dotBlurRad: 0px;
@@ -554,23 +496,19 @@ sidebar.right .sidebar-section {
         radial-gradient(circle at center, var(--color) var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad)));
     background-size: var(--bgSize) var(--bgSize);
     background-position: 0 0, var(--bgPosition) var(--bgPosition);
-    /* Animation */
-    animation-name: backgroundDotScroll;
-    animation-duration: 2s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+
 }
 
 .nav-cont a:nth-child(3n+1) {
-    --color: #0ff5;
+    --color: var(--color-cyan);
 }
 
 .nav-cont a:nth-child(3n+2) {
-    --color: #f0f5;
+    --color: var(--color-magenta);
 }
 
 .nav-cont a:nth-child(3n) {
-    --color: #ff05;
+    --color: var(--color-yellow);
 }
 
 /* Button Stuffs*/
@@ -606,7 +544,7 @@ sidebar.right .sidebar-section {
 }
 
 .r-button img {
-        image-rendering: crisp-edges;
+    image-rendering: crisp-edges;
     max-width: 88px;
     max-height: 31px;
 }
@@ -639,7 +577,7 @@ sidebar.right .sidebar-section {
     display: flex;
     align-items: center;
     justify-content: center;
-        aspect-ratio: 1;
+    aspect-ratio: 1;
 
     position: relative;
     max-width: 50vmin;
@@ -647,7 +585,7 @@ sidebar.right .sidebar-section {
 
     min-width: 50vmin;
     min-height: 50vmin;
-    background-image: 
+    background-image:
         radial-gradient(circle at center, #fff var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
         radial-gradient(circle at center, #fff var(--dotSize), transparent calc(var(--dotSize) + var(--dotBlurRad))),
         linear-gradient(var(--accentColor1), var(--accentColor2));
@@ -662,7 +600,7 @@ sidebar.right .sidebar-section {
     border-radius: 25px;
 }
 
-.avatar > div {
+.avatar>div {
     position: relative;
     height: fit-content;
 }
@@ -680,13 +618,14 @@ sidebar.right .sidebar-section {
 
 vr {
     height: 80%;
-    border-left: dotted 2px var(--textColorSoft);;
+    border-left: dotted 2px var(--textColorSoft);
+    ;
 
 }
 
 /* Footer Stuff */
 
-#footer{
+#footer {
     background-color: var(--bg2);
     box-sizing: border-box;
     display: flex;
@@ -695,7 +634,7 @@ vr {
     font-size: .75em;
 }
 
-#footer > div{
+#footer>div {
     display: flex;
     width: 100%;
     align-items: center;
@@ -703,19 +642,41 @@ vr {
 
 }
 
-#footer > div:nth-child(1){
-        justify-content: start;
+#footer>div:nth-child(1) {
+    justify-content: start;
 
 }
 
-#footer > div:nth-child(2){
+#footer>div:nth-child(2) {
     justify-content: center;
 }
 
-#footer > div:nth-child(3){
+#footer>div:nth-child(3) {
     justify-content: end;
 }
 
 sidebar {
     margin: 0 !important;
+}
+
+input {
+    transition: .2s;
+    border-radius: 0;
+    border-image-slice: 8 8 8 8;
+  border-image-width: 4px 4px 4px 4px;
+  border-image-outset: 2px 2px 2px 2px;
+  border-image-repeat: stretch stretch;
+  image-rendering: pixelated;
+  border-image-source: url(https://cdn.snapps.dev/images/misc/border.gif);
+  border-style: solid;
+    filter: drop-shadow(3px 3px 0px #0004);
+    background-color: var(--color-background-1);
+    color: var(--color-text-1);
+    font-family: jost;
+    padding: .25em;
+}
+
+input[type="button"]:hover {
+
+    background-color:var(--color-background-2)
 }

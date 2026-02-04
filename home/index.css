@@ -9,7 +9,6 @@ body {
     position: absolute;
     top: 25px;
     width: 400px;
-    color: var(--textColor);
     margin: auto;
     left: calc(50% - 200px);
     z-index: 2;
@@ -51,7 +50,6 @@ body {
     justify-content: center;
     align-items: center;
     color: #fff;
-    -webkit-text-stroke: .25px #000;
     text-shadow: 0 0 5px #000;
     font-family: "jost";
 }
@@ -129,11 +127,11 @@ body {
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 2000px) {
 
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 2000px) {
 
 #intro .hori{
     flex-direction: column !important;
@@ -152,14 +150,12 @@ width: 100%;
 
 #intro {
     width: 100%;
-    background-image: linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
-    background-size: 20px 20px;
+
     filter: drop-shadow(0 0 5px);
     display: flex;
     flex-direction: column;
     text-align: center;
     font-family: "jost";
-    color: var(--textColor);
     z-index: 1;
 }
 
@@ -234,9 +230,7 @@ scale: 1.03;
     position: absolute;
     margin-top: -50px;
     left: 0;
-    background-image: linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
-    background-size: 20px 20px;
-    background-position-y: 50px;
+
     width: 200%;
     height: 50px;
     --mask:
@@ -251,14 +245,13 @@ scale: 1.03;
 
 #intro .border:nth-child(2n) {
     --waveSize: 120px;
-    transform: rotate(180deg) translateX(-16px) translateY(2px);
+    transform: rotate(180deg) translateX(-16px) translateY(2px) scaleX(-1);
     position: absolute;
     margin-top: -50px;
     right: 0;
     bottom: -50px;
-    background-image: linear-gradient(var(--bgCont2) 1px, transparent 1px), linear-gradient(to right, var(--bgCont2) 1px, var(--bgCont1) 1px);
-    background-size: 20px 20px;
-    background-position: -5px 13px;
+    background-position-y: 0;
+
     width: 200%;
     height: 50px;
     --mask:
@@ -393,31 +386,21 @@ background {
     background: linear-gradient(125deg,
             rgba(255, 255, 255, 0) 0%,
             rgba(255, 255, 255, 0) 74%,
-            rgba(0, 255, 255, 1) 74%,
-            rgba(0, 255, 255, 1) 76%,
+            var(--color-cyan)  74%,
+            var(--color-cyan)  76%,
             rgba(255, 255, 255, 0) 76%,
             rgba(255, 255, 255, 0) 77%,
-            rgba(255, 0, 255, 1) 77%,
-            rgba(255, 0, 255, 1) 79%,
+            var(--color-magenta)  77%,
+            var(--color-magenta)  79%,
             rgba(255, 255, 255, 0) 79%,
             rgba(255, 255, 255, 0) 80%,
-            rgba(255, 255, 0, 1) 80%,
-            rgba(255, 255, 0, 1) 82%,
+            var(--color-yellow) 80%,
+            var(--color-yellow) 82%,
             rgba(255, 255, 255, 0) 82%,
             rgba(255, 255, 255, 0) 83%,
-            rgba(50, 50, 50, 1) 83%,
-            rgba(50, 50, 50, 1) 85%,
+            var(--color-key) 83%,
+            var(--color-key) 85%,
             rgba(255, 255, 255, 0) 85%);
-}
-
-@keyframes dotSlide {
-    0% {
-        background-position: 0px 0px
-    }
-
-    100% {
-        background-position: 2vw 4vw
-    }
 }
 
 #thingies {
@@ -426,7 +409,7 @@ background {
     width: 100%;
     overflow-x: scroll;
     height: 90vh;
-
+  padding-top: 2em;
     background-image: 
     repeating-conic-gradient(#000c 0 25%, #000d 0 50%), 
   linear-gradient(90deg, #0ff,#f0f, #ff0);
@@ -467,22 +450,51 @@ height: 100%;
 
 }
 
-.grid > *{
-    display: block;
-    margin: 10px;
-    border-radius: 20px;
-    background-color: var(--bg2);
+.grid > * {
+  display: block;
+  margin: 10px;
+  background-color: var(--color-background-2);
+}
+
+
+#gallery-posts {
+  width: calc(100% - 2em);
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  margin: 1em;
+  height: 70%;
+  justify-content: center;
+}
+
+.gallery-post {
+  position: relative;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  width: 192px;
+  height: 192px;
+  margin: 10px;
+}
+
+.gallery-post-tooltip {
+  color: var(--color-text-1);
+  transition: .25s;
+
+  opacity: 0;
+  position: absolute;
+  z-index: 1;
+    font-size: .75em;
+  background-color: var(--color-background-1);
+}
+
+.gallery-post:hover .gallery-post-tooltip {
+  opacity: .75;
 }
 
 #kk {
     background-color: #9f0;
 }
 
-@keyframes checkerScroll {
-    0%{    background-position:       0 0 ,0 0;
-}
-    100%{    background-position:       50px 50px ,0 0;
-}
-    
-}
+
 
