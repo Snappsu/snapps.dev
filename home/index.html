@@ -24,8 +24,9 @@
 </head>
 
 <body>
+    <script src="/res/scripts/gallery.js"></script>
 
-    <note id="under-construction" class="warn">This site is under active under active under construction. Nothing functions, but the framework is there. Personally, I think it looks pretty neat.</note>
+    <note id="under-construction" class="warn">This site is under active construction. Few things functions, but the framework is there. Personally, I think it looks pretty neat.</note>
 
     <nav>
         <a href="/home/">Home</a>
@@ -39,7 +40,7 @@
     <div id="sidebars">
         <sidebar class="left">
             <div class="sidebar-section">
-                <span class="sidebar-section-header">status</span>
+                <span class="sidebar-section-header" data-label="status">status</span>
                 <div class="center">
                     <div class="avatar">
                         <div>
@@ -53,7 +54,7 @@
 
             </div>
             <div class="sidebar-section">
-                <span class="sidebar-section-header">oomfies</span>
+                <span class="sidebar-section-header" data-label="oomfies">oomfies</span>
                 <p>Cool peeps who inspire me to do the cool stuff that I do.</p>
                 <div class="center">
                     <a class="button" href="https://stellers.gay/"><img src="/res/img/buttons/oomf/mark.png"
@@ -62,7 +63,7 @@
                 <p>> <a class="rainbow" href="/oomfies/">wall of oomfs</a>
                     <</p> </div> </sidebar> <sidebar class="right">
                         <div class="sidebar-section" id="nav">
-                            <span class="sidebar-section-header">navigation</span>
+                            <span class="sidebar-section-header"  data-label="navigation">navigation</span>
                             <div class="nav-cont">
                                 <a href="/home/">home</a>
                                 <a href="/ask/">ask</a>
@@ -74,7 +75,7 @@
                         </div>
 
                         <div class="sidebar-section">
-                            <span class="sidebar-section-header">fun stuffs</span>
+                            <span class="sidebar-section-header" data-label="fun stuffs">fun stuffs</span>
                             <p>Some quirky things I like to keep track of.</p>
 
                             <h2>cool sites</h2>
@@ -150,7 +151,24 @@
                 <h1>Art</h1>
                 <span>[Quirky description]</span>
                 <div class="grid-4x3 grid">
-                    <div style="grid-column: x1 / x3; grid-row: y1 / y4;">Gallery</div>
+                    <div style="grid-column: x1 / x3; grid-row: y1 / y4;">
+                    <script>
+                        function seachGallery(){
+                            var tags = document.getElementById("gallery-search").children[0].children[0].value
+                            var spice = document.getElementById("gallery-search").children[0].children[1].value
+                            queryGallery(tags,spice)
+
+                        }
+                    </script>
+                    <div id="gallery-search">
+                        <form>
+                            <input type="text" placeholder="e6-like tags ">
+                            <input type="range" id="points" name="spice" min="0" max="3" value="1">
+                            <input type="button" value="🔎" onclick="seachGallery()">
+                        </form>
+                    </div>
+                    <div id="gallery-posts" class="grid-bg"></div>
+                    </div>
                     <div style="grid-column: x3 / right; grid-row: y1 / y3;">Links</div>
                     <div style="grid-column: x3 / right; grid-row: y3 / y4;">Commissions</div>
                 </div>
@@ -172,7 +190,6 @@
                 <span>[Quirky description]</span>
                 <div class="grid-4x3 grid">
                     <div style="grid-column: x1 / x2; grid-row: y1 / y3;">drawpile</div>
-
                 </div>
             </div>
 

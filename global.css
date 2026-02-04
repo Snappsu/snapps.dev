@@ -13,11 +13,7 @@ img{
     src: url("https://cdn.snapps.dev/misc/jost.woff") format('woff');
 }
 
-body,
-html {
-    background-color: var(--bg1);
 
-}
 
 :root {
 
@@ -389,7 +385,7 @@ sidebar.right {
     box-sizing: border-box;
     width: 100%;
     padding: 10px;
-    color: var(--textColor);
+    color: var(--color-text-1);
     margin-bottom: 10px;
     transition: .25s;
     overflow: hidden;
@@ -397,7 +393,7 @@ sidebar.right {
 }
 
 sidebar.left .sidebar-section {
-    background-image: linear-gradient(90deg, var(--bg1), #0000);
+    background-image: linear-gradient(90deg, var(--color-background-2), #0000);
     padding-left: 20px;
 
 
@@ -405,7 +401,7 @@ sidebar.left .sidebar-section {
 
 sidebar.right .sidebar-section {
     text-align: right;
-    background-image: linear-gradient(270deg, var(--bg1), #0000);
+    background-image: linear-gradient(270deg, var(--color-background-2), #0000);
     padding-right: 30px;
 
 }
@@ -424,7 +420,16 @@ sidebar.right .sidebar-section {
 
     color: var(--textColor);
     transition: .25s;
-    filter: drop-shadow(0 0 1px #000);
+    filter: drop-shadow(2px 1px 0 #000) drop-shadow(4px 2px 0 #000) drop-shadow(5px 3px 0 #000);
+}
+
+.sidebar-section-header::before{
+    content: attr(data-label);
+  color: #fff;
+  position: absolute;
+  z-index: -1;
+  font-family: "octosquare";
+  -webkit-text-stroke: .1em black;
 }
 
 .sidebar-section:nth-child(3n+1):hover .sidebar-section-header {
@@ -441,7 +446,7 @@ sidebar.right .sidebar-section {
 
 .sidebar-section:hover {
     opacity: 1;
-    background-color: var(--bg1);
+    background-color: var(--color-background-2);
 }
 
 .sidebar-section h2 {
@@ -654,3 +659,24 @@ sidebar {
     margin: 0 !important;
 }
 
+input {
+    transition: .2s;
+    border-radius: 0;
+    border-image-slice: 8 8 8 8;
+  border-image-width: 4px 4px 4px 4px;
+  border-image-outset: 2px 2px 2px 2px;
+  border-image-repeat: stretch stretch;
+  image-rendering: pixelated;
+  border-image-source: url(https://cdn.snapps.dev/images/misc/border.gif);
+  border-style: solid;
+    filter: drop-shadow(3px 3px 0px #0004);
+    background-color: var(--color-background-1);
+    color: var(--color-text-1);
+    font-family: jost;
+    padding: .25em;
+}
+
+input[type="button"]:hover {
+
+    background-color:var(--color-background-2)
+}
