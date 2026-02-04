@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- embed stuff -->
+    <meta content="Snapps' Tag Roulette" property="og:title">
+    <meta content="A simple tool for prompted drawing challenges" property="og:description">
+    <meta content="https://snapps.dev/toys/tag-roulette/" property="og:url">
+    <meta content="https://cdn.snapps.dev/images/embed-anim.gif" property="og:image">
+    <meta content="#8d72ff" data-react-helmet="true" name="theme-color">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- styles-->
+    <link rel=" stylesheet" href="https://cdn.snapps.dev/style/fonts.css">
+    <link rel="stylesheet" href="index.css">
+    <!-- technical -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Roulette</title>
+</head>
+
+<body>
+    <style>
+
+
+    </style>
+    <!-- JS Warning -->
+    <sub id="jswarn"><i>this tool requires javascript to work...</i></sub>
+    <!-- Settings -->
+    <div><span>How much time? </span><input id="diff" style="width: 3.5em;" onchange="updateTagPool()" type="number"
+            min="1" value="60"><span> Minutes</span></div>
+    <div><span>Max spice? </span><input id="lvl" style="width: 2em;" type="number" min="1" value="1"
+            onchange="updateTagPool()"></div>
+    <span>Tags in pool:
+        <pre id="tag-count"></pre><button onclick="toggleTagPool()">Show Pool</button></span>
+    <div id="tag-pool" class="closed"></div>
+
+    <hr style="width: 300px;">
+    <!-- Rolls -->
+    <button id="uRoll" onclick="rollTagUniform()">Uniform Roll</button>
+    <hr style="width: 300px;">
+    <span>Your lucky tag is...</span>
+    <b>
+        <pre id="result">[Not Yet Rolled]</pre></b>
+    <span>...after <span id="rerolls"></span> roll(s)!</span>
+    <span>Dated:
+        <pre style="display: inline; background-color: #444; padding: 4px;
+    border-radius: 3px;" id="date"></pre></span>
+
+    <hr style="width: 300px;">
+    <div id="timer"><button id="startTimerBtn" onclick="startTimer()">Start Timer</button></div>
+    <div id="timer"><button id="pauseTimer" onclick="pauseTime()" disabled>Pause Timer</button></div>
+
+    <progress id="timeBar" value="0"></progress>
+    <span>Time elapsed:
+        <pre id="elapsedTime"></pre></span>
+
+    <footer>
+        <div><a href="https://snapps.dev/toys/">← return to toy box</a></div>
+        <div><i>made with the finest spaghetti...</i> 💖 <a
+                href="https://github.com/Snappsu/snapps.dev/tree/main/toys/tag-roulette">source code</a></div>
+        <div>
+
+            <label id="tag-file-btn-lbl" for="tag-file-btn" onclick="readTagsFromText()">load tag list</label>
+            <a style="color:#ff0"
+                onclick="alert('What is a tag list?\nIn this case, a tag list is a string of text that contains a list of tags/topics and a number indicating how \'spicy\' they are (interpret that however you please~) with the minimum being 1. The list should be formatted as such:\n\nscalie,1;\nbig_boobs,2;\n...\n\nI have a sample tag list here: https:\/\/snapps.dev\/toys/tag-roulette/sample_tag_list.txt')">tag
+                list?</a>
+            <a onclick="exportTags()">export tags</a>
+            <a id="saveBtn" onclick="saveToCookies()">save stuff</a>
+            <a onclick="changeBGColor()">change bg</a>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

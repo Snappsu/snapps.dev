@@ -1,33 +1,8 @@
-# Obligatory to-do list
-Oh boy...
+Oh!
+Hello there!
+Didn't expect to see anyone here.
 
-## Theory
-- Decide on what deserves to be in the navigation page
+As you can probably assume, this is my website. Made with love, prayers, and horribley incosistent formatting.
 
-## Structure
-- Home > Design the widgets for the "thingies"
-- Charaters > Make page
-- "Wall of Oomfies"
-- Art > Make page
-- General > Webring + Button sidebar section 
-- Site credits > Make page
-- Home > Journal
-  
-## Scripting
-- General > Signup/Login capabilities
-- General > Theme(s)
-- General > Cookies setting, getting, consent 
-- General > Global NSFW check/redirect 
-- Commissions > Commissions quote calculator
-- Asks > Develop system for getting asks
-- General > Accessibility features 
-- General > Implement CDN
-
-## Style
-- Home > Add some flavor to text
-- General > Make it look good on mobile 
-## Assets
-- General > Pfp icons
-- Ask > Banners
-- Home > Header images for my thingies
-- Landing > New images for all cards
+(I'm gonna be honest it's 2am and I decided to write this on a whim)
+((Snapps, if you see this, add more stuff))
