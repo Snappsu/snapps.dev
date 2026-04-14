@@ -1,104 +1,419 @@
-html, body  {
+html,
+body {
+    box-sizing: border-box;
     user-select: none;
     margin: 0;
     height: 100vh;
-}
-
-#bg {
-    position: fixed;
-    z-index: -1;
-    left: -200px;
-    top: -200px;
-    width: calc(100vw + 200px);
-    height: calc(100vh + 200px);
-}
-
-.hero {
-    position: absolute;
-    top: 50vh;
-    left: 0vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin: 0;
-    filter: drop-shadow(5px 5px 0#0004);
-}
-
-.hero h1 {
-    position: absolute;
-    font-size: 8vw;
-}
-
-.hero img {
-    position: absolute;
-    width: 60vw;
-    height: auto;
-}
-
-
-.content {
-    position: absolute;
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    position: absolute;
-    overflow: auto;
-    min-height: 100%;
-    justify-content: center;
-    align-items: center;
 }
 
-.content > *{
+
+.hero {
+    box-sizing: border-box;
+    height: 65%;
+    min-height: 600px;
+    width: 100%;
+    position: relative;
+    padding: 0 2em;
+    display: flex;
+    justify-content: center;
     flex-shrink: 0;
 }
 
-.window{
-    max-height: 80vh;
-    overflow: auto;
+.hero-image {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    image-rendering: pixelated;
+    position: absolute;
+    bottom: 0;
+    min-height: 512px;
+    max-height: 512px;
+
+    transform-origin: bottom;
+    transition: .25s;
+    transition-timing-function: ease-out;
 }
 
-.window,
-.subwindow {
+.hero-image img {
+    position: relative;
+}
+
+/*this is by far the worst css i've ever written*/
+.hero-image img:nth-child(1),
+.hero-image:hover img:nth-child(1),
+.hero-image:active img:nth-child(1) {
+    display: none;
+}
+
+.hero-image:not(:hover) img:nth-child(1) {
+    display: block;
+}
+
+.hero-image img:nth-child(2) {
+    display: none;
+}
+
+.hero-image:active img:nth-child(2) {
+    display: none !important;
+}
+
+.hero-image:hover img:nth-child(2) {
+    display: block;
+    cursor: grab;
+}
+
+.hero-image img:nth-child(3) {
+    display: none;
+}
+
+.hero-image:active img:nth-child(3) {
+    display: block;
+    cursor: grabbing;
+}
+
+.hero-image:hover {
+    transform: scaleX(.975) scaleY(1.025);
+}
+
+.hero-image:active {
+
+    transform: scaleX(1.05) scaleY(0.95);
+}
+
+.hero h1.title {
+    position: absolute;
+    top: 30px;
+    font-size: 100px;
+    margin: auto;
+    z-index: 1;
+    transition: .2s;
+}
+
+.hero h1.title:hover {
+    transform: rotate(-2deg);
+    scale: 1.05;
+}
+
+.hero h1.title span {
+    color: var(--color);
+}
+
+.hero h1.title:hover span:nth-child(3) {
+    animation: colorScroll 1s linear infinite both;
+}
+
+.hero h1.title:hover span:nth-child(4) {
+    animation: colorScroll2 1s linear infinite both;
+}
+
+.hero h1.title:hover span:nth-child(5) {
+    animation: colorScroll3 1s linear infinite both;
+}
+
+.hero h1.subtitle {
+    position: absolute;
+    top: 140px;
+    font-size: 40px;
+    left: 50%;
+    z-index: 1;
+    transition: .2s;
+}
+
+.hero h1.subtitle:hover {
+    transform: rotate(-2deg);
+    scale: 1.05;
+}
+
+.hero .cta {
+    color: #fff;
+    display: flex;
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    bottom: 25px;
+}
+
+* .hero .cta a {
+    color: #fff;
+    white-space-collapse: preserve-spaces;
+    padding: 0 .25em;
+    font-size: 1.5em;
+    animation: colorScroll 2s ease-out 0s infinite;
+    text-decoration: none;
+    filter: drop-shadow(0 0 10px #000);
+    transition: .2s;
+}
+
+.hero .cta a::before {
+    color: #fff;
+    position: absolute;
+    content: '> E N T E R <';
+    z-index: -1;
+    -webkit-text-stroke: 2px #fff;
+
+}
+
+.hero .cta a:hover {
+    animation: colorScroll 2s linear infinite;
+    filter: drop-shadow(0 0 10px var(--color));
+    scale: 1.1;
+}
+
+.hero .cta a:hover::before {
+    -webkit-text-stroke: 2px #fff;
+}
+
+.container {
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background-2);
+    padding-bottom: 1em;
+    box-sizing: border-box;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+}
+
+.container>div {
     display: flex;
     flex-direction: column;
-    background-color: var(--color-container-1);
-    width: min(80vw, 600px);
-    padding: 1em;
+    padding: 0 2em;
+    width: 100%;
+    box-sizing: border-box;
+
 }
 
-#pfp {
+.container>div:last-of-type {
+    padding-right: 2em;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container div a {
+    --color: var(--color-text-1);
+    color: var(--color-text-1);
+    text-decoration: none;
+    width: 100%;
+    text-align: left;
+    position: relative;
+    padding: .25em .5em;
+    box-sizing: border-box;
     transition: .2s;
-    filter: drop-shadow(4px 0px 0 #0004);
-    transform-origin: bottom center;
-    background-image: url(/res/img/avatar/tempIcon.png);
-    background-size: 100%;
+    display: flex;
+    flex-direction: column;
+    background-position: 95% 50%;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    background-size: 20%;
 }
 
-#pfp:hover {
-    transform: scale3d(1,1.025,1);
-        background-image: url(/res/img/avatar/tempIcon2.png);
+.container div a * {
+    transition: .1s;
+}
+
+.container div a:nth-of-type(3n+1) {
+    --color: var(--color-cyan);
+}
+
+.container div a:nth-of-type(3n+2) {
+    --color: var(--color-magenta);
+}
+
+.container div a:nth-of-type(3n) {
+    --color: var(--color-yellow);
+}
+
+.container div a:hover {
+    background-image: url("/res/img/icon/svg/external.svg");
+
+    background-color: rgb(from var(--color) r g b / 20%);
+    background-size: 15%;
+}
+
+.container div a:has(h1[data-label="fur affinity"]):hover {
+    background-image: url("/res/img/icon/svg/fa.svg");
+}
+
+.container div a:has(h1[data-label="itaku"]):hover {
+    background-image: url("/res/img/icon/svg/itaku.svg");
+}
+
+.container div a:has(h1[data-label="bluesky"]):hover {
+    background-image: url("/res/img/icon/svg/bsky.svg");
+}
+
+.container div a:has(h1[data-label="twitter"]):hover {
+    background-image: url("/res/img/icon/svg/twitter.svg");
+}
+
+.container div a:has(h1[data-label="matrix"]):hover {
+    background-image: url("/res/img/icon/svg/matrix.svg");
+    cursor: pointer;
+}
+
+.container div a:has(h1[data-label="discord"]):hover {
+    background-image: url("/res/img/icon/svg/discord.svg");
+    cursor: pointer;
 
 }
 
-#pfp:active {
-    transform: scale3d(1.05,0.95,1);
-    background-image: url(/res/img/avatar/tempIcon3.png);
-}
+.container div a:has(h1[data-label="email"]):hover {
+    background-image: url("/res/img/icon/svg/mail.svg");
 
-@media (orientation: portrait) {
- #pfp {order: -1;}
+    cursor: pointer;
 
 }
 
-.subwindow {
-    width: auto;
-    margin: .5em;
+.container div a:has(h1[data-label="steam"]):hover {
+    background-image: url("/res/img/icon/svg/steam.svg");
 }
 
-.padding{
-    display: block;
-    height: 50px;
-    width: 50px;
+.container div a:has(h1[data-label="github"]):hover {
+    background-image: url("/res/img/icon/svg/git.svg");
+}
+
+.container div a h1:first-child {
+    font-family: 'octosquare';
+    font-size: 2em;
+}
+
+.container div a:hover h1:first-child {
+    color: var(--color);
+}
+
+.container div a span {
+    display: inline-block;
+    overflow: hidden;
+    height: 0em;
+}
+
+.container div a:hover span {
+    height: 2em;
+
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 33px;
+    background-color: var(--color-background-2);
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+.button {
+    height: 31px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .hero {
+        height: 650px;
+    }
+
+    .container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+}
+
+body {
+    will-change: background-position;
+    animation: bgScroll 20s linear infinite;
+}
+
+#cc {
+    opacity: .4;
+    position: absolute;
+    font-size: 3em; 
+    bottom: 10px;
+    right: 20px;
+    font-weight: bold;
+}
+
+#cc a {
+    color: #000;
+    text-decoration: none;
+
+}
+
+@keyframes bgScroll {
+    0% {
+        background-position: 0px 0px, 0px 100px, 100px 0px, 100px 100px;
+    }
+
+    100% {
+        background-position: 400px 200px, 400px 300px, 500px -200px, 500px -100px;
+    }
+}
+
+@keyframes colorScroll {
+    0% {
+        --color: var(--color-cyan);
+    }
+
+    33% {
+        --color: var(--color-yellow);
+    }
+
+    66% {
+        --color: var(--color-magenta);
+    }
+
+    100% {
+        --color: var(--color-cyan);
+    }
+}
+
+@keyframes colorScroll2 {
+    0% {
+        --color: var(--color-magenta);
+    }
+
+    33% {
+        --color: var(--color-cyan);
+    }
+
+    66% {
+        --color: var(--color-yellow);
+    }
+
+    100% {
+        --color: var(--color-magenta);
+    }
+}
+
+@keyframes colorScroll3 {
+    0% {
+        --color: var(--color-yellow);
+    }
+
+    33% {
+        --color: var(--color-magenta);
+    }
+
+    66% {
+        --color: var(--color-cyan);
+    }
+
+    100% {
+        --color: var(--color-yellow);
+    }
 }
