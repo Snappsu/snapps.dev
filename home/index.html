@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Stuff to Import-->
-    <link rel="stylesheet" rel="preload" href="/global.css">
-    <link rel="stylesheet" rel="preload" href="index.css">
+    <link rel="preload" as="style" href="https://cdn.snapps.dev/style/palette.css">
+    <link rel="preload" as="style" href="index.css">
+    <link rel="preload" as="style" href="https://cdn.snapps.dev/style/fonts.css">
     <link rel="stylesheet" href="https://cdn.snapps.dev/style/palette.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.snapps.dev/style/fonts.css">
     <!-- Page Appearance -->
-    <title>home - snapps.dev</title>
+    <title>snapps.dev</title>
     <link rel="icon" href="/res/img/global/embed.png">
     <link rel="apple-touch-icon" href="/res/img/global/embed.png">
     <!-- Embed Stuff -->
@@ -23,197 +26,49 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
-    </style>
+    <!-- fediverse stuffs -->
+    <meta name="fediverse:creator" content="snapps@booping.synth.download" />
+    <!-- for adult rating -->
+    <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
 </head>
 
-<body>
+<body class="dot-bg" style="background-color: #000;">
     <script src="/res/scripts/gallery.js"></script>
 
-    <note id="under-construction" class="warn">This site is under active construction. Few things functions, but the framework is there. Personally, I think it looks pretty neat.</note>
 
-    <nav>
-        <a href="/home/">Home</a>
-        <a href="/ask/">Ask</a>
-        <a>Journal</a>
-        <a>Projects</a>
-        <a>Support</a>
-        <a>Commissions</a>
-    </nav>
+    <div id="main-window">
+        <!-- title bar -->
+         <div id="title-bar"><h1 data-label="snapps.dev">snapps<span style="color:#c5c5c5">.</span><span style="color:var(--color-cyan)">d</span><span style="color:var(--color-magenta)">e</span><span style="color:var(--color-yellow)">v</span></h1></div>
 
-    <div id="sidebars">
-        <sidebar class="left">
-            <div class="sidebar-section">
-                <span class="sidebar-section-header" data-label="status">status</span>
-                <div class="center">
-                    <div class="avatar">
-                        <div>
-                            <img id="avi-img" src="/res/img/avatar/tempIcon.png">
-                        </div>
-                    </div>
-                </div>
-                <p>pronouns: they/them/whatever</p>
-                <p>mood: distracted</p>
-                <p>working on: this site</p>
-
+        <!-- side bar -->
+        <div id="side-bar">
+            <!-- search bar -->
+            <div id="search-bar">
+                <input type="text" placeholder="🔎" value="">
             </div>
-            <div class="sidebar-section">
-                <span class="sidebar-section-header" data-label="oomfies">oomfies</span>
-                <p>Cool peeps who inspire me to do the cool stuff that I do.</p>
-                <div class="center">
-                    <a class="button" href="https://stellers.gay/"><img src="/res/img/buttons/oomf/mark.png"
-                            alt="Synth.Download!"></a>
-                </div>
-                <p>> <a class="rainbow" href="/oomfies/">wall of oomfs</a>
-                    <</p> </div> </sidebar> <sidebar class="right">
-                        <div class="sidebar-section" id="nav">
-                            <span class="sidebar-section-header"  data-label="navigation">navigation</span>
-                            <div class="nav-cont">
-                                <a href="/home/">home</a>
-                                <a href="/ask/">ask</a>
-                                <a>projects</a>
-                                <a>characters</a>
-                                <a>art</a>
-                                <a>commissions</a>
-                            </div>
-                        </div>
+            <!-- page list -->
+                <!-- about me -->
+                <div><h1 data-label="about me">about me</h1></div>
+                <!-- news/rss -->
+                <!-- featured -->
+                <div><h1>featured!</h1></div>
+                <div><h1>soapbox</h1></div>
 
-                        <div class="sidebar-section">
-                            <span class="sidebar-section-header" data-label="fun stuffs">fun stuffs</span>
-                            <p>Some quirky things I like to keep track of.</p>
+                <!-- the rest -->
+        </div>
 
-                            <h2>cool sites</h2>
-                            <div class="button-reel">
-                                <div class="button-reel-cont">
-                                    <a class="r-button" href="https://synth.download"><img
-                                            src="https://synth.download/assets/buttons/synth.download.svg"
-                                            alt="Synth.Download!"></a>
-                                    <a class="r-button" href="https://cendyne.dev/"><img
-                                            src="https://c.cdyn.dev/KUZ5LUqi" alt="button saying cendyne.dev"></a>
-                                    <a class="r-button" href="https://classic.blitwise.com"><img
-                                            src="https://classic.blitwise.com/miniblitwise.gif" width="77"
-                                            height="28"></a>
-                                    <div class="button-spacer"> More soon, hopefully</div>
-                                </div>
-                            </div>
-                        </div>
-        </sidebar>
+        <!-- content -->
+        <div id="content-area"></div>
+
+        <!-- footer -->
+        <div id="footer"></div>
+            <!-- settings bar -->
+                <!-- js warning -->
+                <!-- cookie consent -->
+                <!-- toggle fullscreen -->
+            <!-- site repo -->
+            <!-- rss feed -->
+            <!-- creative commons -->
     </div>
-
-    <div class="content">
-
-        <div id="hero" class="dot-bg">
-            <span>Hello! I'm </span>
-            <div id="hero-sign">
-                <img id="hero-sign-star" src="/res/img/piecewise/signature/snapps_star.png">
-                <img id="hero-sign-text" src="/res/img/piecewise/signature/snapps_text.png">
-            </div>
-            <span style="position:absolute; margin-bottom:-3em">Welcome to my webzone</span>
-        </div>
-
-        <div id="intro" class="grid-bg">
-            <div class="border grid-bg"></div>
-            <h1 data-label="About me!">About me!</h1>
-            <div class="hori" style="align-items:start;">
-                <div class="vert">
-                    <div class="avatar">
-                        <div id="hero-avi">
-                            <img class="avi-img" src="/res/img/avatar/tempIcon.png">
-                            <img class="avi-border" src="/res/img/avatar/border.gif">
-                            <img class="avi-text" src="/res/img/avatar/text.gif">
-                        </div>
-
-                    </div>
-                    <div id="avi-contact">
-                        <span>Discord: <a href="https://discord.com/users/143978133798780928">@snapps</a></span>
-                        <span>Email: <a href="mailto:lead.dumbass@snapps.dev">lead.dumbass@snapps.dev</a></span>
-                    </div>
-                </div>
-                <vr></vr>
-                <p>Hello!
-                    <br><br>If I had to take a guess, I imagine you probably found out about me from some drawing I made
-                    of
-                    creatures with <b><span class="text-sqoob-off">huge</span> <span class="text-sqoob">boobs</span></b>
-                    and or <b><span class="text-sqoob-off">fat</span> <span class="text-sqoob">butts</span></b> and or
-                    other sizable endowments.
-                    <br><br>
-                    But, for those who don't know, drawing <b style="color:#ff4141;">NSFW</b> stuff—mainly snakes and
-                    other scaly cuties—is what I do currently, though my expertiese is in <code
-                        style="font-size: 1.3em; ;color:#247db1;">coding</code> and I also dabble in <span
-                        style="color:#2f972f;text-shadow:2px 2px #1e631e, 2px 2px #0f350f; filter: drop-shadow(0 0 1px #2f972f);">3D
-                        modeling</span> every now and then.<br><br>Persnapps, I can one day expand my sniddy expanding
-                    operations into those fields.
-                    <br><br>
-                    Soon™<span><img class="text-icon" src="/res/img/icon/gif/marketableSavak.gif"></span></p>
-            </div>
-            <div class="border grid-bg"  ></div>
-        </div>
-
-        <div id="thingies">
-
-            <div id="art" class="thingies-tab">
-                <h1>Art</h1>
-                <span>[Quirky description]</span>
-                <div class="grid-4x3 grid">
-                    <div style="grid-column: x1 / x3; grid-row: y1 / y4;">
-                    <script>
-                        function seachGallery(){
-                            var tags = document.getElementById("gallery-search").children[0].children[0].value
-                            var spice = document.getElementById("gallery-search").children[0].children[1].value
-                            queryGallery(tags,spice)
-
-                        }
-                    </script>
-                    <div id="gallery-search">
-                        <form>
-                            <input type="text" placeholder="e6-like tags ">
-                            <input type="range" id="points" name="spice" min="0" max="2" value="1">
-                            <input type="button" value="🔎" onclick="seachGallery()">
-                        </form>
-                    </div>
-                    <div id="gallery-posts" class="grid-bg"></div>
-                    </div>
-                    <div style="grid-column: x3 / right; grid-row: y1 / y3;">Links</div>
-                    <div style="grid-column: x3 / right; grid-row: y3 / y4;">Commissions</div>
-                </div>
-            </div>
-
-            <div id="projects" class="thingies-tab">
-                <h1>Projects</h1>
-                <span>[Quirky description]</span>
-                <div class="grid-4x3 grid">
-                    <div id="kk" style="grid-column: x1 / x2; grid-row: y1 / y3;">k+k</div>
-                    <div style="grid-column: x2 / x3; grid-row: y1 / y2;">goodest boi</div>
-                    <div style="grid-column: x2 / x3; grid-row: y2 / y4;">snapps.dev</div>
-                    <div style="grid-column: x3 / x4; grid-row: y1 / y3;">sniddy.zip</div>
-                </div>
-            </div>
-
-            <div id="services" class="thingies-tab">
-                <h1>Services</h1>
-                <span>[Quirky description]</span>
-                <div class="grid-4x3 grid">
-                    <div style="grid-column: x1 / x2; grid-row: y1 / y3;">drawpile</div>
-                </div>
-            </div>
-
-            <div id="toys" class="thingies-tab">
-                <h1>Knick-knacks & Doodads</h1>
-                <span>[Quirky description]</span>
-            </div>
-
-        </div>
-        <div id="footer">
-            <div></div>
-            <div>
-                <p>Made with love, sweat, and many sleepless nights 💖</p>
-            </div>
-            <div><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img
-                        src="/res/img/buttons/misc/cc.gif"></a></div>
-        </div>
-    </div>
-
 </body>
-
 </html>
