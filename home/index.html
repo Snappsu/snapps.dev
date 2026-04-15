@@ -38,23 +38,48 @@
 
     <div id="main-window">
         <!-- title bar -->
-         <div id="title-bar"><h1 data-label="snapps.dev">snapps<span style="color:#c5c5c5">.</span><span style="color:var(--color-cyan)">d</span><span style="color:var(--color-magenta)">e</span><span style="color:var(--color-yellow)">v</span></h1></div>
+        <div id="title-bar">
+            <div class="left" id="title-bar-address">
+                <h1 data-label="snapps.dev">snapps<span style="color:#c5c5c5">.</span><span
+                        style="color:var(--color-cyan)">d</span><span style="color:var(--color-magenta)">e</span><span
+                        style="color:var(--color-yellow)">v</span><span id="page-address"></span></h1>
+            </div>
+            <div class="right">
+                <img class="ui" style="--color:var(--color-cyan)" src="/res/img/icon/svg/fullscreen.svg" onclick="toggleFullscreen()">
+                <img class="ui" style="--color:var(--color-magenta)" src="/res/img/icon/svg/close.svg" onclick="closeWindow()">
+            </div>
+        </div>
 
         <!-- side bar -->
         <div id="side-bar">
-            <!-- search bar -->
+            <!-- search bar (soon:tm:)
             <div id="search-bar">
-                <input type="text" placeholder="🔎" value="">
+                <input type="text" placeholder="🔎">
             </div>
+             -->
             <!-- page list -->
-                <!-- about me -->
-                <div><h1 data-label="about me">about me</h1></div>
-                <!-- news/rss -->
-                <!-- featured -->
-                <div><h1>featured!</h1></div>
-                <div><h1>soapbox</h1></div>
-
-                <!-- the rest -->
+            <div onclick="loadPage('about-me')">
+                <h1 data-label="about me">about me</h1>
+            </div>
+            <div class="wip">
+                <h1 data-label="featured!">featured!</h1>
+            </div>
+            <div class="wip">
+                <h1 data-label="comms">comms</h1>
+            </div>
+            <div class="wip">
+                <h1 data-label="oomfs">oomfs</h1>
+            </div>
+            <div class="wip">
+                <h1 data-label="soapbox">soapbox</h1>
+            </div>
+            <div onclick="loadPage('toys')">
+                <h1 data-label="toys">toys</h1>
+            </div>
+            <div class="wip">
+                <h1 data-label="wiki">wiki</h1>
+            </div>
+            <!-- the rest -->
         </div>
 
         <!-- content -->
@@ -62,13 +87,97 @@
 
         <!-- footer -->
         <div id="footer"></div>
-            <!-- settings bar -->
-                <!-- js warning -->
-                <!-- cookie consent -->
-                <!-- toggle fullscreen -->
-            <!-- site repo -->
-            <!-- rss feed -->
-            <!-- creative commons -->
+        <!-- settings bar -->
+        <!-- js warning -->
+        <!-- cookie consent -->
+        <!-- toggle fullscreen -->
+        <!-- site repo -->
+        <!-- rss feed -->
+        <!-- creative commons -->
     </div>
+    <script>
+        function loadPage(page) {
+            if (page == "") page = "error"
+            var target = null
+            if (event) target = event.target
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                if (this.status == 200) {
+
+                    //clear selection
+                    clearSelection()
+
+                    //set page title
+                    setPageTitle(page.replace("-", " "))
+
+                    //add selection effect to sidebar 
+                    if (target) {
+                        if (target.tagName == "H1") target = target.parentElement
+                        target.classList.add("selected")
+                    }
+
+                    //load content
+                    document.getElementById("content-area").innerHTML = this.responseText;
+
+                } else {
+                    //clear selection
+                    clearSelection()
+
+                    //'load' 404
+                    document.getElementById("content-area").innerHTML = `
+                    <div id="page-bg"><h1 id="page-title" data-label="404 ERROR">404 ERROR</h1></div>
+                    <img height="250px" class="floor" src="/res/img/hero/test2B.gif">
+                    <p>well, this is awkward...</p>
+                    <p>this page doesn't exist (yet?)...</p>
+                    <p>which is kinda weird since you're looking at it right now...</p>
+                    `
+                    setPageTitle("page not found...", "#f55")
+                }
+            }
+            xhttp.open("GET", `/res/pages/${page}`);
+            xhttp.send();
+        }
+
+        function setPageTitle(title, color = "#fff") {
+            document.getElementById("page-address").innerHTML = ` > <span style="color:${color};">${title}</span>`
+            document.getElementById("title-bar-address").children[0].setAttribute('data-label', `snapps.dev > ${title}`)
+        }
+
+        function clearSelection() {
+            try {
+                document.getElementsByClassName("selected")[0].classList.remove("selected")
+            } catch (error) {
+
+            }
+        }
+
+        function makePage(title, content, color = "#fff") {
+            setPageTitle(title, color)
+            document.getElementById("content-area").innerHTML = content;
+            document.getElementsByClassName("selected")[0].classList.remove("selected")
+        }
+
+        var fullscreen = false;
+        function toggleFullscreen() {
+            if (!fullscreen) {
+                document.getElementById("main-window").classList.add("fullscreen")
+                fullscreen = true
+            } else {
+                document.getElementById("main-window").classList.remove("fullscreen")
+                fullscreen = false
+
+            }
+        }
+
+        function closeWindow(){
+            if(confirm("are you sure you want close this window?\n\nunsaved work will be lost."))
+            if(confirm("are you *really* sure you want close this window?"))
+            if(confirm("final warning!\n\nyou may regret this!"))
+            document.getElementById("main-window").remove()
+        }
+
+        loadPage("about-me")
+    </script>
 </body>
+
 </html>

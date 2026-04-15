@@ -3,6 +3,8 @@
 }
 
 body {
+    font-size: 16px;
+    background-color: var(--color-background-1) !important;
     margin: 0;
     width: 100vw;
     height: 100vh;
@@ -26,7 +28,7 @@ body {
 #main-window {
     display: grid;
     grid-template-columns: [sidebar] 150px [content] auto;
-    grid-template-rows: [title] 40px [container] auto [footer] 40px;
+    grid-template-rows: [title] 50px [container] auto [footer] 40px;
     grid-template-areas:
         "titlebar titlebar"
         "sidebar content"
@@ -41,6 +43,10 @@ body {
     height: 100vh;
 }
 
+#main-window.fullscreen > * {
+border-radius: 0;
+}
+
 #title-bar {
     grid-area: titlebar;
 
@@ -52,11 +58,51 @@ body {
 
     background-color: rgb(from var(--color-background-2) r g b / .75);
     backdrop-filter: blur(5px);
+        user-select: none;
+
 }
+
+#title-bar > div {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+}
+
+
+#title-bar > div:first-child{
+    padding-left: 10px;
+}
+#title-bar > div:last-child{
+    padding-right: 5px;
+} 
 
 #title-bar h1 {
     font-size: 1.5em;
-    padding-left: 15px;
+    margin: 0;
+}
+
+#title-bar img.ui {
+    height: 30px;
+    margin: 2px;;
+    padding: 2px;
+    border-radius: 8px;
+    border: solid 1px var(--border-color);
+    background-color: rgb(from var(--color) r g b / .5 );
+    transition: .1s;
+}
+
+#title-bar img.ui:hover{
+        background-color: rgb(from var(--color) r g b / 1);
+
+}
+
+
+.left {
+    justify-content:flex-start;
+}
+
+.right {
+    justify-content:flex-end;
 }
 
 #side-bar {
@@ -71,6 +117,8 @@ body {
 
 #side-bar>* {
     transition: .2s;
+    position: relative;
+    overflow: hidden;
 }
 
 #side-bar>*:nth-child(3n+1) {
@@ -85,6 +133,33 @@ body {
     --color: var(--color-yellow);
 }
 
+#side-bar>*:last-child {
+   border-bottom: solid 1px var(--border-color);
+}
+
+
+#side-bar>div.wip {
+    --color2: #0004;
+    background-image: linear-gradient(45deg, transparent 0%, transparent 25%, var(--color2) 25%,var(--color2) 50%, transparent 50%, transparent 75%, var(--color2) 75%,var(--color2) 100%);
+    background-repeat: repeat;
+    background-size:30px 30px;
+    background-position: 0;
+    transition: .2s;
+}
+
+#side-bar>div.wip:hover {
+    --color2: rgb(from var(--color) r g b / .3);
+} 
+#side-bar>div.wip::before {
+    position: absolute;
+    font-family: octosquare;
+    color: #000a;
+    top: -30px;
+    font-size: 60px;
+    transform: rotate(10deg);
+   content: "wip";
+}
+
 #side-bar>div {
     display: flex;
     justify-content: center;
@@ -93,32 +168,53 @@ body {
     background-image: linear-gradient(90deg, var(--color), transparent);
     background-repeat: no-repeat;
     background-position: -150px;
+    user-select: none;
+
 }
 
+#side-bar>:nth-child(2n+1) {
+background-color: var(--color-background-2);
+}
+
+#side-bar>:nth-child(2n+2) {
+background-color: var(--color-background-1);
+}
+
+
+#side-bar>div.selected{
+    background-color: var(--color);
+}
 
 #side-bar>div:hover {
     background-position: 0px;
 }
 
-
-
 #side-bar h1 {
     font-size: 1.5em;
     margin: 0;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 10px; 
+    text-align: left;
+    transition: .2s;
 }
 
-#side-bar>div:hover h1 {
-    scale: (1.1);
+#side-bar>div.wip h1{opacity: .2;}
+#side-bar>div.wip:hover h1{opacity: 1;}
+
+#side-bar > div:hover h1 ,#side-bar > div.selected h1{
+     padding-left: 15px; 
 }
 
 /* side-bar overrides */
-#search-bar input, #search-bar input[value=""] {
+#search-bar input{
     width: 120px;
     background-color: transparent;
     border-radius: 120px;
 }
 
-#search-bar input:hover,  #search-bar input:not([value]){
+#search-bar input:hover { 
     background-color: #0007;
 }
 
@@ -131,11 +227,125 @@ body {
 
     overflow-y: auto;
     overflow-x: hidden;
-
+    box-sizing: border-box;
     border-right: solid 1px var(--border-color);
     background-color: rgb(from var(--color-background-1) r g b / .90);
     backdrop-filter: blur(5px);
+    padding: 8px 16px;
+    
 }
+
+/* page styling */
+
+#page-bg {
+    left: 0px;
+    top: 0px;
+    position: sticky;
+      z-index: -1;  mix-blend-mode: overlay;
+
+    user-select: none;
+
+}
+
+#page-title {
+position: absolute;
+  display: flex;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+
+  align-items: center;
+  justify-content: center;
+  font-size: 100px;
+  margin-top: 60px;
+  opacity: 0.5;
+  animation: pageTitleScroll 10s linear infinite;
+}
+
+#content-area img {
+max-width: 80%;
+border: solid 1px var( --border-color);
+border-radius: 10px;
+}
+
+#content-area img.floor {
+border: solid 1px var( --border-color);
+border-top: none;
+border-left: none;
+border-right: none;
+border-radius: 0px;
+}
+
+#content-area img.float {
+position: absolute;
+border: none;
+border-radius: 0px;
+}
+
+#content-area img.emote {
+    transform: translateY(0.1em);
+ border: none;
+display: inline;
+height: 1.1em;
+width: 1.1em;
+border-radius: 0;
+}
+
+#content-area h1{
+    margin: 0;
+}
+
+#content-area p{
+    margin-top: 0;
+} 
+
+#content-area a{
+    color:var(--color-cyan)
+} 
+
+#content-area table {
+    background-color: var(--color-background-2);
+    margin:auto;
+}
+
+#content-area tr {
+    background-color: var(--color-background-1);
+
+}
+
+#content-area td {
+padding: 8px ;
+}
+
+
+.tag-cloud {
+    display: flex;
+    background-color: var(--color-background-2);
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tag-cloud span {
+padding: 2px .5em;
+margin: 4px;
+border-radius: 1em;
+}
+
+.tag-cloud span:nth-child(3n+1) {
+    background-color: rgb(from var(--color-cyan)r g b / .4);
+}
+
+.tag-cloud span:nth-child(3n+2) {
+    background-color: rgb(from var(--color-magenta)r g b / .4);
+}
+
+.tag-cloud span:nth-child(3n+3) {
+    background-color: rgb(from var(--color-yellow)r g b / .4);
+}
+
 
 #footer {
     grid-area: footer;
@@ -170,4 +380,10 @@ input:focus,
 button:active {
     outline: none;
     background-color: hsl(from var(--accent-color) h s calc(l * .5));
+}
+
+@keyframes pageTitleScroll {
+    0%{transform: translateX(100%);}
+    100%{transform: translateX(-100%);}
+    
 }
