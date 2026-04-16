@@ -1,0 +1,84 @@
+<div id="page-bg">
+    <h1 id="page-title" data-label="featured">featured</h1>
+</div>
+<p>look at all these cool things!</p>
+<div class="center">
+    <div id="project-grid">
+
+        <div id="gallery-div" style="grid-column: 1 / 3; grid-row: 1 / 4;" class="border">
+            <h1>gallery</h1>
+            <p>here be a sample of my personal booru!</p>
+            <div id="gallery-posts"></div>
+            <a class="button border" href="https://gallery.snapps.dev">visit now</a>
+        </div>
+
+        <div style="grid-column: 3 / 4; grid-row: 1 / 4;" class="border">
+            <h1>ataki</h1>
+            <p>everyone please say hi to ataki! she's my character for a ttrpg im in. wish her luck!</p>
+            <img class="alias" src="https://gallery.snapps.dev/_images/880e4591aa44490e2558bad224ce9c25/100%20-%20apode%20ataki%20snake%20tagme.png">
+            <p>sorry if crunchy...</p>
+        </div>
+        
+        <div style="grid-column: 1 / 4; grid-row: 4 / 6;" class="border">
+            <h1>sniddy.zone</h1>
+            <p>a little network i'm making for my fellow scalie enjoyers out there <img class="emote"
+                    src="/res//img/icon/emotes/snakeHeart.png" title=":snakeHeart:"></p>
+            <p>planning on doing some fun stuffs there in the future.</p>
+            <p>it's still being set up (<span title="unless we're oomfs on discord (msg me!)">no registration yet</span>)
+                but you can peep it</p>
+                <br>
+            <a class="button border" href="https://sniddy.zone">show me</a>
+        </div>
+
+    </div>
+</div>
+<style>
+    #project-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: 100px;
+        width: 700px;
+        padding: 8px;
+    }
+
+    #project-grid>div {
+        font-size: 14px;
+        position: relative;
+        margin: 16px;
+        background-color: var(--color-background-1);
+        padding: 8px;
+        transition: .2s;
+    }
+
+    #project-grid>*:hover {
+        filter: drop-shadow(0 0 3px var(--color));
+    }
+
+
+
+    #project-grid>*:nth-child(3n+1) {
+        --color: var(--color-cyan) !important
+    }
+
+    #project-grid>*:nth-child(3n+2) {
+        --color: var(--color-magenta) !important
+    }
+
+    #project-grid>*:nth-child(3n+3) {
+        --color: var(--color-yellow) !important
+    }
+
+    #project-grid>* h1:first-child {
+        left: 10px;
+        top: -24px;
+        font-size: 24px;
+        transition: .2s;
+        position: absolute;
+    }
+
+            #project-grid>*:hover h1{
+        scale:1.1;
+        rotate: -5deg;
+    }
+</style>
+<script src="/res/scripts/gallery.js"></script>
