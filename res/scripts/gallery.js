@@ -15,7 +15,7 @@ class Post {
         return this
     }
     makeHTMLElement() {
-        return `<a class="gallery-post" href="${this.link}"><img src="${this.src}"><span class="gallery-post-tooltip">${this.desc}</span></a>`
+        return `<a class="gallery-post" title="${this.desc}" href="${this.link}"><img src="${this.src}"><span class="gallery-post-tooltip">${this.desc}</span></a>`
     }
 }
 
@@ -67,3 +67,5 @@ async function queryGallery(query = DEFAULT_QUERY, rating = 1) {
     }
     return false
 }
+
+

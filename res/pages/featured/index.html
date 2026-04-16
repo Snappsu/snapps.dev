@@ -1,15 +1,16 @@
+<script src="/res/scripts/gallery.js"></script>
 <div id="page-bg">
-    <h1 id="page-title" data-label="featured">featured</h1>
+    <h1 id="page-title" data-label="featured stuff">featured stuff</h1>
 </div>
-<p>look at all these cool things!</p>
+<br>
+<p>not much to say here</p>
 <div class="center">
     <div id="project-grid">
 
         <div id="gallery-div" style="grid-column: 1 / 3; grid-row: 1 / 4;" class="border">
             <h1>gallery</h1>
-            <p>here be a sample of my personal booru!</p>
-            <div id="gallery-posts"></div>
-            <a class="button border" href="https://gallery.snapps.dev">visit now</a>
+            <p>here be a sample of <a href="https://gallery.snapps.dev">my personal booru!</a></p>
+            <div id="gallery-posts" onload="queryGallery()"></div>
         </div>
 
         <div style="grid-column: 3 / 4; grid-row: 1 / 4;" class="border">
@@ -80,5 +81,21 @@
         scale:1.1;
         rotate: -5deg;
     }
+
+    #gallery-posts {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  align-items: center;
+  overflow: auto;
+  margin: auto;
+  height: 200px;
+  background-color: var(--color-background-2);
+}
+
+
+.gallery-post span {
+display: none;
+}
 </style>
-<script src="/res/scripts/gallery.js"></script>
+

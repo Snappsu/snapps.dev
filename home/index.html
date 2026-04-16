@@ -65,7 +65,7 @@
             </div>
             <div class="page-button" onclick="loadPage('featured')">
                 <h1 data-label="featured!">featured!</h1>
-                <span style="position: absolute; z-index: 1; color: var(--color-yellow); font-family: octosquare; right: 10px; rotate: 15deg; top: -1px; filter: drop-shadow(0 0 1px #000);">new!</span>
+                <span class="sticker">new!</span>
             </div>
             <div class="page-button wip">
                 <h1 data-label="comms">comms</h1>
@@ -104,7 +104,9 @@
         <!-- rss feed -->
         <!-- creative commons -->
     </div>
+    <script src="/res/scripts/gallery.js"></script>
     <script>
+        var currentPage = ""
         var sidebarPages = Array.from(document.getElementById("side-bar").children).map((tab) => {
             try {
                 return tab.attributes.onclick.value.match(/'(.+)'/)[1]
@@ -133,6 +135,8 @@
                     //load content
                     document.getElementById("content-area").innerHTML = this.responseText;
 
+                    currentPage=page
+
                 } else {
                     //clear selection
                     clearSelection()
@@ -146,6 +150,8 @@
                     <p>which is kinda weird since you're looking at it right now...</p>
                     `
                     setPageTitle("page not found...", "#f55")
+
+                    currentPage ="404"
                 }
             }
             xhttp.open("GET", `/res/pages/${page}`);
@@ -200,7 +206,14 @@
                         document.getElementById("main-window").remove()
         }
 
-        loadPage("featured")
+        //functions to runn when updating page
+        //for reloading a gallery for example
+        var observer = new MutationObserver(()=>{
+            if(currentPage=="featured") queryGallery();
+        })
+        observer.observe(document.getElementById("content-area"), {childList: true})    
+
+        loadPage("top")
     </script>
 </body>
 
