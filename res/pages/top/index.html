@@ -1,0 +1,30 @@
+<div class="left">
+    <p>dunno where to go? i recommend looking at either:</p>
+    <a onclick="loadPage('about-me')">about me </a> - kinda self-explanatory...
+    <br>
+    <a onclick="loadPage('featured')">featured</a> - cool stuff i'm working on
+    <br>
+    <br>
+    <span>changelog:</span>
+    <div id="changelog">
+        <span>4/16/26 - added this landing page and the featured page</span>
+        <span>4/14/26 - a site reborn (for the 6th(?) time) 🎉</span>
+    </div>
+    <br>
+    <p>this is a one-time page, destined to be overwritten by the next page you load.<br>please remember to thank this
+        page for it's service!</p>
+</div>
+<style>
+    #changelog {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 5em;
+        max-height: 5em;
+        mask-image: linear-gradient(180deg, #fff 40%, transparent calc(100% - 1px), #fff calc(100% - 1px));
+        border-top:solid 1px var(--border-color);
+        border-bottom:solid 1px var(--border-color);
+        width: max-content;
+    }
+</style>

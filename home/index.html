@@ -16,11 +16,11 @@
     <link rel="icon" href="/res/img/global/embed.png">
     <link rel="apple-touch-icon" href="/res/img/global/embed.png">
     <!-- Embed Stuff -->
-    <meta content="Snapps the Scalie Artist 🔞" property="og:title">
-    <meta content="✨ Spreading scalie propaganda since 2020 ✨" property="og:description">
+    <meta content="snapps.dev" property="og:title">
+    <meta content="✨ spreading scalie propaganda since 2020 ✨" property="og:description">
     <meta content="https://snapps.dev/" property="og:url">
-    <meta content="https://cdn.snapps.dev/images/embed-anim.gif" property="og:image">
-    <meta content="#9463ff" data-react-helmet="true" name="theme-color">
+    <meta content="https://cdn.snapps.dev/images/button.gif" property="og:image">
+    <meta content="#00bcd4" data-react-helmet="true" name="theme-color">
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -45,8 +45,10 @@
                         style="color:var(--color-yellow)">v</span><span id="page-address"></span></h1>
             </div>
             <div class="right">
-                <img class="ui" style="--color:var(--color-cyan)" src="/res/img/icon/svg/fullscreen.svg" onclick="toggleFullscreen()">
-                <img class="ui" style="--color:var(--color-magenta)" src="/res/img/icon/svg/close.svg" onclick="closeWindow()">
+                <img class="ui" style="--color:var(--color-cyan)" src="/res/img/icon/svg/fullscreen.svg"
+                    onclick="toggleFullscreen()">
+                <img class="ui" style="--color:var(--color-magenta)" src="/res/img/icon/svg/close.svg"
+                    onclick="closeWindow()">
             </div>
         </div>
 
@@ -58,25 +60,32 @@
             </div>
              -->
             <!-- page list -->
-            <div onclick="loadPage('about-me')">
+            <div class="page-button" onclick="loadPage('about-me')">
                 <h1 data-label="about me">about me</h1>
             </div>
-            <div class="wip">
+            <div class="page-button" onclick="loadPage('featured')">
                 <h1 data-label="featured!">featured!</h1>
+                <span class="sticker">new!</span>
             </div>
-            <div class="wip">
+            <div class="page-button wip">
                 <h1 data-label="comms">comms</h1>
             </div>
-            <div class="wip">
+            <div class="page-button wip">
                 <h1 data-label="oomfs">oomfs</h1>
             </div>
-            <div class="wip">
-                <h1 data-label="soapbox">soapbox</h1>
+            <div class="page-button wip">
+                <h1 data-label="ask">ask</h1>
             </div>
-            <div onclick="loadPage('toys')">
+            <div class="page-button wip">
+                <h1 data-label="scaliedex">scaliedex</h1>
+            </div>
+            <div class="page-button" onclick="loadPage('toys')">
                 <h1 data-label="toys">toys</h1>
             </div>
-            <div class="wip">
+            <div class="page-button wip">
+                <h1 data-label="soapbox">soapbox</h1>
+            </div>
+            <div class="page-button wip">
                 <h1 data-label="wiki">wiki</h1>
             </div>
             <!-- the rest -->
@@ -95,7 +104,17 @@
         <!-- rss feed -->
         <!-- creative commons -->
     </div>
+    <script src="/res/scripts/gallery.js"></script>
     <script>
+        var currentPage = ""
+        var sidebarPages = Array.from(document.getElementById("side-bar").children).map((tab) => {
+            try {
+                return tab.attributes.onclick.value.match(/'(.+)'/)[1]
+            } catch (error) {
+                return null
+            }
+        })
+
         function loadPage(page) {
             if (page == "") page = "error"
             var target = null
@@ -111,13 +130,12 @@
                     setPageTitle(page.replace("-", " "))
 
                     //add selection effect to sidebar 
-                    if (target) {
-                        if (target.tagName == "H1") target = target.parentElement
-                        target.classList.add("selected")
-                    }
+                    markActive(page)
 
                     //load content
                     document.getElementById("content-area").innerHTML = this.responseText;
+
+                    currentPage=page
 
                 } else {
                     //clear selection
@@ -132,6 +150,8 @@
                     <p>which is kinda weird since you're looking at it right now...</p>
                     `
                     setPageTitle("page not found...", "#f55")
+
+                    currentPage ="404"
                 }
             }
             xhttp.open("GET", `/res/pages/${page}`);
@@ -141,6 +161,15 @@
         function setPageTitle(title, color = "#fff") {
             document.getElementById("page-address").innerHTML = ` > <span style="color:${color};">${title}</span>`
             document.getElementById("title-bar-address").children[0].setAttribute('data-label', `snapps.dev > ${title}`)
+        }
+
+        function markActive(pageName) {
+            try {
+                document.getElementById("side-bar").children[sidebarPages.indexOf(pageName)].classList.add("selected")
+
+            } catch (error) {
+                console.warn(`page '${pageName}' has no associated tab`)
+            }
         }
 
         function clearSelection() {
@@ -158,6 +187,7 @@
         }
 
         var fullscreen = false;
+
         function toggleFullscreen() {
             if (!fullscreen) {
                 document.getElementById("main-window").classList.add("fullscreen")
@@ -169,14 +199,21 @@
             }
         }
 
-        function closeWindow(){
-            if(confirm("are you sure you want close this window?\n\nunsaved work will be lost."))
-            if(confirm("are you *really* sure you want close this window?"))
-            if(confirm("final warning!\n\nyou may regret this!"))
-            document.getElementById("main-window").remove()
+        function closeWindow() {
+            if (confirm("are you sure you want close this window?\n\nunsaved work will be lost."))
+                if (confirm("are you *really* sure you want close this window?"))
+                    if (confirm("final warning!\n\nyou may regret this!"))
+                        document.getElementById("main-window").remove()
         }
 
-        loadPage("about-me")
+        //functions to runn when updating page
+        //for reloading a gallery for example
+        var observer = new MutationObserver(()=>{
+            if(currentPage=="featured") queryGallery();
+        })
+        observer.observe(document.getElementById("content-area"), {childList: true})    
+
+        loadPage("top")
     </script>
 </body>
 
