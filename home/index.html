@@ -67,6 +67,9 @@
                 <h1 data-label="featured!">featured!</h1>
                 <span class="sticker">new!</span>
             </div>
+            <div class="page-button" onclick="loadPage('links')">
+                <h1 data-label="links">links</h1>
+            </div>
             <div class="page-button wip">
                 <h1 data-label="comms">comms</h1>
             </div>
@@ -82,7 +85,7 @@
             <div class="page-button" onclick="loadPage('toys')">
                 <h1 data-label="toys">toys</h1>
             </div>
-            <div class="page-button wip">
+            <div class="page-button" onclick="loadPage('soapbox')">
                 <h1 data-label="soapbox">soapbox</h1>
             </div>
             <div class="page-button wip">
@@ -95,7 +98,17 @@
         <div id="content-area"></div>
 
         <!-- footer -->
-        <div id="footer"></div>
+        <div id="footer">
+
+            <div class="left">RSS</div>
+
+            <div class="center"></div>
+            <div class="right">
+                <img src="/res/img/icon/svg/warning.svg" id="unsaved-warn-icon" title="you have unsaved preferences!" onclick="toggleCookies()">
+                <ui-button title="toggle freaky stuff" onclick="toggleFreaky()">⛔</ui-button>
+            </div>
+        </div>
+
         <!-- settings bar -->
         <!-- js warning -->
         <!-- cookie consent -->
@@ -106,6 +119,8 @@
     </div>
     <script src="/res/scripts/gallery.js"></script>
     <script>
+
+        // --- page functionality
         var currentPage = ""
         var sidebarPages = Array.from(document.getElementById("side-bar").children).map((tab) => {
             try {
@@ -115,27 +130,43 @@
             }
         })
 
-        function loadPage(page) {
-            if (page == "") page = "error"
+        function loadPage(page,addToHistory=true) {
+
+            if(addToHistory){
+                window.history.pushState(page, "",`#${page}`);
+            } else {
+            }
+
+            // dealing with unknown history state
+            if (history.state==null) {
+                // check url hash
+                page=window.location.hash.slice(1)
+            } 
+
+
+            if (page == "") {
+                page = "intro"
+                window.history.replaceState(page, "",`#${page}`);
+            }
+            console.log(`attempting to load page ${page}`)
+            currentPage=page
+
             var target = null
             if (event) target = event.target
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function () {
                 if (this.status == 200) {
-
                     //clear selection
                     clearSelection()
 
                     //set page title
-                    setPageTitle(page.replace("-", " "))
+                    setPageTitle(page.replaceAll("/"," > "))
 
                     //add selection effect to sidebar 
                     markActive(page)
 
                     //load content
                     document.getElementById("content-area").innerHTML = this.responseText;
-
-                    currentPage=page
 
                 } else {
                     //clear selection
@@ -151,7 +182,7 @@
                     `
                     setPageTitle("page not found...", "#f55")
 
-                    currentPage ="404"
+                    currentPage = "404"
                 }
             }
             xhttp.open("GET", `/res/pages/${page}`);
@@ -186,18 +217,126 @@
             document.getElementsByClassName("selected")[0].classList.remove("selected")
         }
 
-        var fullscreen = false;
+        addEventListener("popstate", (event) => {
+            console.log(`current state: ${event.state}`)
+            loadPage(event.state,false) 
+        })
+       
+        
+        // --- preferences functions ---
 
+        var unsavedPref = false;
+        var userPrefs = {
+            "cookies": false,
+            "fullscreen": false,
+            "freaky": false,
+        }
+
+        // cookies
+        userPrefs.cookies = false; // default
+        function toggleCookies() {
+            if (!userPrefs.cookies) {
+                if(!confirm("this setting will enable cookies to be saved. this will allow this site remember your preferences. they will be remebered for 30 days since you last visited this homepage.\n\nenable cookies?"))return
+                document.getElementById("main-window").classList.add("cookies")
+                userPrefs.cookies = true
+            } else {
+                document.getElementById("main-window").classList.remove("cookies")
+                userPrefs.cookies = false
+            }
+            unsavedPref = true;
+            savePreferences()
+        }
+
+        // fullscreen
+        userPrefs.fullscreen = false; // default
         function toggleFullscreen() {
-            if (!fullscreen) {
+            if (!userPrefs.fullscreen) {
                 document.getElementById("main-window").classList.add("fullscreen")
-                fullscreen = true
+                userPrefs.fullscreen = true
             } else {
                 document.getElementById("main-window").classList.remove("fullscreen")
-                fullscreen = false
+                userPrefs.fullscreen = false
+            }
+            unsavedPref = true;
+            savePreferences()
+        }
 
+        // freaky
+        userPrefs.freaky = false; // default
+        function toggleFreaky() {
+            if (!userPrefs.freaky) {
+                if (!confirm(
+                        `this will toggle on 'freaky' mode!\nyou may stumble upon something weird and/or wicked!\nlike vore, or uh... mainly vore but who knows!`
+                    )) return
+                document.getElementById("main-window").classList.add("freaky")
+                userPrefs.freaky = true
+            } else {
+                document.getElementById("main-window").classList.remove("freaky")
+                userPrefs.freaky = false
+            }
+            unsavedPref = true;
+            savePreferences()
+        }
+
+        function loadPrefs(){
+            const prefsFound = loadCookie("userPrefs")
+            if(prefsFound) userPrefs = prefsFound
+            checkPrefs()
+            savePreferences()
+        }
+
+        // check prefs
+        function checkPrefs(){
+            if(userPrefs.freaky) document.getElementById("main-window").classList.add("freaky")
+            if(userPrefs.fullscreen) document.getElementById("main-window").classList.add("fullscreen")
+        }
+
+        // --- cookies n stuff ---
+
+        function createCookie(name, data) {
+            name=name.replaceAll(" ","_")
+            document.cookie = `${name}=${data}; expires=${(new Date(Date.now() + 2592000000)).toUTCString()}`;
+            console.log(`new cookie '${name}' has been created!`)
+        }
+
+
+        // cookie data should be in a json form
+        function loadCookie(name) {
+            name=name.replaceAll(" ","_")
+            data = null
+            const match = new RegExp(`${name}=([^;]+)(?:;|$)`);
+            console.log("checking for existing preferences...")
+            try {
+                data = document.cookie.match(match)[1]
+                console.log("cookie found!")
+
+                try {
+                    data = JSON.parse(data)
+                } catch (error) {
+                    
+                }
+                return data
+            } catch (error) {
+                console.warn("cookie not found!")
+            
             }
         }
+
+        function savePreferences() {
+            if (userPrefs.cookies) {
+                console.log("saving preferences to cookies")
+                createCookie("userPrefs", JSON.stringify(userPrefs))
+                unsavedPref = false;
+                document.getElementById("unsaved-warn-icon").style.display="none"
+            }
+            
+            if (unsavedPref){
+                document.getElementById("unsaved-warn-icon").style.display="block"
+            }
+            
+        }
+
+        // --- silly functions ---
 
         function closeWindow() {
             if (confirm("are you sure you want close this window?\n\nunsaved work will be lost."))
@@ -208,12 +347,18 @@
 
         //functions to runn when updating page
         //for reloading a gallery for example
-        var observer = new MutationObserver(()=>{
-            if(currentPage=="featured") queryGallery();
+        var observer = new MutationObserver(() => {
+            if (currentPage == "featured") queryGallery();
         })
-        observer.observe(document.getElementById("content-area"), {childList: true})    
+        observer.observe(document.getElementById("content-area"), {
+            childList: true
+        })
 
-        loadPage("top")
+        // to run on load
+        loadPrefs()
+        history.state ? loadPage(history.state,false) : loadPage(window.location.hash.slice(1),true)
+        
+
     </script>
 </body>
 

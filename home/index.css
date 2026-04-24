@@ -130,16 +130,20 @@ body {
     overflow: hidden;
 }
 
-#side-bar>*:nth-child(3n+1) {
+#side-bar>*:nth-child(3n+1 of :not(.freaky)) {
     --color: var(--color-cyan);
 }
 
-#side-bar>*:nth-child(3n+2) {
+#side-bar>*:nth-child(3n+2  of :not(.freaky)) {
     --color: var(--color-magenta);
 }
 
-#side-bar>*:nth-child(3n+0) {
+#side-bar>*:nth-child(3n+0 of :not(.freaky)) {
     --color: var(--color-yellow);
+}
+
+#side-bar>*.freaky{ 
+    --color: #9f0
 }
 
 #side-bar>*:last-child {
@@ -380,6 +384,34 @@ a.button:hover {
     background-color: var(--color);
 }
 
+
+a.big {
+    padding: .25em;
+    margin: 4px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    background-color: transparent;
+    transition: .2s;
+}
+
+a.big h1 {
+    font-size: 1.5em;
+    text-decoration-color: var(--color);
+}
+
+a.big:nth-of-type(3n+1):hover {
+    background-color: rgb(from var(--color-cyan)r g b / .4);
+}
+
+a.big:nth-of-type(3n+2):hover {
+    background-color: rgb(from var(--color-magenta)r g b / .4);
+}
+
+a.big:nth-of-type(3n+3):hover {
+    background-color: rgb(from var(--color-yellow)r g b / .4);
+}
+
 span[title] {
     text-decoration: underline;
     text-decoration-style: dotted;
@@ -396,6 +428,46 @@ span[title] {
     border: solid 1px var(--border-color);
     background-color: rgb(from var(--color-background-2) r g b / .75);
     backdrop-filter: blur(5px);
+}
+
+
+#footer > div {
+    width: 100%;
+    display: flex;
+    margin: 0 12px;
+    height: 100%;
+    align-items: center;
+}
+
+#footer > div > * {
+    margin: 2px;
+    width: 24px;
+    height: 24px;
+}
+
+#footer > div.right > * {
+    margin-right: 0px;
+}
+
+#footer > div.left > * {
+    margin-left: 0px;
+}
+
+
+ui-button{
+    transition: .2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+    background-color: #fff4;
+    border-radius: 12px; 
+    cursor: pointer;
+    filter: grayscale(1);
+}
+
+ui-button:hover {
+        filter: grayscale(0);
 }
 
 /* general style overrides*/
@@ -440,7 +512,8 @@ img.alias {
     transition: .2s;
 }
 
-.page-button:hover .sticker,.page-button.selected .sticker{
+.page-button:hover .sticker,
+.page-button.selected .sticker {
     scale: 1.1;
     transform: translateX(4px) translateY(-1px);
 }
@@ -468,4 +541,16 @@ img.alias {
     100% {
         rotate: 17deg;
     }
+}
+
+#unsaved-warn-icon{
+    display: none;
+}
+
+#main-window *.freaky {
+    display: none;
+}
+
+#main-window.freaky *.freaky {
+    display:inherit;
 }
