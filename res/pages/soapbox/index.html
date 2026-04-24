@@ -1,0 +1,116 @@
+<div id="page-bg">
+    <h1 id="page-title" data-label="soapbox">soapbox</h1>
+</div>
+<p>[there's gonna be an image here one day]</p>
+<hr>
+<p>welcome to my silly soapbox of yapping!</p>
+<p>here, i ramble about snakes and synths, servers and software, sniddy and snass.</p>
+<p>below is a of my most recent list entries.</p>
+<div id="entry-list">
+</div>
+<style>
+    .entry:nth-child(3n+1) {
+        --color: var(--color-cyan)
+    }
+
+    .entry:nth-child(3n+2) {
+        --color: var(--color-magenta)
+    }
+
+    .entry:nth-child(3n+3) {
+        --color: var(--color-yellow)
+    }
+
+    .entry:nth-child(1) {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .entry:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+
+
+    .entry {
+        position: relative;
+        margin: 0 auto;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        background-color: hsl(from var(--color) h s l / .2);
+        text-align: left;
+        padding: 8px 16px;
+        transition: .2s;
+    }
+
+    .entry:hover {
+        background-color: hsl(from var(--color) h s l / .4);
+
+    }
+
+    .entry .title {
+        border-bottom: solid 3px;
+        font-size: 1.3em;
+        border-image: linear-gradient(90deg, var(--color), transparent) 1;
+        margin-bottom: 4px;
+    }
+
+    .entry .metadata {
+        position: relative;
+        height: 0px;
+        transition: .2s;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .entry:hover .metadata {
+        height: 120px;
+        overflow: hidden;
+
+    }
+
+    .entry .desc {
+        height: 100%;
+        overflow: hidden;
+
+    }
+
+    .entry .date{
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: .70em;
+    }
+
+     .date::after{
+        content: " UTC";
+     }
+
+    .entry .info {
+        margin-top: 4px;
+        padding: 4px 0;
+    }
+
+    .entry .info>* {
+        margin: 0 2px;
+        background-color: var(--color-background-1);
+        border-radius: 8px;
+        padding: 2px 8px;
+    }
+
+    .entry .info>*:nth-child(1)::before {
+        content: '#';
+    }
+
+    .entry .info>*:nth-child(2)::before {
+        content: '+';
+    }
+    .readNow{
+        width: max-content;
+        margin-left: auto;
+        background-color: var(--color-background-1);
+        padding: 2px 8px;
+        border-radius: 8px;
+
+    }
+</style>

@@ -34,6 +34,7 @@
 
 <body class="dot-bg" style="background-color: #000;">
     <script src="/res/scripts/gallery.js"></script>
+    <script src="/res/scripts/blog.js"></script>
 
 
     <div id="main-window">
@@ -184,6 +185,7 @@
 
                     currentPage = "404"
                 }
+                document.title = "#"+currentPage
             }
             xhttp.open("GET", `/res/pages/${page}`);
             xhttp.send();
@@ -349,6 +351,7 @@
         //for reloading a gallery for example
         var observer = new MutationObserver(() => {
             if (currentPage == "featured") queryGallery();
+            if (currentPage == "soapbox") fetchBlogPosts();
         })
         observer.observe(document.getElementById("content-area"), {
             childList: true

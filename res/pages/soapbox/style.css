@@ -1,0 +1,85 @@
+article {
+    position: relative;
+    margin: auto;
+    text-align: left;
+    width: 500px;
+}
+
+.metadata {
+    border-bottom: solid 3px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-size: 1.5em;
+}
+
+.info>* {
+    margin: 0 2px;
+
+}
+
+.date {
+    position: absolute;
+    right: 0;
+    top: 0
+}
+
+.date::after {
+    content: ' UTC';
+}
+
+.tangent {
+    text-align: center;
+    width: 100%;
+}
+
+article p.tangent.end {
+    border-top: solid 1px;
+
+}
+
+article p.tangent.start {
+border-bottom: solid 1px;
+}
+
+.convo {
+    margin-top: 44px !important;
+    position: relative;
+    --bg: var(--color-text-1);
+    --text: var(--color-background-2);
+    padding: 12px 8px;
+    background-color: var(--bg);
+    color: var(--text);
+    width: max-content;
+    max-width: 500px;
+    border: 1px solid var(--bg2);
+    border-radius: 0 16px 16px 16px;
+}
+
+.convo::before {
+    position: absolute;
+    background-color: var(--bg);
+    padding: 6px 8px;
+    top: -28px;
+    left: 0;
+    content: var(--name);
+        border-radius: 16px 16px 0 0;
+
+}
+
+.convo.snapps {
+    --name: "snapps:";
+    font-family: monospace;
+    --bg: #4f4f4f;
+    --text: #a1d54c;
+}
+
+.convo.savak {
+    --name: "Savak:";
+    font-family: cursive;
+    --bg: #9474a1;
+    --text: #fff;
+}
+
