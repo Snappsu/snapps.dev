@@ -8,19 +8,18 @@
 <br>
 <br>
 <br>
-<div style="font-size: 1.5em;">
-    <p>i'm that <span style="font-family: octosquare;">snapps</span> person you keep hearing about.<br><sub>they/them if  anyone asks.</sub></p>
+<div id="content" style="font-size: 1.5em;">
+    <p>i'm that <span style="font-family: octosquare;">snapps</span> person you keep hearing about.<br><sub>they/them if
+            anyone asks.</sub></p>
     <!-- contact -->
-    <details>
-        <summary>
-            <h1>contact</h1>
-        </summary>
-    </details>
+    <div id="contact-box">
+        <span onclick="setClipboard('@snapps:sniddy.zone')">martix</span>
+        <span onclick="setClipboard('@snapps')">discord</span>
+        <span onclick="setClipboard('lead.dumbass@snapps.dev')">email</span>
+     
+    </div>
     <!-- about me text -->
-    <details>
-        <summary>
-            <h1>the long</h1>
-        </summary>
+
         <p>if i had to take a guess, you probably know me as the scalie propaganda peddler that draws snakes and
             other creature with <b>huge milky boobs</b>... or <b>fat honkin' butts</b>... or <b>big eggy
                 bellies</b>... or other large assets (i like things big, i can't help it <img class="emote"
@@ -53,14 +52,54 @@
             <span>vrchat</span>
             <span>swimming</span>
         </div>
-    </details>
-    <!-- contact -->
-    <details>
-        <summary>
-            <h1>funny buttons</h1>
-        </summary>
-        <p></p>
-    </details>
     <sub>note to future me: replace these with buttons</sub><br>
     <p>anyways... go <a onclick="loadPage('featured')">check out this cool stuff!</a></p>
 </div>
+<style>
+#content {
+    width: 600px;
+    margin: auto;
+}
+#contact-box{
+    display: flex;
+    justify-content: space-around;
+}
+
+#contact-box > span{
+    position: relative;
+    background-color: var(--color-background-2);
+    text-shadow: 0 0 2px #000;
+    padding: 4px;
+    width: 100%;
+    margin: 8px;
+    margin-bottom: 1.6em;
+    border-radius: 8px;
+    transition: .2s;
+}
+
+#contact-box > span::after{
+    content: '(click to copy)';
+    position: absolute; 
+    opacity: 0; 
+    font-size: .65em;
+    left: 0;
+    bottom: 0em;
+    transition: .2s;
+    width: 100%;
+}
+
+#contact-box > span:hover::after{
+    opacity: .3; 
+    bottom: -1.75em;
+}
+
+#contact-box > span:hover:nth-child(1){
+    background-color: var(--color-cyan);
+}
+#contact-box > span:hover:nth-child(2){
+    background-color: var(--color-magenta);
+}
+#contact-box > span:hover:nth-child(3){
+    background-color: var(--color-yellow);
+}
+</style>
