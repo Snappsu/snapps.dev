@@ -7,7 +7,7 @@ class Post {
     link;
     src;
     constructor(desc, link, src) {
-        console.log(desc)
+        //console.log(desc)
         this.desc = desc
         if (this.desc == "" || this.desc == null) this.desc = "[no description provided]"
         this.link = link
