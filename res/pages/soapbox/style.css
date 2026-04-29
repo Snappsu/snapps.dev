@@ -83,3 +83,59 @@ border-bottom: solid 1px;
     --text: #fff;
 }
 
+.song-btn{
+    background-image: url(/res/img/icon/svg/play.svg);
+    background-blend-mode: overlay;
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+    background-color: rgb(from var(--color-cyan) r g b / .3);
+    margin-bottom: 1em;
+      background-size: 86px;
+  animation: songButtonBoppin 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) infinite;
+  cursor: pointer;
+}
+
+.song-btn span:nth-child(1){
+    transition: .2s;
+    font-size: 2em;
+    margin-left: -.65em;
+    font-family: octosquare;
+
+
+}
+.song-btn span:nth-child(1)::before{
+    transition: .2s;
+    opacity: 0;
+    content: '> ';
+}
+
+.song-btn span:nth-child(1):hover{
+    font-size: 2em;
+    margin-left: 0;
+    font-family: octosquare;
+
+
+}
+.song-btn span:nth-child(1):hover:before{
+    opacity: 1;
+}
+
+@keyframes songButtonBoppin {
+    0%{background-position-x: 0;}
+    100%{background-position-x: 86px;}
+    
+}
+
+details{
+    border-radius: 8px;
+    margin-bottom: 1em;
+    padding: .5em;
+    border: solid 1px var(--border-color);
+}
+summary {
+    text-decoration: underline;
+    font-size: 1.5em;
+}
