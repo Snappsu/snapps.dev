@@ -46,10 +46,10 @@
                         style="color:var(--color-yellow)">v</span><span id="page-address"></span></h1>
             </div>
             <div class="right">
-                <img class="ui" style="--color:var(--color-cyan)" src="/res/img/icon/svg/fullscreen.svg"
-                    onclick="toggleFullscreen()">
-                <img class="ui" style="--color:var(--color-magenta)" src="/res/img/icon/svg/close.svg"
-                    onclick="closeWindow()">
+                <div class="ui"><img style="--color:var(--color-cyan)" src="/res/img/icon/svg/fullscreen.svg"
+                        onclick="toggleFullscreen()"></div>
+                <div class="ui"><img  style="--color:var(--color-magenta)" src="/res/img/icon/svg/close.svg"
+                        onclick="closeWindow()"></div>
             </div>
         </div>
 
@@ -101,14 +101,38 @@
         <!-- footer -->
         <div id="footer">
 
-            <div class="left"><a href="https://feed.snapps.dev"><img src="/res/img/icon/svg/rss.svg"
+            <div class="left"><a class="ui" id="rss" href="https://feed.snapps.dev"><img src="/res/img/icon/svg/rss.svg"
                         title="RSS feed"></a></div>
 
-            <div class="center"></div>
+            <div class="center">
+                <div id="music-player">
+                    <div class="left">
+                        <div id="music-player-playback" onclick="handlePlayback()"><img src="/res/img/icon/svg/play.svg"></div>
+                        <div id="music-player-stop" onclick="stopPlaying()"><img src="/res/img/icon/svg/stop.svg"></div>
+                        <div id="music-player-stop" onclick="playRandom()"><img src="/res/img/icon/svg/shuffle.svg"></div>
+                    </div>
+                    <div class="center">
+                        <div id="music-player-bar-bg">
+                            <div id="music-player-bar-current"></div>
+                            <span id="music-player-label"></span>
+                            <span id="music-player-bar-time-now"></span>
+                            <span id="music-player-bar-loop-count"></span>
+                            <span id="music-player-bar-time-end"></span>
+                        </div>
+                    </div>
+
+                    <div class="right">
+                        <div id="music-player-volume"><img src="/res/img/icon/svg/volume.svg">
+                            <div id="music-player-volume-cont"><input type="range" value="20" min="0" max="100"
+                                    orient="vertical" onmouseup="saveVolumeChange()" /></div>
+                        </div>
+                         
+                    </div>
+                </div>
+            </div>
             <div class="right">
-                <img src="/res/img/icon/svg/warning.svg" id="unsaved-warn-icon" title="you have unsaved preferences!"
-                    onclick="toggleCookies()">
-                <ui-button title="toggle freaky stuff" onclick="toggleFreaky()">⛔</ui-button>
+                <div class="ui" title="toggle freaky stuff" id="freak" onclick="toggleFreaky()"><img src="/res/img/icon/svg/spiral.svg"></div>
+                <div class="ui" id="unsaved-warn-icon"  title="you have unsaved preferences!"><img src="/res/img/icon/svg/warning.svg" onclick="toggleCookies()"></div>
             </div>
         </div>
 
@@ -120,6 +144,7 @@
         <!-- rss feed -->
         <!-- creative commons -->
     </div>
+    <script src="/res/scripts/brstm.js"></script>
     <script src="/res/scripts/gallery.js"></script>
     <script>
         // --- page functionality
@@ -232,6 +257,8 @@
             "cookies": false,
             "fullscreen": false,
             "freaky": false,
+            "loopMusic": true,
+            "volume": .2,
         }
 
         // cookies
@@ -240,7 +267,7 @@
             if (!userPrefs.cookies) {
                 if (!confirm(
                         "this setting will enable cookies to be saved. this will allow this site remember your preferences. they will be remebered for 30 days since you last visited this homepage.\n\nenable cookies?"
-                        )) return
+                    )) return
                 document.getElementById("main-window").classList.add("cookies")
                 userPrefs.cookies = true
             } else {
@@ -278,7 +305,7 @@
                 document.getElementById("main-window").classList.remove("freaky")
                 userPrefs.freaky = false
             }
-            unsavedPref = true;
+            
             savePreferences()
         }
 
@@ -293,6 +320,8 @@
         function checkPrefs() {
             if (userPrefs.freaky) document.getElementById("main-window").classList.add("freaky")
             if (userPrefs.fullscreen) document.getElementById("main-window").classList.add("fullscreen")
+            if (userPrefs.volume) document.getElementById("music-player-volume-cont").children[0].value = userPrefs
+                .volume * 100
         }
 
         // --- cookies n stuff ---
@@ -327,6 +356,7 @@
         }
 
         function savePreferences() {
+            unsavedPref = true;
             if (userPrefs.cookies) {
                 console.log("saving preferences to cookies")
                 createCookie("userPrefs", JSON.stringify(userPrefs))
@@ -347,6 +377,158 @@
                 if (confirm("are you *really* sure you want close this window?"))
                     if (confirm("final warning!\n\nyou may regret this!"))
                         document.getElementById("main-window").remove()
+        }
+
+        // --- music player functions
+        const DEFAULT_SONG="Hourglass Meadow"
+        const RANDOM_SONG_POOL=["10444","113524","30346","96248","Hourglass Meadow"]
+        const CHILL_SONG_POOL=[]
+        const LAST_SONG_DEPTH=3
+        var lastSongPool=[]
+        
+        var nowPlaying = null
+        //template: "id":{title:"",game:""},
+        
+        const musicLibrary = {
+            "22154": {
+                title: "File Select",
+                game: "Mario & Luigi: Superstar Saga"
+            },
+            "52560": {
+                title: "Tranquility",
+                game: "9 Hours, 9 Persons, 9 Doors"
+            },
+            "73499": {
+                title: "Geothermal",
+                game: "Cave Story"
+            },
+            "10444": {
+                title: "Central City",
+                game: "Sonic Battle",
+            },
+            "113524": {
+                title: "TV WORLD",
+                game: "DELTARUNE Chapters 3+4",
+            },
+            "60570": {
+                title: "You've Come Far (Coffee Break)",
+                game: "Earthbound",
+            },
+            "30346": {
+                title: "Disco Kid (Pause)",
+                game: "Punch-Out!! (Wii)",
+            },"96248": {
+                title: "WELCOME TO THE CITY",
+                game: "DELTARUNE Chapter 2",
+            },"Hourglass Meadow": {
+                title: "Temptation Stairway",
+                game: "Hourglass Meadow",
+            },
+        }
+
+        function handlePlayback() {
+            if (nowPlaying == null) {
+                    playSong(DEFAULT_SONG);
+
+
+                
+
+            } else {
+                window.player.togglePlayback()
+
+            }
+
+        }
+
+        function saveVolumeChange() {
+            userPrefs.volume = document.getElementById("music-player-volume-cont").children[0].value / 100
+            savePreferences()
+        }
+
+        function addToLastPlayed(song) {
+            if(lastSongPool.unshift(song) > LAST_SONG_DEPTH) lastSongPool.pop()
+        }
+
+        function playSong(id) {
+            if (userPrefs.volume == null) userPrefs.volume = .2
+            savePreferences()
+            window.player.volume.set(userPrefs.volume)
+
+            nowPlaying = musicLibrary[id]
+            addToLastPlayed(id)
+            window.player.play(`/res/music/${id}.brstm`)
+        }
+
+        function playRandom(pl=null){
+            if (pl==null) pl = RANDOM_SONG_POOL
+
+            var randomSong =  pl[Math.floor(Math.random() * pl.length)];
+            do {
+                randomSong =  pl[Math.floor(Math.random() * pl.length)];
+            } while (lastSongPool.includes(randomSong));
+            playSong(randomSong);
+        }
+
+        function toggleLooping() {
+            if (userPrefs.loopMusic == null) userPrefs.loopMusic = true
+            console.log(userPrefs.loopMusic)
+            if (userPrefs.loopMusic) {
+                window.player.setLoop(false);
+                userPrefs.loopMusic = false
+            } else {
+                window.player.setLoop(true);
+                userPrefs.loopMusic = true
+            }
+            updateMusicGUI()
+            savePreferences()
+        }
+
+        function updateMusicGUI() {
+
+            //current pos
+            const currentPosition = window.player.progress.currentSample / window.player.progress.totalSamples
+            document.getElementById("music-player-bar-current").style.width = `calc(100% * ${currentPosition})`
+
+            //loop area
+            const loopPos = window.player.metadata.loopLocation / window.player.progress.totalSamples * 100;
+            if (window.player.looping) {
+                document.getElementById("music-player-bar-bg").style.backgroundImage =
+                    `linear-gradient(90deg, rgb(from var(--color-magenta) r g b /.25) calc(${loopPos}%), transparent calc(${loopPos}% + 20px))`
+                document.getElementById("music-player-bar-loop-count").innerText = `loops: ${window.player.loops}`
+            } else {
+                document.getElementById("music-player-bar-bg").style.backgroundImage = "unset"
+                document.getElementById("music-player-bar-loop-count").innerText = ``
+            }
+
+            //current and end time
+            const currentTime = new Date(Math.ceil(window.player.progress.currentSample / window.player.metadata
+                .sampleRate) * 1000).toISOString().substring(14, 19)
+            const endTime = new Date(Math.ceil(window.player.progress.totalSamples / window.player.metadata
+                .sampleRate) * 1000).toISOString().substring(14, 19)
+            document.getElementById("music-player-bar-time-now").innerText = currentTime
+            document.getElementById("music-player-bar-time-end").innerText = endTime
+
+            //play pause
+            if (window.player.paused) {
+                document.getElementById("music-player-playback").children[0].src = "/res/img/icon/svg/play.svg"
+            } else {
+                document.getElementById("music-player-playback").children[0].src = "/res/img/icon/svg/pause.svg"
+            }
+
+            //volume
+            window.player.volume.set(document.getElementById("music-player-volume-cont").children[0].value / 100)
+
+            // music label
+            nowPlaying ? document.getElementById("music-player-label").innerText =
+                `${nowPlaying.game} - ${nowPlaying.title}` : document.getElementById("music-player-label").innerText =
+                ""
+
+        }
+
+        function stopPlaying() {
+            nowPlaying = null
+            window.player.togglePlayback(true)
+            window.player.seek(0)
         }
 
         // --- general functions ---
@@ -370,6 +552,7 @@
         })
 
         // to run on load
+        window.player.setOnUpdate(updateMusicGUI)
         loadPrefs()
         history.state ? loadPage(history.state, false) : loadPage(window.location.hash.slice(1), true)
     </script>
