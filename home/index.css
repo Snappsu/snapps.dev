@@ -90,11 +90,11 @@ body {
     padding: 4px;
     border-radius: 8px;
     transition: .2s;
-    background-color:transparent;
+    background-color: transparent;
 }
 
 .ui:hover {
-background-color: rgb(from var(--color-text-1) r g b / .3);
+    background-color: rgb(from var(--color-text-1) r g b / .3);
 }
 
 
@@ -674,7 +674,7 @@ img.alias {
 #music-player-volume:hover #music-player-volume-cont {
     margin-bottom: 0px;
     opacity: 1;
-    height: 100px; 
+    height: 100px;
     transform: translateY(0);
     padding-bottom: 12px;
 
@@ -699,14 +699,70 @@ img.alias {
     background-color: rgb(from var(--color-text-1) r g b / .3);
 }
 
-.ui#rss:hover{background-color: #eb7c20;}
-.ui#freak:hover{background-color: #20eb3b !important; }
+.ui#rss:hover {
+    background-color: #eb7c20;
+}
 
-.freaky .ui#freak {background-color: rgb(from #20eb3b r g b / .3);}
+.ui#freak:hover {
+    background-color: #20eb3b !important;
+}
+
+.freaky .ui#freak {
+    background-color: rgb(from #20eb3b r g b / .3);
+}
+
+#settings-window:open {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: #0006;
+    backdrop-filter: blur(3px);
+    z-index: 10;
+    
+}
+
+#settings-window>div {
+    min-width: 300px;
+    background-color: var(--color-background-2);
+    color: var(--color-text-1);
+    padding: 12px 24px;  
+    border-radius: 12px;
+
+}
+
+.setting-section {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    
+    padding: 12px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    background-color: var(--color-background-1);
+    border-radius: 12px;
+}
+
+.setting-section::before {
+    background-color: var(--color-background-1);
+    font-family: octosquare;
+    font-size: 1.2em;
+    padding: 4px 8px;
+    border-radius: 12px;
+    position: absolute;
+    top: -.8em;
+    content: attr(data-label);
+}
 
 @media (prefers-color-scheme: dark) {
     img[src$=".svg"i] {
         filter: invert(1) drop-shadow(0 0 2px #000);
     }
 }
-
