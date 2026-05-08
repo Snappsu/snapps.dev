@@ -113,7 +113,7 @@ body {
 
 .hero h1.subtitle {
     position: absolute;
-    top: calc(4vh + min(100px,12vmin) );
+    top: calc(40px + min(100px,12vmin) );
     font-size: calc(min(100px,12vmin) * .4);
     left: 50%;
     z-index: 1;
@@ -311,8 +311,26 @@ h1 {
     height: 33px;
     background-color: var(--color-background-2);
     display: flex;
-    justify-content: center;
     z-index: 2;
+    overflow-y: hidden;
+    overflow-x: scroll;
+      scrollbar-width: none;
+        -ms-overflow-style: none;
+
+
+}
+
+/* For Chrome, Safari, and newer versions of Edge */
+.header::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.header {
+}
+
+/* For Internet Explorer and older Edge */
+.element {
 }
 
 img {

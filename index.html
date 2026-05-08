@@ -35,6 +35,8 @@
 <body class="dot-bg">
 
     <div class="header border">
+        <a style="cursor: pointer;" onclick='sendButtonToClipboard()'><img class="button"
+                src="https://cdn.snapps.dev/images/button.gif" alt="snapps.dev!" title="you're already here silly!"></a>
         <a href="https://honkbird.neocities.org/"><img class="button" src="/res/img/buttons/oomf/honk.webp" title="a very lovely oomf who makes doodles i adore!"></a>
         <a href="https://stellers.gay/"><img class="button" src="/res/img/buttons/oomf/mark.png"
                 title="the fluffiest, gayest birb this side of the net!"></a>
@@ -43,8 +45,7 @@
         <a href="https://synth.download"><img class="button"
                 src="https://synth.download/assets/buttons/synth.download.svg" alt="Synth.Download!"
                 title="you wouldn't download a synth..."></a>
-        <a style="cursor: pointer;" onclick='sendButtonToClipboard()'><img class="button"
-                src="https://cdn.snapps.dev/images/button.gif" alt="snapps.dev!" title="you're already here silly!"></a>
+        
     </div>
 
     <div class="hero">
@@ -85,8 +86,7 @@
                             <span>best place to reach me</span>
                         </a>
                         <a>
-                            <h1 data-label="discord" onclick="sendToClipboard('snapps')">discord</h1><span>i also check
-                                here</span>
+                            <h1 data-label="discord" onclick="sendToClipboard('snapps')">discord</h1><span>because the one above doesn't work</span>
                         </a>
                         <a>
                             <h1 data-label="email" onclick="sendToClipboard('lead.dumbass@snapps.dev')">email</h1>
@@ -149,7 +149,7 @@
             }
 
             async function sendButtonToClipboard() {
-                if (confirm("This will copy the bare minimum HTML needed to embed my button to your clipboard")) {
+                if (confirm("this will copy the bare minimum HTML needed to embed my button to your clipboard!")) {
                     const type = "text/plain";
                     const clipboardItemData = {
                         [type]: `<a href="https://snapps.dev"><img src="https://cdn.snapps.dev/images/button.gif" alt="visit snapps.dev!"></a>`,
