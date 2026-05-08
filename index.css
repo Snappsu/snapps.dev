@@ -11,8 +11,7 @@ body {
 
 .hero {
     box-sizing: border-box;
-    height: 65%;
-    min-height: 600px;
+    height: min(650px,90vw);
     width: 100%;
     position: relative;
     padding: 0 2em;
@@ -28,15 +27,15 @@ body {
     image-rendering: pixelated;
     position: absolute;
     bottom: 0;
-    min-height: 512px;
     max-height: 512px;
-
+    width: 90vw;
     transform-origin: bottom;
     transition: .25s;
     transition-timing-function: ease-out;
 }
 
 .hero-image img {
+    object-fit: contain;
     position: relative;
 }
 
@@ -85,7 +84,7 @@ body {
 .hero h1.title {
     position: absolute;
     top: 30px;
-    font-size: 100px;
+    font-size: min(100px,12vmin);
     margin: auto;
     z-index: 1;
     transition: .2s;
@@ -114,8 +113,8 @@ body {
 
 .hero h1.subtitle {
     position: absolute;
-    top: 140px;
-    font-size: 40px;
+    top: calc(4vh + min(100px,12vmin) );
+    font-size: calc(min(100px,12vmin) * .4);
     left: 50%;
     z-index: 1;
     transition: .2s;
@@ -326,10 +325,11 @@ img {
 
 
 @media only screen and (max-width: 1200px) {
+    /*
     .hero {
         height: 650px;
     }
-
+*/
     .container {
         flex-direction: column;
         justify-content: flex-start;
