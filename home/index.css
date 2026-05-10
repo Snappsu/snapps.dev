@@ -244,13 +244,14 @@ body {
 #content-area {
     grid-area: content;
 
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     box-sizing: border-box;
     border-right: solid 1px var(--border-color);
     background-color: rgb(from var(--color-background-1) r g b / .90);
     backdrop-filter: blur(5px);
     padding: 8px 16px;
+    padding-top: 0;
 
 }
 
@@ -765,4 +766,14 @@ img.alias {
     img[src$=".svg"i] {
         filter: invert(1) drop-shadow(0 0 2px #000);
     }
+}
+
+*{
+      scrollbar-color: var(--border-color) #0000;
+      transition: scrollbar-color .1s; 
+
+}
+
+*:hover{
+      scrollbar-color: var(--color-cyan) #0000;
 }

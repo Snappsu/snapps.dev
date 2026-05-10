@@ -5,8 +5,36 @@
 <hr>
 <p>welcome to my silly soapbox of yapping!</p>
 <p>here, i ramble about snakes and synths, servers and software, sniddy and snass.</p>
-<p>if you would like to stay up-to-date with my postings consider subscribing to my <a target="_blank" href="https://feed.snapps.dev/">rss feed</a>.</p>
+<p>if you would like to stay up-to-date with my postings consider subscribing to my <a target="_blank"
+        href="https://feed.snapps.dev/">rss feed</a>.</p>
 <div id="entry-list">
+    <div class="entry"><span class="title" style="order: 1;">Boogie to the BPM</span>
+        <div style="order: 2;" class="metadata"><span class="desc" style="order: 1;">Who could've guessed that animating
+                a music video would involve doing some math and reading?</span><span class="info"
+                style="order: 3;"><span>experiments</span><span>anim</span><span>art</span><span>technical</span><span>tuto</span></span><a class="readNow"
+                style="order: 2;" onclick="loadPage('soapbox/bpm-and-fps')">Read Now!</a></div><span
+            class="date">tbd</span>
+    </div>
+    <div class="entry"><span class="title" style="order: 1;">Checkpoint 1 - The First One</span>
+        <div style="order: 2;" class="metadata"><span class="desc" style="order: 1;">I've decided to periodically
+                document and share what I'm struggling with. Starting now!</span><span class="info"
+                style="order: 3;"><span>checkpoints</span><span>self-reflection</span></span><a class="readNow"
+                style="order: 2;" onclick="loadPage('soapbox/ckpt-1')">Read Now!</a></div><span
+            class="date">3-29-2026</span>
+    </div>
+    <div class="entry"><span class="title" style="order: 1;">Vore, Por Favor</span>
+        <div style="order: 2;" class="metadata"><span class="desc" style="order: 1;">Yeah, I like vore... But hear me
+                out!</span><span class="info" style="order: 3;"><span>personal</span><span>nsfw</span></span><a
+                class="readNow" style="order: 2;" onclick="loadPage('soapbox/vore-por-favor')">Read Now!</a>
+        </div><span class="date">3-24-2026</span>
+    </div>
+    <div class="entry"><span class="title" style="order: 1;">Snapps the Synth vs. Snapps the Idea</span>
+        <div style="order: 2;" class="metadata"><span class="desc" style="order: 1;">I discuss the my perception of
+                myself and the disconnect I have with my sona.</span><span class="info"
+                style="order: 3;"><span>personal</span><span>self-reflection</span></span><a class="readNow"
+                style="order: 2;" onclick="loadPage('soapbox/snapps-vs-snapps')">Read Now!</a></div><span
+            class="date">3-23-2026</span>
+    </div>
 </div>
 <style>
     .entry:nth-child(3n+1) {
@@ -75,16 +103,16 @@
 
     }
 
-    .entry .date{
+    .entry .date {
         position: absolute;
         top: 8px;
         right: 12px;
         font-size: .70em;
     }
 
-     .date::after{
+    .date::after {
         content: " ";
-     }
+    }
 
     .entry .info {
         margin-top: 4px;
@@ -102,10 +130,11 @@
         content: '#';
     }
 
-    .entry .info>*:nth-child(2)::before {
+    .entry .info>*:nth-child(n+2)::before {
         content: '+';
     }
-    .readNow{
+
+    .readNow {
         width: max-content;
         margin-left: auto;
         background-color: var(--color-background-1);

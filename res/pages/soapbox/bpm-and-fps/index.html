@@ -1,0 +1,196 @@
+<head>
+    <link rel="stylesheet" href="/res/pages/soapbox/style.css">
+</head>
+<nav>
+    <a onclick="loadPage('soapbox')">return to shelf</a>
+</nav>
+<article>
+    <div class="metadata">
+        <span class="title">Boogie to the BPM</span>
+        <div class="info">
+            <span>#experiments</span><span>+anim</span><span>+art</span><span>+technical</span><span>+tuto</span></div>
+        <span class="date">tbd</span>
+    </div>
+    <p>
+        It's been a dream of mine to animate a music video.<br>
+        As you may understand, that's a task with many hurdles.<br>
+        I knew this from the start, but I thought I could get over at least three hurdles before I hit an art block or
+        something.<br>
+        Regardless, I gleefully started one summer weekend and then—<b>BAM!</b><br>
+        The very first hurdle put me in my place.<br>
+        So, what happened?
+    </p>
+    <p>
+        Well uh... You see...
+    </p>
+    <p>
+        The speed of music is measured in <u>b</u>eats per <u>m</u>inute (bpm).<br>
+        The fluidity of motion graphics is measured in <u>f</u>rames per <u>s</u>econd (fps).<br>
+        Those facts in and of themselves aren't a problem.<br>
+        It's when you have to match them that problems arise.
+    </p>
+    <p>
+        Let's say  you want to use a song that plays at 120 bpm—a common speed for popular music.<br>
+        You now have to ask the question how many <u>frames</u> do I want between each <u>beat</u>; your <i>fpb</i>?<br>
+        More frames give you more 'space' for things like anticipation and bounce, but too much and your just torturing
+        yourself.<br>
+        For this example, I'll say that I want six (6) frames per beat.<br>
+        So what fps should I animate at?<br>
+        Doing some math...
+    </p>
+    <img src="/res/pages/soapbox/bpm-and-fps/maf.png" class="notes">
+    <p>Alright, poggers! A nice, even 12 fps!</p>
+    <p>Now, let's run this with the song <i>I</i> wanted to use; <i>Catswing</i> from Deltarune Chapters 3 + 4!</p>
+    <div onclick="playSong('114110')" class="song-btn">
+        <span>click to play now!</span>
+        <span>Deltarune Chapters 3 + 4 - Catswing</span>
+    </div>
+    <p>
+        In my vision, I saw Snavak shaking her hips to the offbeat drums. Coincidentally, I made <a
+            href="https://gallery.snapps.dev/post/view/87">a <b>(NSFW)</b> doodle</a> some time later that
+        kinda lined up with what I wanted (don't mind the milk hehe :snappsShy:).
+    </p>
+    <p>
+        Anyways!<br>
+        That song has a <u>bpm of 130</u>...<br>
+        And I wanted to do a test run that uses <u>3 frames per beat</u>...<br>
+        Run the numbers and...
+    </p>
+    <img src="/res/pages/soapbox/bpm-and-fps/mafs2.png" class="notes">
+    <p>
+        Oh...<br>
+        Thaaat's gonna be a problem, right?<br>
+        In this case, it's fine!<br>
+        All you would have to do is just double your beats per frame, and you would be left with a nice, whole 13
+        fps that you can tell your program to animate in.<br>
+        You would just have to make every frame last twice as long to make up for the doubled framerate.
+    </p>
+    <p class="tangent start">=== NERD STUFF AHEAD ===</p>
+    Technically, if all you wanted was a gif, then 6.5 fps is a totally acceptable framerate!<br>
+    According to the Graphic Control Extension of the <a href="https://www.w3.org/Graphics/GIF/spec-gif89a.txt">GIF
+        specification</a>:<br>
+    <blockquote>
+        <code>vii) Delay Time - If not 0, this field specifies the number of
+            hundredths (1/100) of a second to wait before continuing with the
+            processing of the Data Stream. The clock starts ticking immediately
+            after the graphic is rendered. This field may be used in
+            conjunction with the User Input Flag field.</code>
+    </blockquote>
+    <p>
+        Every frame can have its own delay time, and said time is measured in hundredths of a second (1/100s)
+        ((centiseconds)).<br>
+        So if you multiply 6.5 fps by 100 centiseconds, you can give each frame the resulting delay of 650 centiseconds
+        and get the same result. <br>
+    </p>
+    <p>
+        BTW: The max amount of centiseconds you can delay a gif's frame is 2^16 - 1 = 65,535 centiseconds or 655.35
+        seconds
+        or 10.9225 minutes.<br>
+        Neat!
+    </p>
+    <p class="tangent end">=== END OF NERD STUFF ===</p>
+    <p>Equipped with this realization, I went into my trusty clip studio paint and made the thing!</p>
+    <p>Here's a pause button in case you were listening to the song.</p>
+    <div onclick="player.togglePlayback(true)" class="song-btn pause">
+        <span>click to... pause?</span>
+        <span>How quirky...</span>
+    </div>
+    <p class="warning">VOLUME <i>MAY</i> BE LOUD</p>
+    <video controls onloadstart="this.volume=0.25">
+        <source src="/res/pages/soapbox/bpm-and-fps/demo.mp4">
+    </video>
+    <p>Heeeey! Lookit that!<br>
+        Now imagine that line is a thick-ass(ed) snake and we're <b style="color:var(--color-yellow)"><i>GOLD!</i></b>
+    </p>
+    <p>Some things to note:</p>
+    <ul>
+        <li>The brain processes sound *very slightly* faster than sight. In my limited experience, I haven't had to
+            account
+            for this yet.</li>
+        <li>A user's browser may induce some delay between audio and video (that seems to be the case for me
+            :snappsSquint:).</li>
+        <li>If you want to try doing this, I recommend working with <u>6 frames per beat</u>; doing that allows for more
+            flexibility when animating and less of a chance that you get unusable fps values.</li>
+    </ul>
+    <p>That's about all I really wanted to show off, but I have more fun, technical stuff below if you are an <b>ADVANCED READER</b>.</p>
+    <a onclick="loadPage('soapbox')" class="button">return to shelf</a>
+    <hr>
+    <p>
+        Something about seeing a decimal... I know it will bite me in the ass if I don't bite its ass first.<br>
+        Besides, I wouldn't be a good programmer if I didn't deal with edge cases.
+    </p>
+    <p>Let's try one more song...</p>
+    <div onclick="playSong('86844')" class="song-btn">
+        <span>click to play now!</span>
+        <span>Splatoon 2 - Acid Hues [Off the Hook]</span>
+    </div>
+    <p>
+        This one plays at <u>146 bpm</u>, and let's say I want to have <u>8 frames per beat</u>.<br>
+        That would mean I'd have to use a sloppy 292/15 fps or 19.4666... fps.<br>
+    </p>
+    <p>(Just to reiterate my point above, if I wanted 6 frames per beat, I would end up with a more manageable 14.6 fps;
+        Six continues to be the perfect number! <img class="emote" src="/res/img/icon/emotes/catHug.webp">)
+    </p>
+    <p>So, how do I deal with situations where either the fps is either a non-terminating decimal or needs more
+        precision than centiseconds (see NERD STUFF above)?<br>
+        A gif specifically will not work, so now I'm in the wild divgital west.<br>
+    </p>
+    <p>
+        God help me.
+    </p>
+    <p>
+        I'm not gonna run through every image format that supports animation, as I've done that plenty of times; just
+        accept that my only real options are WebP and aPNG.
+    </p>
+    <p>
+        As a webp believer and totally *not* for foreshadowing, lets check webp's spec first...
+    </p>
+    <p>
+        According to <a target="_blank"
+            href="https://developers.google.com/speed/webp/docs/riff_container#animation">the manual</a>, WebPs use
+        milliseconds to specify frame delay.<br>
+        That successfully postpones the precision issue by one digit! Yippie!<br>
+        The non-terminating decimal issue, however, cares not for WebP's measly extra decimal. :snappsPensive:
+    </p>
+    <p>Alright, what about aPNGs?</p>
+    <p>Deep inside every aPNG frame is a cute little bit of data called the <a target="_blank"
+            href="https://www.w3.org/TR/png-3/#fcTL-chunk">Frame Control Chunk</a>, and inside that are two very useful
+        values:
+    </p>
+    <blockquote>
+        <code>delay_num</code> and <code>delay_den</code> define the numerator and denominator of the delay fraction;
+        indicating the time to
+        display the current frame, in seconds. If the denominator is 0, it is to be treated as if it were 100 (that
+        is, delay_num then specifies 1/100ths of a second). If the the value of the numerator is 0 the decoder
+        should render the next frame as quickly as possible, though viewers may impose a reasonable lower bound.
+        They are encoded as two-byte unsigned integers.
+    </blockquote>
+    <p>This means that the a frames delay can be <u>any positive rational number</u>, given that the numerator and
+        denominator are both less than 65,535!<br>
+        Yippie! (for real this time!) <img class="emote" src="/res/img/icon/emotes/veryMarketableSavak.webp">
+    </p>
+    <p>
+        I plan on using this for some quirky discord pfp shenanigans, but I'll yap about that at a later date.
+    </p>
+    <p>
+        Anyways, using this info, I created a toy in desmos (my beloved) to help visualize how fluid a given frames per beat
+        would be:<br>
+        <a target="_blank"
+            href="https://www.desmos.com/calculator/kxiphoo8me">https://www.desmos.com/calculator/kxiphoo8me</a>
+    </p>
+    <p>
+        If you wanna see the ball bounce to the beat, click on the right-facing arrow in the box labeled '2' in time with
+        the beat, and it <i>should</i> be good if you timed it right. <img class="emote"
+            src="/res/img/icon/emotes/catBop.webp">
+    </p>
+    <p>
+        When I have time, I plan on stuffing all this math into a useful tool I can stuff into <a onclick="loadPage('toys')">my toybox</a>.
+    </p>
+    <p>
+        I may have to do a part two or make an edit to this because idk how difficult it will be to export a video (and audio (audio is very important here)) at weird framerates. Claws crossed!
+    </p>
+    <p>
+        Until next time!
+    </p>
+    <a onclick="loadPage('soapbox')" class="button">return to shelf</a>
+</article>
