@@ -36,6 +36,16 @@
     <script src="/res/scripts/gallery.js"></script>
     <script src="/res/scripts/blog.js"></script>
 
+    <dialog id="settings-window">
+        <div>
+            <div class="setting-section" data-label="content toggles">
+                <div class="ui" title="toggle freaky stuff" id="freak" onclick="toggleFreaky()"><img
+                        src="/res/img/icon/svg/spiral.svg"></div>
+            </div>
+
+            <button commandfor="settings-window" command="close">Confirm</button>
+        </div>
+    </dialog>
 
     <div id="main-window">
         <!-- title bar -->
@@ -48,7 +58,7 @@
             <div class="right">
                 <div class="ui"><img style="--color:var(--color-cyan)" src="/res/img/icon/svg/fullscreen.svg"
                         onclick="toggleFullscreen()"></div>
-                <div class="ui"><img  style="--color:var(--color-magenta)" src="/res/img/icon/svg/close.svg"
+                <div class="ui"><img style="--color:var(--color-magenta)" src="/res/img/icon/svg/close.svg"
                         onclick="closeWindow()"></div>
             </div>
         </div>
@@ -107,9 +117,11 @@
             <div class="center">
                 <div id="music-player">
                     <div class="left">
-                        <div id="music-player-playback" onclick="handlePlayback()"><img src="/res/img/icon/svg/play.svg"></div>
+                        <div id="music-player-playback" onclick="handlePlayback()"><img
+                                src="/res/img/icon/svg/play.svg"></div>
                         <div id="music-player-stop" onclick="stopPlaying()"><img src="/res/img/icon/svg/stop.svg"></div>
-                        <div id="music-player-stop" onclick="playRandom()"><img src="/res/img/icon/svg/shuffle.svg"></div>
+                        <div id="music-player-stop" onclick="playRandom()"><img src="/res/img/icon/svg/shuffle.svg">
+                        </div>
                     </div>
                     <div class="center">
                         <div id="music-player-bar-bg">
@@ -126,13 +138,16 @@
                             <div id="music-player-volume-cont"><input type="range" value="20" min="0" max="100"
                                     orient="vertical" onmouseup="saveVolumeChange()" /></div>
                         </div>
-                         
+
                     </div>
                 </div>
             </div>
             <div class="right">
-                <div class="ui" title="toggle freaky stuff" id="freak" onclick="toggleFreaky()"><img src="/res/img/icon/svg/spiral.svg"></div>
-                <div class="ui" id="unsaved-warn-icon"  title="you have unsaved preferences!"><img src="/res/img/icon/svg/warning.svg" onclick="toggleCookies()"></div>
+                <div class="ui" title="settings" id="settings-btn"
+                    onclick="document.getElementById('settings-window').showModal();">
+                    <img src="/res/img/icon/svg/gear.svg"></div>
+                <div class="ui" id="unsaved-warn-icon" title="you have unsaved preferences!">
+                    <img src="/res/img/icon/svg/warning.svg" onclick="toggleCookies()"></div>
             </div>
         </div>
 
@@ -223,7 +238,8 @@
 
         function markActive(pageName) {
             try {
-                document.getElementById("side-bar").children[sidebarPages.indexOf(pageName)].classList.add("selected")
+                var basepage = pageName.match(/[^\/]+/)[0];
+                document.getElementById("side-bar").children[sidebarPages.indexOf(basepage)].classList.add("selected")
 
             } catch (error) {
                 console.warn(`page '${pageName}' has no associated tab`)
@@ -305,7 +321,7 @@
                 document.getElementById("main-window").classList.remove("freaky")
                 userPrefs.freaky = false
             }
-            
+
             savePreferences()
         }
 
@@ -380,15 +396,15 @@
         }
 
         // --- music player functions
-        const DEFAULT_SONG="Hourglass Meadow"
-        const RANDOM_SONG_POOL=["10444","113524","30346","96248","Hourglass Meadow"]
-        const CHILL_SONG_POOL=[]
-        const LAST_SONG_DEPTH=3
-        var lastSongPool=[]
-        
+        const DEFAULT_SONG = "Hourglass Meadow"
+        const RANDOM_SONG_POOL = ["10444", "113524", "30346", "96248", "Hourglass Meadow"]
+        const CHILL_SONG_POOL = []
+        const LAST_SONG_DEPTH = 3
+        var lastSongPool = []
+
         var nowPlaying = null
         //template: "id":{title:"",game:""},
-        
+
         const musicLibrary = {
             "22154": {
                 title: "File Select",
@@ -417,10 +433,21 @@
             "30346": {
                 title: "Disco Kid (Pause)",
                 game: "Punch-Out!! (Wii)",
-            },"96248": {
+            },
+            "96248": {
                 title: "WELCOME TO THE CITY",
                 game: "DELTARUNE Chapter 2",
-            },"Hourglass Meadow": {
+            },
+            "114110": {
+                title: "Catswing",
+                game: "Deltarune Chapters 3 + 4",
+            },
+
+            "86844": {
+                title: "Acid Hues [Off the Hook]",
+                game: "Splatoon 2",
+            },
+            "Hourglass Meadow": {
                 title: "Temptation Stairway",
                 game: "Hourglass Meadow",
             },
@@ -428,10 +455,10 @@
 
         function handlePlayback() {
             if (nowPlaying == null) {
-                    playSong(DEFAULT_SONG);
+                playSong(DEFAULT_SONG);
 
 
-                
+
 
             } else {
                 window.player.togglePlayback()
@@ -446,7 +473,7 @@
         }
 
         function addToLastPlayed(song) {
-            if(lastSongPool.unshift(song) > LAST_SONG_DEPTH) lastSongPool.pop()
+            if (lastSongPool.unshift(song) > LAST_SONG_DEPTH) lastSongPool.pop()
         }
 
         function playSong(id) {
@@ -459,12 +486,12 @@
             window.player.play(`/res/music/${id}.brstm`)
         }
 
-        function playRandom(pl=null){
-            if (pl==null) pl = RANDOM_SONG_POOL
+        function playRandom(pl = null) {
+            if (pl == null) pl = RANDOM_SONG_POOL
 
-            var randomSong =  pl[Math.floor(Math.random() * pl.length)];
+            var randomSong = pl[Math.floor(Math.random() * pl.length)];
             do {
-                randomSong =  pl[Math.floor(Math.random() * pl.length)];
+                randomSong = pl[Math.floor(Math.random() * pl.length)];
             } while (lastSongPool.includes(randomSong));
             playSong(randomSong);
         }
@@ -545,7 +572,6 @@
         //for reloading a gallery for example
         var observer = new MutationObserver(() => {
             if (currentPage == "featured") queryGallery();
-            if (currentPage == "soapbox") fetchBlogPosts();
         })
         observer.observe(document.getElementById("content-area"), {
             childList: true

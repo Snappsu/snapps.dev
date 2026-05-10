@@ -11,8 +11,7 @@ body {
 
 .hero {
     box-sizing: border-box;
-    height: 65%;
-    min-height: 600px;
+    height: min(650px,90vw);
     width: 100%;
     position: relative;
     padding: 0 2em;
@@ -28,15 +27,15 @@ body {
     image-rendering: pixelated;
     position: absolute;
     bottom: 0;
-    min-height: 512px;
     max-height: 512px;
-
+    width: 90vw;
     transform-origin: bottom;
     transition: .25s;
     transition-timing-function: ease-out;
 }
 
 .hero-image img {
+    object-fit: contain;
     position: relative;
 }
 
@@ -85,7 +84,7 @@ body {
 .hero h1.title {
     position: absolute;
     top: 30px;
-    font-size: 100px;
+    font-size: min(100px,12vmin);
     margin: auto;
     z-index: 1;
     transition: .2s;
@@ -114,8 +113,8 @@ body {
 
 .hero h1.subtitle {
     position: absolute;
-    top: 140px;
-    font-size: 40px;
+    top: calc(40px + min(100px,12vmin) );
+    font-size: calc(min(100px,12vmin) * .4);
     left: 50%;
     z-index: 1;
     transition: .2s;
@@ -136,6 +135,7 @@ body {
     align-items: center;
     font-size: 2em;
     bottom: 25px;
+    z-index: -1;
 }
 
 * .hero .cta a {
@@ -169,6 +169,7 @@ body {
 }
 
 .container {
+    position: relative;
     z-index: 1;
     display: flex;
     justify-content: space-around;
@@ -310,8 +311,26 @@ h1 {
     height: 33px;
     background-color: var(--color-background-2);
     display: flex;
-    justify-content: center;
     z-index: 2;
+    overflow-y: hidden;
+    overflow-x: scroll;
+      scrollbar-width: none;
+        -ms-overflow-style: none;
+
+
+}
+
+/* For Chrome, Safari, and newer versions of Edge */
+.header::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.header {
+}
+
+/* For Internet Explorer and older Edge */
+.element {
 }
 
 img {
@@ -324,10 +343,11 @@ img {
 
 
 @media only screen and (max-width: 1200px) {
+    /*
     .hero {
         height: 650px;
     }
-
+*/
     .container {
         flex-direction: column;
         justify-content: flex-start;
@@ -342,10 +362,11 @@ body {
 #cc {
     opacity: .4;
     position: absolute;
-    font-size: 3em; 
+    font-size: 2em; 
     bottom: 10px;
     right: 20px;
     font-weight: bold;
+    z-index: -1;
 }
 
 #cc a {
