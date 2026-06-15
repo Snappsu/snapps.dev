@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- embed stuff -->
+    <meta content="Snapps' Tag Roulette 2!" property="og:title">
+    <meta content="A *better* tool for prompted drawing challenges" property="og:description">
+    <meta content="https://snapps.dev/toys/tag-roulette-2/" property="og:url">
+    <meta content="https://cdn.snapps.dev/images/embed-anim.gif" property="og:image">
+    <meta content="#8d72ff" data-react-helmet="true" name="theme-color">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- styles-->
+    <link rel=" stylesheet" href="https://cdn.snapps.dev/style/fonts.css">
+    <link rel="stylesheet" href="index2.css">
+
+    <!-- technical -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tag roulette 2</title>
+</head>
+<style>
+    /* anti-flashbang*/
+    body {
+        background-color: #000;
+    }
+</style>
+
+<body>
+
+    <div id="display">
+        <div id="unsaved-warn">
+            <span>⚠ CAUTION ⚠</span>
+            <span>you have unsaved data!</span>
+            <a onClick="window.tagRoulette.saveData()">click here to save!</a>
+        </div>
+        <div id="card-holder">
+            <canvas id="card-canvas" width="0" height="0"></canvas>
+            <span id="card-measure-width">width</span>
+            <span id="card-measure-height">height</span>
+            <span id="roulette-meta-data"></span>
+        </div>
+        <div id="canvas-options">
+            <a class="color" onclick="window.tagRoulette.copyCardToClipboard()">copy!</a>
+            <a class="color" onclick="window.tagRoulette.rollRoulette()">roll!</a>
+            <a class="color" onclick="window.tagRoulette.downloadCard()">download!</a>
+        </div>
+        <div id="timer">
+            <span id="timer-time"></span>
+            <span id="timer-time-bg">88:88:88.888</span>
+            <span id="timer-stop" class="">⚐</span>
+            <div id="timer-buttons" class="center row">
+                <a onclick="window.tagRoulette.startTimer()">START</a>
+                <a onclick="window.tagRoulette.pauseTimer()">PAUSE</a>
+                <a onclick="window.tagRoulette.stopTimer()">STOP</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar">
+        <h1>tag roulette</h1>
+
+        <div id="menu">
+            <details class="color" open>
+                <summary>tags</summary>
+                <div id="tag-container">
+                    <div id="tag-pages">
+                    </div>
+                    <div id="tag-list">
+                    </div>
+                    <div id="tag-input">
+                        <input type="text" id="tag-input-text" onkeydown="window.tagRoulette.addTag()"
+                            onkeyup="window.tagRoulette.validateTagInput()"
+                            placeholder="<name>,<spice?>,<desc?>"><button
+                            onclick="window.tagRoulette.addTag()">+</button>
+                    </div>
+                    <div class="center row">
+                        <a onclick="window.tagRoulette.importTags()">import</a>
+                        <a onclick="window.tagRoulette.exportTags()">export</a>
+                    </div>
+                </div>
+
+                <div class="center">
+                    <a onclick="window.tagRoulette.giveSampleTagList()">Need a starter list?</a>
+                    <div class="center row">
+                    </div>
+                </div>
+            </details>
+            <details class="color" open>
+                <summary>roulette options</summary>
+                <div><label for="use-timer-opt">use timer:</label><input type="checkbox" id="use-timer-opt"
+                        name="use-timer-opt" onChange="window.tagRoulette.onMenuChange()"></div>
+                <div>
+                    <label for="max-spice-opt">max spice:</label>
+                    <input type="number" id="max-spice-opt" name="max-spice-opt" min="1" max="1"
+                        onChange="window.tagRoulette.onMenuChange()" />
+                </div>
+
+            </details>
+            <details class="color">
+                <summary>card styling</summary>
+                <div class="center">
+                    <div id="card-style-choice">
+                        <select id="card-style-menu" name="card-style" onchange="window.tagRoulette.onMenuChange()">
+                            <option value="matsaleh">matsaleh</option>
+                            <option value="confortaa">confortaa</option>
+                        </select>
+                    </div>
+                    <input type="number" id="font-size-opt" name="fontSize" min="8" value="48"
+                        onChange="window.tagRoulette.onMenuChange()" />
+                    <input type="text" id="font-color-opt" name="background-color" minlength="3" maxlength="9" value=""
+                        placeholder="font hex color" onChange="window.tagRoulette.onMenuChange()"
+                        onkeyup="window.tagRoulette.onMenuChange()" />
+                    <input type="text" id="bg-color-opt" name="background-color" minlength="3" maxlength="9" value=""
+                        placeholder="card hex color" onChange="window.tagRoulette.onMenuChange()"
+                        onkeyup="window.tagRoulette.onMenuChange()" />
+                    <span>misc fields</span>
+                    <div><input type="checkbox" id="field-roll-count" name="field-roll-count"
+                            onChange="window.tagRoulette.onMenuChange()"><label for="field-roll-count">roll
+                            count</label></div>
+                </div>
+            </details>
+            <details class="color" open>
+                <summary>how to use</summary>
+                <p>in this new version, you can directly copy/download the roulette info and paste/import into you program of choice!</p>
+                <p>no more having to take an ugly screenshot! the future is now~ 💖</p>
+                <p>just add some tags and don't forget to save! this time, data is properly saved to you browser storage</p>
+                <p><i>what's this 'spice' thing?</i> - it's a simple way to filter out kinker stuff from the pool if your not feeling it.</p>
+                <p>it's absolutely optional.</p>
+                <p>also no time limit yet, sorry...</p>
+            </details>
+        </div>
+    </div>
+
+    <div id="footer">
+    </div>
+
+    <script type="module">
+        import * as tr from "./tagRoulette.js";
+
+        // Notes when editing...
+        // When adding new options:
+        // - add default to DEFAULT_SETTINGS
+        // - update loadData() and onMenuChange()
+        // When adding buttons:
+        // - make sure you add the function to the window somehow
+
+        //window setup
+        window.tagRoulette={}
+
+        //init
+        const canvas = document.getElementById("card-canvas");
+        const ctx = canvas.getContext("2d");
+        
+        var style = {
+            confortaa: {
+                font: {
+                    name: 'confortaa',
+                    loc: 'comfortaa.woff2',
+                    sizeHeightRatio: 1.1
+                },
+                padding: 2,
+            },
+            matsaleh: {
+                font: {
+                    name: 'matsaleh',
+                    loc: 'matsaleh.otf',
+                    sizeHeightRatio: 1
+                },
+                padding: 8,
+            }
+        }
+
+        var DEFAULT_SETTINGS = {
+            cardStyle: "matsaleh",
+            cardColor: null,
+            textSize: 64,
+            textColor: null,
+            timer: true,
+            maxSpice: 1,
+            showRollCount: true
+        }
+
+        // local roulette stuff
+        var currentTag = {name:"Click Roll!",spice:0,desc:"Roll a new tag!"}
+        var currentPage;
+        var rolls = 0
+
+        // roulette related
+        function rollRoulette() {
+            //increment
+            rolls++
+
+            //reset stuff
+            resetTimerStuff()
+
+            console.log("rolling roulette...")
+
+            currentTag = tr.rollTag(userData.tags, userData.settings.maxSpice ,currentTag)
+
+            updateGUI()
+            drawCard()
+
+        }
+        window.tagRoulette.rollRoulette = rollRoulette
+
+        // tags
+
+        function importTags(){
+            let propmpText = `Paste you tag list below!\n\nFormat: <tag_name>,<tag_spice>,<tag_description?>;`
+            let defaultText = `tag_one,1,;tag_two_,2,Description optional!;`
+            let dataIn = prompt(propmpText, defaultText)
+            userData.tags = tr.importTags(dataIn)
+            unsavedData = true
+            updateGUI()
+        }
+        window.tagRoulette.importTags = importTags
+
+
+        async function exportTags(tagList=null){
+            if (tagList == null) tagList = userData.tags
+
+            let propmpText = `This will copy your current tag list to your clipboard;`
+            if (!confirm(propmpText)) return
+            let tags = tr.exportTags(tagList)
+            try {
+                await navigator.clipboard.writeText(tags);
+            } catch (error) {
+                console.error(error.message);
+            }
+            console.log(tags)
+        }
+        window.tagRoulette.exportTags = exportTags
+
+        function removeTag(tag){
+            console.log(`attempting to remove tag '${tag}'...`)
+            if(confirm(`remove tag '${tag}?'`)){
+            delete userData.tags[tag]
+             unsavedData=true
+             console.log(`tag '${tag}' removed!`)
+            updateGUI()
+            } else {
+            console.warn(`aborting!`)
+            }
+        }
+
+        function validateTagInput(){
+            let inputEle = document.getElementById("tag-input-text")
+            let value = inputEle.value;
+            if (value==""){
+                inputEle.style.backgroundColor = "#222"
+                return
+            }
+            let tagRegex = /^([\w-]+)(?:,(\d+),(.+)?)?$/m
+            let match = value.match(tagRegex)
+            if(match){
+                inputEle.style.backgroundColor = "#120"
+            } 
+            else {
+                inputEle.style.backgroundColor = "#211"
+            }
+        }
+        window.tagRoulette.validateTagInput = validateTagInput
+
+        function addTag(){
+            //hacky solution to allow enter key
+            if ("key" in event) {
+                if (event.key !== "Enter" ) return
+            }
+            
+            console.log(`attempting to add tag...`)
+            let input = document.getElementById("tag-input-text").value;
+            let tagRegex = /^([\w-]+)(?:,(\d+),(.+)?)?$/m
+            let match = input.match(tagRegex)
+            if(!match){ console.warn(`no valid tag found...`); return}
+            let name = match[1];
+            let spice = match[2] ? parseInt(match[2]) : 1;
+            let desc = match[3] ? match[3] : null;
+            if (tr.checkForTag(userData,name)){
+                console.warn(`tag '${name}' already exists...`);
+                if(!confirm(`tag '${name}' is already in the list...\n\noverwrite it?`)) return 
+            }
+            console.warn(`(over)writing tag!`);
+            userData.tags[name] = {spice:spice,desc:desc}
+            document.getElementById("tag-input-text").value = "";
+            document.getElementById("tag-input-text").style.backgroundColor = "#222"
+            unsavedData = true
+            updateGUI()
+        }
+        window.tagRoulette.addTag = addTag
+
+        // settings
+        let unsavedData = false; 
+        function onMenuChange() {
+            console.log("settings changed!")
+            //assume settings have changed
+            unsavedData = true;
+
+            // timer
+            userData.settings.timer=document.getElementById("use-timer-opt").checked
+
+            userData.settings.maxSpice=parseInt(document.getElementById("max-spice-opt").value)
+            
+            // card style
+            userData.settings.cardStyle = document.getElementById("card-style-menu").value
+
+            let hexRegex = /#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{3,4})/
+            // font size
+            userData.settings.textSize = parseInt(document.getElementById("font-size-opt").value)
+
+            // font color
+            let validHex = document.getElementById("font-color-opt").value.match(hexRegex)
+            validHex ? userData.settings.textColor = `#${validHex[1]}` : userData.settings.textColor = null
+
+            // bg color
+            validHex = document.getElementById("bg-color-opt").value.match(hexRegex)
+            validHex ? userData.settings.cardColor = `#${validHex[1]}` : userData.settings.cardColor =  null
+
+            // fields
+            // roll count
+            userData.settings.showRollCount=document.getElementById("field-roll-count").checked
+
+            updateGUI()
+            drawCard()
+        }
+        window.tagRoulette.onMenuChange = onMenuChange
+
+        function loadData(){
+            console.log("loading data into UI...")
+            // card style
+            // TODO make menu select font
+            document.getElementById("card-style-menu").children
+
+            // card color
+            if(userData.settings.cardColor)document.getElementById("bg-color-opt").value =userData.settings.cardColor
+
+            // timer 
+            document.getElementById("use-timer-opt").checked = userData.settings.timer
+        
+            // text size
+            document.getElementById("font-size-opt").value = userData.settings.textSize 
+
+            // text color
+            if(userData.settings.textColor) document.getElementById("font-color-opt").value =userData.settings.textColor
+
+            //show roll count
+            document.getElementById("field-roll-count").checked = userData.settings.showRollCount
+        }
+
+        function saveData(){
+            console.log("saving data into local browser storage...",userData)
+            tr.saveUserData(userData,"USER_DATA")
+            unsavedData = false;
+            updateGUI();
+        }
+        window.tagRoulette.saveData = saveData
+
+        function setDefaultSettings(){
+            console.log("setting user settings to defaults...")
+            userData.settings = DEFAULT_SETTINGS
+        }
+
+        // gui
+        async function drawCard() {
+
+            console.log('attempting to draw card...')
+            // initialize
+            let cardStyle = style[userData.settings.cardStyle]
+            let font = cardStyle.font
+            let minWidth = 0
+            let minHeight = 0
+            let totalFields = 0
+            let labels = []
+            await loadFont(font.name, font.loc)
+            ctx.font = `${userData.settings.textSize}px ${font.name}`;
+
+            //generate fields
+            // reset fields
+            let currentFields = {}
+            // get roulette options
+
+            // generate fields
+            currentFields['tag'] = currentTag.name
+
+            let date = (new Date()).toUTCString().slice(5, 16)
+            currentFields['date'] = date
+
+            //timer fields
+            if (timerStopped) {
+                currentFields['time'] = printTime(timeElapsed)
+            }
+            // misc fields
+            if (document.getElementById("field-roll-count").checked) currentFields['rolls'] =
+                `${rolls==1?"first try!":rolls}`
+
+
+            for (const field in currentFields) {
+                let label = `${field.toUpperCase()}: ${currentFields[field].toUpperCase()}`
+                let labelWidth = Math.ceil(ctx.measureText(label).width);
+                if (labelWidth > minWidth) minWidth = labelWidth;
+                totalFields++
+                labels.push(label)
+            }
+
+
+            // card size
+            minWidth += (4 * cardStyle.padding)
+            minHeight += (userData.settings.textSize*font.sizeHeightRatio * totalFields + 2 * cardStyle.padding + 2)
+
+            // draw the card
+            canvas.width = minWidth
+            canvas.height = minHeight
+
+            ctx.font = `${userData.settings.textSize}px ${font.name}`;
+            ctx.fillStyle =  userData.settings.cardColor?  userData.settings.cardColor : "#0000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = userData.settings.textColor ?  userData.settings.textColor : "#000";
+
+            let currentY = cardStyle.padding
+            labels.forEach(label => {
+                ctx.fillText(label, 2 * cardStyle.padding, userData.settings.textSize + currentY);
+                currentY += userData.settings.textSize*font.sizeHeightRatio
+            });
+
+            // if Timed
+            //ctx.fillText(tagLabelText, 2*style.padding, fontHeight + fontHeight + fontHeight + currentY);
+
+            // measurements
+            document.getElementById("card-measure-width").innerHTML = `${minWidth} px`
+            document.getElementById("card-measure-height").innerHTML = `${minHeight} px`
+
+            console.log('card rendering finished!')
+        }
+
+        function changeTagPage(page){
+            currentPage = page
+            updateGUI()
+        }
+
+        function updateGUI(){
+
+        // some validation
+        let totalTagsFound = Object.keys(userData.tags).length
+        //if no tags
+        if( totalTagsFound == 0){
+            document.getElementById("tag-input").style.animation="glow 1s infinite"
+             currentTag = {name:"Add some tags!",spice:0,desc:"Roll a new tag!"}
+             document.getElementById("tag-list").innerHTML = `<p style="text-align:center;">use the input below<br>to add tags...</p><p style="text-align:center;">or import a list<br>if you have one...</p>`
+        } else {
+            document.getElementById("tag-input").style.animation=""
+        }
+
+            // timer
+            if (userData.settings.timer) {
+                timerEle.style.display = "block"
+            } else {
+                timerEle.style.display = "none"
+            }
+
+            // unsaved data notif
+            if (unsavedData) {
+                document.getElementById("unsaved-warn").style.display = "flex"
+            } else {
+                document.getElementById("unsaved-warn").style.display = "none"
+            }
+
+            //tag 
+            let pages = []
+            let tags = []
+            let poolCount = 0
+            if(totalTagsFound>0){
+                try {
+
+                    //clear existing
+                    document.getElementById("tag-pages").innerHTML = ""
+                    document.getElementById("tag-list").innerHTML = ""
+                    
+                    for (const tag in userData.tags) {
+                        if(userData.tags[tag].spice<=userData.settings.maxSpice) poolCount++;
+
+                        //if new page
+                        if (!pages.includes(userData.tags[tag].spice)){
+                            let pageEle = document.createElement("span")
+                            pageEle.classList.add("color")
+                            pageEle.innerHTML = userData.tags[tag].spice
+                            pageEle.addEventListener("click", function(){changeTagPage(userData.tags[tag].spice)})
+                            pages.push(userData.tags[tag].spice)
+                            // if first page
+                            if (currentPage==null){
+                                currentPage=userData.tags[tag].spice
+                            }                
+                            document.getElementById("tag-pages").appendChild(pageEle) 
+                        }
+                        if(userData.tags[tag].spice==currentPage){
+                            let tagEle= document.createElement("span")
+                            tagEle.addEventListener("click", function(){removeTag([tag])})
+                            tagEle.classList.add("color")
+                            tagEle.innerHTML = tag + `<span>delete?</span>`
+                            if (userData.tags[tag].desc) tagEle.title = userData.tags[tag].desc
+                            document.getElementById("tag-list").append(tagEle)
+                        }
+                    }
+                    document.getElementById("tag-pages").children[currentPage-1].classList.add("selected")
+                } catch (error) {
+                        
+                }
+            }
+
+            // max spice 
+            let maxSpice = Math.max(...pages) 
+            console.log(maxSpice)
+            document.getElementById("max-spice-opt").max = maxSpice
+            if (document.getElementById("max-spice-opt").value > maxSpice) document.getElementById("max-spice-opt").value = maxSpice
+            document.getElementById("max-spice-opt").value = userData.settings.maxSpice;
+            // roulette metadata
+            document.getElementById("roulette-meta-data").innerText=`tags in pool: ${poolCount} | max spice: ${userData.settings.maxSpice}`
+
+        }
+
+        // timer stuff
+        let timerEle = document.getElementById("timer")
+        var timeElapsed = 0
+        var lastTime = null
+        var timerTask = null
+        var timerPaused = null
+        var timerStopped = null
+
+        function resetTimerStuff() {
+            clearInterval(timerTask);
+            stopTabTitleUpdate()
+            timeElapsed = 0
+            lastTime = null
+            timerTask = null
+            timerPaused = null
+            timerStopped = null
+            document.getElementById("timer-stop").classList.remove("active")
+            document.getElementById("timer-time").innerHTML = ""
+
+        }
+
+        function startTimer() {
+            clearInterval(timerTask);
+            stopTabTitleUpdate()
+            timerTask = null
+            console.log("starting timer!")
+            lastTime = Date.now()
+            timerPaused = false
+            timerStopped = false
+            timeElapsed = 0
+            document.getElementById("timer-stop").classList.remove("active")
+
+            startTabTitleUpdate()
+            timerTask = setInterval(() => {
+                timeElapsed += Date.now() - lastTime
+                lastTime = Date.now()
+                updateTimer()
+            }, 17);
+
+            drawCard()
+        }
+        window.tagRoulette.startTimer = startTimer
+
+        function pauseTimer() {
+            if (timerPaused == null || timerStopped) return
+            if (timerPaused) {
+                console.log("resuming timer!")
+
+                lastTime = Date.now()
+                timerPaused = false
+                clearInterval(timerTask);
+                timerTask = setInterval(() => {
+                    timeElapsed += Date.now() - lastTime
+                    lastTime = Date.now()
+                    updateTimer()
+                }, 17);
+                startTabTitleUpdate()
+
+            } else {
+                console.log("pausing timer!")
+                clearInterval(timerTask);
+                stopTabTitleUpdate()
+                timerPaused = true
+            }
+        }
+        window.tagRoulette.pauseTimer = pauseTimer
+
+        function stopTimer() {
+            if(timerStopped==null) return
+            console.log("stopping timer!")
+            clearInterval(timerTask)
+            document.getElementById("timer-stop").classList.add("active")
+            timerStopped = true
+            stopTabTitleUpdate()
+            drawCard()
+        }
+        window.tagRoulette.stopTimer = stopTimer
+
+        function updateTimer() {
+            displayTime(timeElapsed)
+        }
+
+        var titleUpdateTask = null
+        var titleUpdatePage = 0
+    
+        function startTabTitleUpdate() {
+            titleUpdateTask = setInterval(() => {
+                switch (titleUpdatePage % 3) {
+                    case 0:
+                        document.title = "timer running!"
+                        break;
+                    case 1:
+                        document.title = `${currentTag.name} - ${printTime(timeElapsed)}`
+                        break;
+                    case 2:
+                        document.title = "tag roulette 2"
+                        break;
+                }
+                titleUpdatePage++
+            }, 2500);
+        }
+
+        function stopTabTitleUpdate() {
+            clearInterval(titleUpdateTask);
+            document.title = "tag roulette 2"
+        }
+
+        function displayTime(time) {
+            let hours = 0
+            let minutes = 0
+            let seconds = 0
+            let mili = 0
+            //hours
+            while (time >= 3600000) {
+                hours++
+                time -= 3600000
+            }
+            //minutes
+            while (time >= 60000) {
+                minutes++
+                time -= 60000
+            }
+            //seconds
+            while (time >= 1000) {
+                seconds++
+                time -= 1000
+            }
+            mili = time
+            document.getElementById("timer-time").innerHTML =
+                `${hours.toString().padStart(2, 0)}:${minutes.toString().padStart(2, 0)}:${seconds.toString().padStart(2, 0)}.${mili.toString().padStart(3, 0)}`
+        }
+
+        function printTime(time) {
+            let hours = 0
+            let minutes = 0
+            let seconds = 0
+            let mili = 0
+            //hours
+            while (time >= 3600000) {
+                hours++
+                time -= 3600000
+            }
+            //minutes
+            while (time >= 60000) {
+                minutes++
+                time -= 60000
+            }
+            //seconds
+            while (time >= 1000) {
+                seconds++
+                time -= 1000
+            }
+            return `${hours>0?hours+"h ":""}${minutes>0?minutes+"m ":""}${seconds>0?seconds+"s":""}`
+        }
+        
+        // aux
+        async function loadFont(fontName, fontURL) {
+            console.log(`loading font at ${fontURL} as '${fontName}'...`)
+            const customFont = new FontFace(fontName, `url(${fontURL})`);
+            await customFont.load().then(function (loadedFont) {
+                // Add the loaded font to the document context
+                document.fonts.add(loadedFont);
+                console.log(`font loaded!`)
+            }).catch(function (error) {
+                console.error("Font failed to load:", error);
+            });
+        }
+
+        async function copyCardToClipboard() {
+            canvas.toBlob(function (blob) {
+                const item = new ClipboardItem({
+                    "image/png": blob
+                });
+                navigator.clipboard.write([item]);
+            });
+        }
+        window.tagRoulette.copyCardToClipboard = copyCardToClipboard
+
+        async function downloadCard() {
+            canvas.toBlob(function (blob) {
+                let link = document.createElement('a');
+                link.style.display = 'none';
+                link.href = URL.createObjectURL(blob);
+                link.download = `tagRouletteCard`;
+                document.body.appendChild(link);
+                link.click()
+                setTimeout(() => {
+                    URL.revokeObjectURL(link.href);
+                    link.parentNode.removeChild(link);
+                }, 0);
+            });
+        }
+        window.tagRoulette.downloadCard = downloadCard
+
+        async function giveSampleTagList(params) {
+            if(confirm("this will copy snapps' default tag list to your clip board!\n\ni recommend pasting it in a text editor and getting a gist of the format.")){
+                let tags = 
+`breast_focus,1,;
+butt_focus,1,;
+balls_focus,1,;
+belly_focus,1,;
+teats_focus,2,;
+milking,1,;
+pregnant,1,;
+lactation,1,;
+exhibitionism,1,;
+expansion,1,;
+accident,1,;
+stuffing,2,;
+somnophilia,2,;
+oviposition,2,;
+puffy_anus,2,;
+smothering,1,;
+face_sitting,2,;
+macro,2,;
+size_difference,1,;
+low-angle_view,1,;
+high-angle_view,1,;
+pov,1,;
+stuck,1,;
+squish,1,;
+breastfeeding,2,;
+buttplug,1,;
+hyper,2,;
+weight_gain,1,;
+suspension,1,;
+obese,1,;
+bullying,2,;
+bondage,1,;
+office,1,;
+bedroom,1,;
+poolside,1,;
+beach,1,;
+maid,1,;
+workout,1,;
+tentacles,2,;
+party,1,;
+magic,1,;
+exessive_cum,2,;
+worship,2,;
+`
+                try {
+                    await navigator.clipboard.writeText(tags);
+                } catch (error) {
+                    console.error(error.message);
+                }
+            }
+        } 
+        window.tagRoulette.giveSampleTagList = giveSampleTagList
+
+        // --- init script ---
+        console.log("checking for local data...")
+        let userData = tr.loadUserData("USER_DATA") //check for local data
+        if(userData == null){
+            console.warn("user data not found!")
+            userData = {
+                settings:{},
+                tags:{}
+            }
+            setDefaultSettings()
+            // load default settings
+        }else{
+            console.log("user data found!",userData)
+            // do some validation
+        }
+
+        
+        // write data to ui
+        loadData()
+
+        //update gui
+        updateGUI()
+
+        // draw card (assume placeholder tag)
+        drawCard()
+
+    </script>
+</body>
+
+</html>
