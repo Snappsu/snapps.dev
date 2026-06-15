@@ -211,7 +211,7 @@
 
         function importTags(){
             let propmpText = `Paste you tag list below!\n\nFormat: <tag_name>,<tag_spice>,<tag_description?>;`
-            let defaultText = `tag_one,1,;tag_two_,2,Description optional!;`
+            let defaultText = `tag_one,1,;tag_two,2,Description optional!;`
             let dataIn = prompt(propmpText, defaultText)
             userData.tags = tr.importTags(dataIn)
             unsavedData = true
@@ -715,7 +715,7 @@
         window.tagRoulette.downloadCard = downloadCard
 
         async function giveSampleTagList(params) {
-            if(confirm("this will copy snapps' default tag list to your clip board!\n\ni recommend pasting it in a text editor and getting a gist of the format.")){
+            if(confirm("this will copy snapps' default tag list to your clipboard! \n\ni recommend pasting it in a text editor messing with it before importing.")){
                 let tags = 
 `breast_focus,1,;
 butt_focus,1,;
