@@ -136,6 +136,7 @@
     </div>
 
     <div id="footer">
+        <a onclick="tagRoulette.restoreBackup()">Restore Backup</a>
     </div>
 
     <script type="module">
@@ -201,6 +202,7 @@
 
             currentTag = tr.rollTag(userData.tags, userData.settings.maxSpice ,currentTag)
 
+            makeBackup()
             updateGUI()
             drawCard()
 
@@ -357,6 +359,39 @@
             updateGUI();
         }
         window.tagRoulette.saveData = saveData
+
+        //to be called after every roll
+        function makeBackup(){
+            console.log("making backup!")
+            let data= {}
+            data.rolls = rolls
+            data.currentTag = currentTag
+            //data.timeElapsed = timeElapsed // godspeed user; i don't wanna kill your hard drive so i won't bother saving it
+            // save date?
+            tr.saveUserData(data,"BACKUP_DATA")
+        }
+
+        function backupFound(){
+            console.log("checking for backup...")
+            let found = false
+            try {
+                let backupData = tr.loadUserData("BACKUP_DATA")
+                found = true
+            } catch (error) {
+                
+            }
+            console.log(found?"backup found!":"backup not found!")
+            return found
+        }
+        
+        function restoreBackup(){
+            console.log("restoring backup!")
+            let backupData = tr.loadUserData("BACKUP_DATA")
+            rolls = backupData.rolls
+            currentTag = backupData.currentTag 
+            drawCard()
+        }
+        window.tagRoulette.restoreBackup = restoreBackup
 
         function setDefaultSettings(){
             console.log("setting user settings to defaults...")
@@ -789,6 +824,9 @@ worship,2,;
         
         // write data to ui
         loadData()
+
+        // check for backup
+        if(backupFound())
 
         //update gui
         updateGUI()

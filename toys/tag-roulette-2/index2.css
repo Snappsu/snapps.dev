@@ -300,6 +300,9 @@ summary {
     z-index: 2;
     grid-area: f;
     background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #timer {
@@ -452,4 +455,16 @@ summary {
     0%{box-shadow:0 0 0px var(--color);}
     50%{box-shadow: 0 0 10px var(--color);}
     100%{box-shadow: 0 0 0px var(--color);}
+}
+
+#footer a {
+    color:#00bcd4;
+    background: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#footer a:hover{
+    background: #444;
 }
