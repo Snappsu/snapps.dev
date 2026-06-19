@@ -1,16 +1,16 @@
-nav{
+nav {
     top: 0px;
     transform: translateX(-16px);
     display: flex;
     position: sticky;
-    width: calc(100% + 32px) ;
+    width: calc(100% + 32px);
     height: 32px;
     justify-content: space-around;
     align-items: flex-start;
     z-index: 1;
 }
 
-nav > a{
+nav>a {
     font-family: octosquare;
     color: #fff !important;
     display: flex;
@@ -26,17 +26,19 @@ nav > a{
     text-shadow: 0 0 2px #000;
 }
 
-nav > a:hover {
+nav>a:hover {
     padding-top: 8px;
 }
 
-nav > a:hover:nth-child(3n + 1) {
+nav>a:hover:nth-child(3n + 1) {
     background-color: var(--color-cyan);
 }
-nav > a:hover:nth-child(3n + 2) {
+
+nav>a:hover:nth-child(3n + 2) {
     background-color: var(--color-magenta);
 }
-nav > a:hover:nth-child(3n + 3) {
+
+nav>a:hover:nth-child(3n + 3) {
     background-color: var(--color-yellow);
 }
 
@@ -198,7 +200,7 @@ summary {
     font-size: 1.5em;
 }
 
-details h1{
+details h1 {
     font-size: 2em !important;
 }
 
@@ -213,17 +215,17 @@ img.notes {
     img.notes {
         filter: invert(1) hue-rotate(180deg) saturate(5);
     }
-    
-article a[href]::after{
-     filter: invert(1) hue-rotate(180deg) saturate();
-}
+
+    article a[href]::after {
+        filter: invert(1) hue-rotate(180deg) saturate();
+    }
 }
 
 blockquote {
     --color: #888888;
     position: relative;
     display: block;
-    background-color: rgb(from var(--color) r g b / .8);
+    background-color: hsl(from var(--color) h s 20 / .8);
     background-size: auto 100%;
     border-radius: 12px;
 
@@ -328,54 +330,122 @@ u {
     text-decoration-thickness: 2px;
 }
 
-b{color: var(--color-cyan);}
+b {
+    color: var(--color-cyan);
+}
 
-i{
+i {
     color: var(--color-yellow);
 }
 
 ol li::marker {
-  font-weight: bold;
-  font-family: octosquare;
+    font-weight: bold;
+    font-family: octosquare;
 }
 
-ol li:nth-child(3n+1)::marker{
-color: var(--color-cyan);
+ol li:nth-child(3n+1)::marker {
+    color: var(--color-cyan);
 }
-ol li:nth-child(3n+2)::marker{
-color: var(--color-magenta);
+
+ol li:nth-child(3n+2)::marker {
+    color: var(--color-magenta);
 }
-ol li:nth-child(3n+3)::marker{
-color: var(--color-yellow);
+
+ol li:nth-child(3n+3)::marker {
+    color: var(--color-yellow);
 }
 
 article a[href]::after {
     content: "W";
-color:transparent;
-background-position: .2em .2em;
-background-size: .9em;
-background-repeat: no-repeat;
-background-image:url(/res/img/icon/svg/external.svg);
+    color: transparent;
+    background-position: .2em .2em;
+    background-size: .9em;
+    background-repeat: no-repeat;
+    background-image: url(/res/img/icon/svg/external.svg);
 }
 
 span.bonus {
-    background-image: linear-gradient(90deg, var(--color-cyan),var(--color-magenta),var(--color-yellow),var(--color-cyan));
+    background-image: linear-gradient(90deg, var(--color-cyan), var(--color-magenta), var(--color-yellow), var(--color-cyan));
     animation: scrollHori 2s linear infinite;
     color: transparent;
     background-clip: text;
     background-size: 100px;
 }
 
-@keyframes scrollHori{
-    0% {background-position: 0;}
-    100%{background-position: 100px}
+@keyframes scrollHori {
+    0% {
+        background-position: 0;
+    }
+
+    100% {
+        background-position: 100px
+    }
 }
 
 
-pre{
+pre {
     width: 90%;
     margin: 1em auto;
     padding: .5em;
     border-radius: 12px;
     background-color: var(--color-background-2);
+}
+
+article a:has(img)::after {
+    position: absolute;
+    display: block;
+    font-size: 1em;
+    bottom: 20px;
+    text-shadow: 0 0 2px #fff;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    content: "(open in new tab)" !important;
+    background-image: none !important;
+    color: #000 !important;
+    opacity: 0;
+    transition: .2s
+}
+
+article a:has(img):hover::after {
+    font-size: 1em;
+    opacity: 1;
+    bottom: 15px;
+}
+
+article a:has(img) {
+    position: relative
+}
+
+#content-area article a.nsfw {
+    color: var(--color-magenta)
+}
+
+a:has(span.info), span:has(span.info) {
+    position: relative;
+    cursor: help;
+    text-decoration: underline dotted  !important;
+
+
+}
+
+*>span.info {
+        transition: .2s;
+    position: absolute;
+    display: inline;
+    color: #fff;
+    bottom: 1.1em;
+    left: max(-50%, -100px);
+    max-width: 200px;
+    width: max-content;
+    padding: .4em .6em;
+    border-radius: 5px;
+    background-color: #222;
+    opacity: 0;
+    z-index: -1;
+}
+
+*:hover>span.info {
+    opacity: 1;
+    z-index: 1;
 }

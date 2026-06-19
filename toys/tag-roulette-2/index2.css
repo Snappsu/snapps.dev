@@ -1,0 +1,470 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: grid;
+    grid-template:
+        "s d"calc(100% - 40px) "f f"40px / min(250px) 1fr;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes scroll {
+    0% {
+        background-position: 0px 0px;
+    }
+
+    100% {
+        background-position: 3vmax 3vmax
+    }
+
+}
+
+#display {
+    background-image: url("bg.png");
+    background-size: 3vmax;
+    image-rendering: pixelated;
+    perspective: 800px;
+    grid-area: d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+
+    animation: scroll 3s linear infinite;
+    background-color: #022;
+}
+
+#card-canvas {
+    image-rendering: auto;
+    transition: .2s;
+    box-shadow: 0px 0px 5px #000;
+    transform: rotateY(0deg);
+}
+
+canvas {
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    border: solid 1px #000;
+    backdrop-filter: blur(4px);
+}
+
+#canvas-options {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+#canvas-options a {
+    padding: .25em 2em;
+    background-color: #fff;
+    color: #000;
+    border: solid 3px var(--color);
+    filter: drop-shadow(0 0 4px #000);
+    transition: .2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+#canvas-options a:hover {
+    scale: 1.1;
+    transition: 0s;
+    background-color: var(--color);
+    color: #fff;
+    border-color: #fff;
+}
+
+#canvas-options a:active {
+    scale: 1.1;
+    transition: 0s;
+    background-color: var(--color);
+    color: #fff;
+    border: solid 3px #fff;
+    scale: 1.05;
+}
+
+#card-holder {
+    position: relative;
+}
+
+#card-holder span {
+    position: absolute;
+    color: #fff9;
+    text-align: center;
+    font-size: min(1em, 60%);
+}
+
+#card-measure-width {
+    left: 2px;
+    top: -1.7em;
+    right: 1px;
+    border-bottom: dashed 1px #fff9;
+}
+
+#card-measure-height {
+    top: 2px;
+    bottom: 6px;
+    left: -1.6em;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    border-right: dashed 1px #fff9;
+}
+
+#roulette-meta-data{
+    position: absolute;
+}
+
+.color:nth-child(3n+1) {
+    --color: #00bcd4
+}
+
+.color:nth-child(3n+2) {
+    --color: #ff0080
+}
+
+.color:nth-child(3n+3) {
+    --color: #ffd000
+}
+
+#sidebar {
+    grid-area: s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+overflow-y: auto;
+    color: #eee;
+    background-color: #333;
+    border-right: solid 1px #000;
+    filter: drop-shadow(0 0 5px #000);
+}
+
+#tag-container {
+    position: relative;
+    margin: 8px 0;
+}
+
+#tag-pages {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+#tag-pages>* {
+    text-align: center;
+    width: 100%;
+    background-color:#111;
+    transition: .1s;
+}
+
+#tag-pages>*:hover {
+    background-color: hsl(from var(--color) h s 30);
+}
+
+#tag-pages>*.selected {
+    background-color: hsl(from var(--color) h s l);
+}
+
+#tag-list {
+    background-color: #111;
+    height: 150px;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    display: flex;
+    padding: 4px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#tag-list > span {
+    padding: 2px 8px;
+    font-size: .8em;
+    background-color: #333;
+    border-radius: 10px ;
+    margin: 4px;
+    cursor: pointer;
+    height: 1.5em;
+    flex: -moz-available;
+    text-align: -webkit-left;
+    transition: .1s;
+    position: relative;
+
+}
+
+#tag-list > span:hover {
+    background-color: hsl(from var(--color) h s 25);
+
+}
+
+#tag-input {
+    display: flex;
+}
+
+#tag-input input {
+    width: 180px;
+    border: none;
+    height: 2em;
+    margin: 0;
+    background-color: #222;
+    color: #fff;
+}
+
+
+#tag-list > span > span {
+    right: 10px;
+    position: absolute;
+    opacity: 0;
+    transition: .2s;
+}
+
+#tag-list > span:hover > span {
+    right: 10px;
+    position: absolute;
+    opacity: 1;
+}
+
+
+
+#tag-input input:focus{    outline: none !important;}
+
+#tag-input button {
+    background-color: #222;
+    width: 33px;
+    height: calc(2em + 2px);
+    margin: 0;
+    color: #fff;
+    padding: 5px;
+    border: none;cursor: pointer;
+}
+
+#tag-input button:hover {
+    background-color: #9f0;
+    color: #222;
+}
+
+#menu {
+    padding: 0px 1em;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+details {
+    width: 100%;
+    margin-bottom: .5em;
+}
+
+details>span {
+    display: block;
+    text-align: left;
+    width: 100%;
+}
+
+summary {
+    width: 100%;
+    font-weight: bold;
+    box-sizing: border-box;
+    color: var(--color);
+    padding-bottom: 3px;
+    border-bottom: solid 1px;
+    text-align: left;
+}
+
+.center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.center.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#sidebar a {
+    color: #00bcd4;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#sidebar a:hover {
+    color: #0095a8;
+}
+
+#footer {
+    z-index: 2;
+    grid-area: f;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#timer {
+    position: relative;
+    margin: 32px;
+    width: 300px;
+    height: 130px;
+    padding: 24px 48px;
+    border-radius: 32px;
+    background-color: #555;
+    filter: drop-shadow(0 24px 0 #333) drop-shadow(0 0 6px #000);
+}
+
+@font-face {
+    font-family: LCD;
+    src: url(LCD1.ttf);
+}
+
+#timer-time {
+    position: absolute;
+    font-family: LCD;
+    left: 16px;
+    right: 16px;
+    height: 1em;
+    padding: 4px 8px;
+    font-size: 3em;
+    border-radius: 16px;
+    text-align: left;
+    user-select: none;
+    background-color: #c4ffbc;
+    color: #222;
+
+}
+
+#timer-time-bg {
+    user-select: none;
+    position: absolute;
+    font-family: LCD;
+    left: 16px;
+    right: 16px;
+    color: #2223;
+    padding: 4px 8px;
+    font-size: 3em;
+    border-radius: 16px;
+    text-align: left;
+}
+
+#timer-stop {
+    user-select: none;
+    position: absolute;
+    font-size: 3em;
+    top: 18px;
+    right: 24px;
+    color: #2223;
+
+}
+
+#timer-stop.active {
+    color: #222;
+}
+
+#timer-buttons {
+    box-sizing: border-box;
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    font-size: 1em;
+
+}
+
+#timer-buttons a {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 1em 2em;
+    border-radius: 12px;
+    transition: .1s;
+    user-select: none;
+}
+
+#timer-buttons a:nth-of-type(1) {
+    color: #eee;
+    background-color: #00bcd4;
+    --scolor: #007281;
+    filter: drop-shadow(0 8px 0 var(--scolor));
+}
+
+#timer-buttons a:nth-of-type(2) {
+    color: #333;
+    background-color: #ffd000;
+    --scolor: #8d7300;
+    filter: drop-shadow(0 8px 0 var(--scolor));
+}
+
+#timer-buttons a:nth-of-type(3) {
+    color: #fff;
+    background-color: #ff0080;
+    --scolor: #af0058;
+    filter: drop-shadow(0 8px 0 var(--scolor));
+}
+
+#timer-buttons a:hover {
+    transform: translateY(4px);
+    filter: drop-shadow(0 4px 0 var(--scolor));
+}
+
+#timer-buttons a:active {
+    transform: translateY(8px) scaleX(1.05);
+    filter: drop-shadow(0 0px 0 var(--scolor));
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+
+#unsaved-warn {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000b;
+    padding: 1em 2em;
+    border: solid 1px #000;
+    border-radius: 16px;
+    color: #fff;
+    animation: fadeIn .5s ease-out;
+}
+
+#unsaved-warn span:nth-child(1) {
+    font-size: 1.5em;
+    color: #ffd000;
+    margin-bottom: .25em;
+}
+
+#unsaved-warn a {
+    margin-top: .5em;
+    color: #00bcd4;
+}
+
+@keyframes glow {
+    0%{box-shadow:0 0 0px var(--color);}
+    50%{box-shadow: 0 0 10px var(--color);}
+    100%{box-shadow: 0 0 0px var(--color);}
+}
+
+#footer a {
+    color:#00bcd4;
+    background: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#footer a:hover{
+    background: #444;
+}
