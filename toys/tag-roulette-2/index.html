@@ -41,6 +41,8 @@
             <canvas id="card-canvas" width="0" height="0"></canvas>
             <span id="card-measure-width">width</span>
             <span id="card-measure-height">height</span>
+            <span id="card-hist-prev"></span>
+            <span id="card-hist-next"></span>
             <span id="roulette-meta-data"></span>
         </div>
         <div id="canvas-options">
@@ -188,23 +190,35 @@
         // local roulette stuff
         var currentTag = {name:"Click Roll!",spice:0,desc:"Roll a new tag!"}
         var currentPage;
+        var tagHistory = []
         var rolls = 0
+        var displayedRoll = rolls;
 
         // roulette related
         function rollRoulette() {
+            
+
             //increment
             rolls++
+            displayedRoll = rolls;
 
             //reset stuff
             resetTimerStuff()
 
+            // get new tag
             console.log("rolling roulette...")
-
             currentTag = tr.rollTag(userData.tags, userData.settings.maxSpice ,currentTag)
 
+            // add tag to history
+            let tempCard = currentTag;
+            tempCard.rollIndex = rolls
+            tagHistory.push(tempCard)
+            console.log(tagHistory)
+
+            // menu stuffs
             makeBackup()
             updateGUI()
-            drawCard()
+            drawCard(tagHistory[displayedRoll-1])
 
         }
         window.tagRoulette.rollRoulette = rollRoulette
@@ -366,6 +380,7 @@
             let data= {}
             data.rolls = rolls
             data.currentTag = currentTag
+            data.tagHistory = tagHistory
             //data.timeElapsed = timeElapsed // godspeed user; i don't wanna kill your hard drive so i won't bother saving it
             // save date?
             tr.saveUserData(data,"BACKUP_DATA")
@@ -389,7 +404,9 @@
             let backupData = tr.loadUserData("BACKUP_DATA")
             rolls = backupData.rolls
             currentTag = backupData.currentTag 
-            drawCard()
+            tagHistory = backupData.tagHistory
+            displayedRoll=rolls
+            drawCard(tagHistory[rolls-1])
         }
         window.tagRoulette.restoreBackup = restoreBackup
 
@@ -399,7 +416,12 @@
         }
 
         // gui
-        async function drawCard() {
+        async function drawCard(tagData=null) {
+
+            if (tagData==null){
+                tagData = currentTag
+                tagData.rollIndex = rolls
+            } 
 
             console.log('attempting to draw card...')
             // initialize
@@ -418,7 +440,7 @@
             // get roulette options
 
             // generate fields
-            currentFields['tag'] = currentTag.name
+            currentFields['tag'] = tagData.name
 
             let date = (new Date()).toUTCString().slice(5, 16)
             currentFields['date'] = date
@@ -429,7 +451,7 @@
             }
             // misc fields
             if (document.getElementById("field-roll-count").checked) currentFields['rolls'] =
-                `${rolls==1?"first try!":rolls}`
+                `${tagData.rollIndex==1?"first try!":tagData.rollIndex}`
 
 
             for (const field in currentFields) {
@@ -467,7 +489,31 @@
             document.getElementById("card-measure-width").innerHTML = `${minWidth} px`
             document.getElementById("card-measure-height").innerHTML = `${minHeight} px`
 
+            // history
+
+            if (rolls > 1){
+                if (displayedRoll > 1){
+                    document.getElementById("card-hist-prev").style.display = "flex"
+                    document.getElementById("card-hist-prev").onclick = ()=>{showTag(-1)}
+                } else {
+                    document.getElementById("card-hist-prev").style.display = "none"
+                }
+                if (displayedRoll<rolls) {
+                    document.getElementById("card-hist-next").style.display = "flex"
+                    document.getElementById("card-hist-next").onclick = ()=>{showTag(1)}
+                } else {
+                    document.getElementById("card-hist-next").style.display = "none"
+                }
+
+            }
+
             console.log('card rendering finished!')
+        }
+
+        function showTag(dir){
+            displayedRoll += dir
+            console.log(`displaying roll #${displayedRoll}`)
+            drawCard(tagHistory[displayedRoll-1])
         }
 
         function changeTagPage(page){
@@ -502,7 +548,7 @@
                 document.getElementById("unsaved-warn").style.display = "none"
             }
 
-            //tag 
+            //tag list
             let pages = []
             let tags = []
             let poolCount = 0
@@ -546,13 +592,11 @@
 
             // max spice 
             let maxSpice = Math.max(...pages) 
-            console.log(maxSpice)
             document.getElementById("max-spice-opt").max = maxSpice
             if (document.getElementById("max-spice-opt").value > maxSpice) document.getElementById("max-spice-opt").value = maxSpice
             document.getElementById("max-spice-opt").value = userData.settings.maxSpice;
             // roulette metadata
             document.getElementById("roulette-meta-data").innerText=`tags in pool: ${poolCount} | max spice: ${userData.settings.maxSpice}`
-
         }
 
         // timer stuff

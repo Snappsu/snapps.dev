@@ -114,6 +114,36 @@ canvas {
     border-right: dashed 1px #fff9;
 }
 
+
+
+span#card-hist-prev,span#card-hist-next {
+    display: none;
+     align-items: center;
+    justify-content: center;
+    font-size: 1em;
+     height: 32px;
+    width: 48px;
+    color: #000;
+    background-color: #fff;
+}
+
+span#card-hist-prev {
+    left: calc(-32px - 48px);
+    top:calc(50% - 16px);
+}
+span#card-hist-prev::before {
+content: 'prev';
+}
+
+span#card-hist-next {
+    left: calc(100% + 32px);
+    top:calc(50% - 16px);
+}
+span#card-hist-next::before {
+content: 'next';
+}
+
+
 #roulette-meta-data{
     position: absolute;
 }
