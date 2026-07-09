@@ -125,6 +125,22 @@ span#card-hist-prev,span#card-hist-next {
     width: 48px;
     color: #000;
     background-color: #fff;
+    animation: appear .4s ease-out 1 ;
+    border: solid 3px rgb(136, 212, 22); 
+    transition: .2s;
+}
+
+span#card-hist-prev:hover,span#card-hist-next:hover {
+        border: solid 3px #fff; 
+        background-color: rgb(136, 212, 22);
+        color: #fff !important;
+        scale: 1.1;
+  transition: 0s;
+}
+
+@keyframes appear {
+    0% {opacity: 0%;}
+    100% {opacity: 100%;}
 }
 
 span#card-hist-prev {
@@ -132,7 +148,7 @@ span#card-hist-prev {
     top:calc(50% - 16px);
 }
 span#card-hist-prev::before {
-content: 'prev';
+content: 'prev!';
 }
 
 span#card-hist-next {
@@ -140,7 +156,7 @@ span#card-hist-next {
     top:calc(50% - 16px);
 }
 span#card-hist-next::before {
-content: 'next';
+content: 'next!';
 }
 
 
