@@ -109,6 +109,7 @@
                         <select id="card-style-menu" name="card-style" onchange="window.tagRoulette.onMenuChange()">
                             <option value="matsaleh">matsaleh</option>
                             <option value="confortaa">confortaa</option>
+                            <option value="pisckl">pisckl</option>
                         </select>
                     </div>
                     <input type="number" id="font-size-opt" name="fontSize" min="8" value="48"
@@ -119,18 +120,36 @@
                     <input type="text" id="bg-color-opt" name="background-color" minlength="3" maxlength="9" value=""
                         placeholder="card hex color" onChange="window.tagRoulette.onMenuChange()"
                         onkeyup="window.tagRoulette.onMenuChange()" />
-                    <span>misc fields</span>
-                    <div><input type="checkbox" id="field-roll-count" name="field-roll-count"
+                    <span>displayed fields</span>
+                    <div id="menu-displayed-fields">
+                        <label for="m-df-date">
+                            <input type="checkbox" id="m-df-date" value="date" onChange="window.tagRoulette.onMenuChange()" >date
+                        </label>
+                        <label for="m-df-roll-count">
+                            <input type="checkbox" id="m-df-roll-count" value="roll count" onChange="window.tagRoulette.onMenuChange()" >roll count
+                        </label>
+<!--
+                        <input type="checkbox" id="field-date" name="field-date"
+                            onChange="window.tagRoulette.onMenuChange()"><label for="field-date">date</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="field-roll-count" name="field-roll-count"
                             onChange="window.tagRoulette.onMenuChange()"><label for="field-roll-count">roll
-                            count</label></div>
+                            count</label>
+-->
+
+                    </div>
                 </div>
             </details>
             <details class="color" open>
                 <summary>how to use</summary>
-                <p>in this new version, you can directly copy/download the roulette info and paste/import into your program of choice!</p>
+                <p>in this new version, you can directly copy/download the roulette info and paste/import into your
+                    program of choice!</p>
                 <p>no more having to take an ugly screenshot! the future is now~ 💖</p>
-                <p>just add some tags and don't forget to save! this time, data is properly saved to you browser storage</p>
-                <p><i>what's this 'spice' thing?</i> - it's a simple way to filter out kinker stuff from the pool if you're not feeling it.</p>
+                <p>just add some tags and don't forget to save! this time, data is properly saved to you browser storage
+                </p>
+                <p><i>what's this 'spice' thing?</i> - it's a simple way to filter out kinker stuff from the pool if
+                    you're not feeling it.</p>
                 <p>it's absolutely optional.</p>
                 <p>also no time limit yet, sorry...</p>
             </details>
@@ -174,6 +193,14 @@
                     sizeHeightRatio: 1
                 },
                 padding: 8,
+            },
+            pisckl: {
+                font: {
+                    name: 'pisckl',
+                    loc: 'Pisckl.ttf',
+                    sizeHeightRatio: .5
+                },
+                padding: 8,
             }
         }
 
@@ -184,7 +211,8 @@
             textColor: null,
             timer: true,
             maxSpice: 1,
-            showRollCount: true
+            showRollCount: true,
+            displayedFields: ['tag']
         }
 
         // local roulette stuff
@@ -336,8 +364,8 @@
             validHex ? userData.settings.cardColor = `#${validHex[1]}` : userData.settings.cardColor =  null
 
             // fields
-            // roll count
-            userData.settings.showRollCount=document.getElementById("field-roll-count").checked
+            userData.settings.displayedFields = menuGetFieldsToDisplay()
+  
 
             updateGUI()
             drawCard()
@@ -362,8 +390,16 @@
             // text color
             if(userData.settings.textColor) document.getElementById("font-color-opt").value =userData.settings.textColor
 
-            //show roll count
-            document.getElementById("field-roll-count").checked = userData.settings.showRollCount
+            // get displayed fields
+            Array.from(document.getElementById("menu-displayed-fields").children).map((element)=>{
+                if (element.children[0].checked) return element.children[0].checked=false //clear them first
+                
+            })
+            if(userData.settings.displayedFields){
+                userData.settings.displayedFields.forEach(field=>{
+                    document.getElementById(`m-df-${field.replace(" ","-")}`).checked=true
+                })
+            }
         }
 
         function saveData(){
@@ -437,23 +473,39 @@
             //generate fields
             // reset fields
             let currentFields = {}
+            let displayedFields = ['tag']
+            displayedFields = displayedFields.concat(menuGetFieldsToDisplay())
+            console.log(displayedFields)
+            
             // get roulette options
 
             // generate fields
-            currentFields['tag'] = tagData.name
+            displayedFields.forEach((field)=>{
+                switch (field) {
+                    case 'tag':
+                        currentFields['tag'] = tagData.name
+                        break;
+                    case 'date':
+                        let date = (new Date()).toUTCString().slice(5, 16)
+                        currentFields['date'] = date
+                        break;
+                    // if valid field not found
+                    case 'roll count':
+                        currentFields['rolls'] = `${tagData.rollIndex==1?"first try!":tagData.rollIndex}`
+                        break;
+                    case 'time':
+                        // only when timer is stopped
+                        if (timerStopped) {
+                            currentFields['time'] = printTime(timeElapsed)
+                        }
+                        break;
+                    default:
+                        // do nothing
+                        break;
+                }
+            })
 
-            let date = (new Date()).toUTCString().slice(5, 16)
-            currentFields['date'] = date
-
-            //timer fields
-            if (timerStopped) {
-                currentFields['time'] = printTime(timeElapsed)
-            }
-            // misc fields
-            if (document.getElementById("field-roll-count").checked) currentFields['rolls'] =
-                `${tagData.rollIndex==1?"first try!":tagData.rollIndex}`
-
-
+            // prepare labels
             for (const field in currentFields) {
                 let label = `${field.toUpperCase()}: ${currentFields[field].toUpperCase()}`
                 let labelWidth = Math.ceil(ctx.measureText(label).width);
@@ -461,7 +513,6 @@
                 totalFields++
                 labels.push(label)
             }
-
 
             // card size
             minWidth += (4 * cardStyle.padding)
@@ -478,8 +529,8 @@
 
             let currentY = cardStyle.padding
             labels.forEach(label => {
-                ctx.fillText(label, 2 * cardStyle.padding, userData.settings.textSize + currentY);
-                currentY += userData.settings.textSize*font.sizeHeightRatio
+                ctx.fillText(label, 2 * cardStyle.padding, Math.floor(userData.settings.textSize*font.sizeHeightRatio) + currentY);
+                currentY += Math.floor(userData.settings.textSize*font.sizeHeightRatio)
             });
 
             // if Timed
@@ -519,6 +570,16 @@
         function changeTagPage(page){
             currentPage = page
             updateGUI()
+        }
+
+        // so that adding a field does require cascading changes
+        function menuGetFieldsToDisplay(){
+            let fields = Array.from(document.getElementById("menu-displayed-fields").children).map((element)=>{
+                if (element.children[0].checked) return element.children[0].value
+                
+            })
+            fields=fields.filter(fields => fields!=undefined)
+            return fields
         }
 
         function updateGUI(){
