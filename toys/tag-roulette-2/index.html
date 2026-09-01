@@ -32,10 +32,16 @@
 <body>
 
     <div id="display">
-        <div id="unsaved-warn">
+        <div id="unsaved-warn" class="warning">
             <span>⚠ CAUTION ⚠</span>
             <span>you have unsaved data!</span>
             <a onClick="window.tagRoulette.saveData()">click here to save!</a>
+        </div>
+        <div id="outdated-warn" class="warning">
+            <span>⚠ CAUTION ⚠</span>
+            <span>your settings are outdated!</span>
+            <a onClick="window.tagRoulette.migrateData()">click here to migrage!</a>
+            <span>(your tags should be safe, but export them just in case!)</span>
         </div>
         <div id="card-holder">
             <canvas id="card-canvas" width="0" height="0"></canvas>
@@ -170,8 +176,12 @@
         // When adding new options:
         // - add default to DEFAULT_SETTINGS
         // - update loadData() and onMenuChange()
+        // - update CURRENT_VERSION
         // When adding buttons:
         // - make sure you add the function to the window somehow
+
+        const CURRENT_VERSION = 3
+
 
         //window setup
         window.tagRoulette={}
@@ -208,6 +218,7 @@
         }
 
         var DEFAULT_SETTINGS = {
+            version: CURRENT_VERSION,
             cardStyle: "matsaleh",
             cardColor: null,
             textSize: 64,
@@ -215,7 +226,7 @@
             timer: true,
             maxSpice: 1,
             showRollCount: true,
-            displayedFields: ['tag']
+            displayedFields: ['tag','date','roll count','time']
         }
 
         // local roulette stuff
@@ -375,11 +386,37 @@
         }
         window.tagRoulette.onMenuChange = onMenuChange
 
+        let outdatedData = false;
+        function validateUserDataVersion(userData){
+            console.log(`validaing user data... ${userData.settings.version == CURRENT_VERSION}!`)
+            if (userData.settings.version == CURRENT_VERSION){
+                return true
+            } else {
+                outdatedData = true
+                return false
+            }
+            return 
+        }
+        
+        function migrateData(){
+            console.log("migrating data...")
+            userData.settings = DEFAULT_SETTINGS
+
+            saveData()
+            console.log(unsavedData.settings)
+            outdatedData=false
+            updateGUI()
+        }
+        window.tagRoulette.migrateData = migrateData
+
+
         function loadData(){
+
             console.log("loading data into UI...")
             // card style
             // TODO make menu select font
-            document.getElementById("card-style-menu").children
+            document.getElementById("card-style-menu").value=userData.settings.cardStyle
+            console.log(document.getElementById("card-style-menu"))
 
             // card color
             if(userData.settings.cardColor)document.getElementById("bg-color-opt").value =userData.settings.cardColor
@@ -399,9 +436,14 @@
                 
             })
             if(userData.settings.displayedFields){
-                userData.settings.displayedFields.forEach(field=>{
-                    document.getElementById(`m-df-${field.replace(" ","-")}`).checked=true
+                 userData.settings.displayedFields.forEach(field=>{
+                    try {
+                        document.getElementById(`m-df-${field.replace(" ","-")}`).checked=true
+                    } catch (error) {
+                        
+                    }
                 })
+                
             }
         }
 
@@ -466,6 +508,7 @@
             // initialize
             let cardStyle = style[userData.settings.cardStyle]
             let font = cardStyle.font
+            
             let minWidth = 0
             let minHeight = 0
             let totalFields = 0
@@ -485,25 +528,31 @@
             // generate fields
             displayedFields.forEach((field)=>{
                 switch (field) {
+
                     case 'tag':
                         currentFields['tag'] = tagData.name
                         break;
+
                     case 'date':
                         let date = (new Date()).toUTCString().slice(5, 16)
                         currentFields['date'] = date
                         break;
+
                     // if valid field not found
                     case 'roll count':
                         currentFields['rolls'] = `${tagData.rollIndex==1?"first try!":tagData.rollIndex}`
                         break;
+
                     case 'time':
-                        // only when timer is stopped
-
-                        if (timerStopped) {
-                            currentFields['time'] = printTime(timeElapsed)
-                        } else currentFields['time'] = "ready to start"
-
+                        // only if using timer
+                        if(userData.settings.timer){
+                            // only when timer is stopped
+                            if (timerStopped) {
+                                currentFields['time'] = printTime(timeElapsed)
+                            } else currentFields['time'] = "ready to start"
+                        }
                         break;
+
                     default:
                         // do nothing
                         break;
@@ -612,6 +661,13 @@
                 document.getElementById("unsaved-warn").style.display = "flex"
             } else {
                 document.getElementById("unsaved-warn").style.display = "none"
+            }
+
+            // unsaved data notif
+            if (outdatedData) {
+                document.getElementById("outdated-warn").style.display = "flex"
+            } else {
+                document.getElementById("outdated-warn").style.display = "none"
             }
 
             //tag list
@@ -929,11 +985,13 @@ worship,2,;
         }else{
             console.log("user data found!",userData)
             // do some validation
+            if (validateUserDataVersion(userData)){
+                // write data to ui
+                loadData()
+            } else {
+                // panik
+            }
         }
-
-        
-        // write data to ui
-        loadData()
 
         // check for backup
         if(backupFound())
