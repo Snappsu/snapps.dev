@@ -128,6 +128,9 @@
                         <label for="m-df-roll-count">
                             <input type="checkbox" id="m-df-roll-count" value="roll count" onChange="window.tagRoulette.onMenuChange()" >roll count
                         </label>
+                        <label for="m-df-time">
+                            <input type="checkbox" id="m-df-time" value="time" onChange="window.tagRoulette.onMenuChange()" >time
+                        </label>
 <!--
                         <input type="checkbox" id="field-date" name="field-date"
                             onChange="window.tagRoulette.onMenuChange()"><label for="field-date">date</label>
@@ -495,9 +498,11 @@
                         break;
                     case 'time':
                         // only when timer is stopped
+
                         if (timerStopped) {
                             currentFields['time'] = printTime(timeElapsed)
-                        }
+                        } else currentFields['time'] = "ready to start"
+
                         break;
                     default:
                         // do nothing
