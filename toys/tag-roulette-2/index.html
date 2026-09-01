@@ -32,15 +32,23 @@
 <body>
 
     <div id="display">
-        <div id="unsaved-warn">
+        <div id="unsaved-warn" class="warning">
             <span>⚠ CAUTION ⚠</span>
             <span>you have unsaved data!</span>
             <a onClick="window.tagRoulette.saveData()">click here to save!</a>
+        </div>
+        <div id="outdated-warn" class="warning">
+            <span>⚠ CAUTION ⚠</span>
+            <span>your settings are outdated!</span>
+            <a onClick="window.tagRoulette.migrateData()">click here to migrage!</a>
+            <span>(your tags should be safe, but export them just in case!)</span>
         </div>
         <div id="card-holder">
             <canvas id="card-canvas" width="0" height="0"></canvas>
             <span id="card-measure-width">width</span>
             <span id="card-measure-height">height</span>
+            <span id="card-hist-prev"></span>
+            <span id="card-hist-next"></span>
             <span id="roulette-meta-data"></span>
         </div>
         <div id="canvas-options">
@@ -107,6 +115,7 @@
                         <select id="card-style-menu" name="card-style" onchange="window.tagRoulette.onMenuChange()">
                             <option value="matsaleh">matsaleh</option>
                             <option value="confortaa">confortaa</option>
+                            <option value="pisckl">pisckl</option>
                         </select>
                     </div>
                     <input type="number" id="font-size-opt" name="fontSize" min="8" value="48"
@@ -117,18 +126,39 @@
                     <input type="text" id="bg-color-opt" name="background-color" minlength="3" maxlength="9" value=""
                         placeholder="card hex color" onChange="window.tagRoulette.onMenuChange()"
                         onkeyup="window.tagRoulette.onMenuChange()" />
-                    <span>misc fields</span>
-                    <div><input type="checkbox" id="field-roll-count" name="field-roll-count"
+                    <span>displayed fields</span>
+                    <div id="menu-displayed-fields">
+                        <label for="m-df-date">
+                            <input type="checkbox" id="m-df-date" value="date" onChange="window.tagRoulette.onMenuChange()" >date
+                        </label>
+                        <label for="m-df-roll-count">
+                            <input type="checkbox" id="m-df-roll-count" value="roll count" onChange="window.tagRoulette.onMenuChange()" >roll count
+                        </label>
+                        <label for="m-df-time">
+                            <input type="checkbox" id="m-df-time" value="time" onChange="window.tagRoulette.onMenuChange()" >time
+                        </label>
+<!--
+                        <input type="checkbox" id="field-date" name="field-date"
+                            onChange="window.tagRoulette.onMenuChange()"><label for="field-date">date</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="field-roll-count" name="field-roll-count"
                             onChange="window.tagRoulette.onMenuChange()"><label for="field-roll-count">roll
-                            count</label></div>
+                            count</label>
+-->
+
+                    </div>
                 </div>
             </details>
             <details class="color" open>
                 <summary>how to use</summary>
-                <p>in this new version, you can directly copy/download the roulette info and paste/import into your program of choice!</p>
+                <p>in this new version, you can directly copy/download the roulette info and paste/import into your
+                    program of choice!</p>
                 <p>no more having to take an ugly screenshot! the future is now~ 💖</p>
-                <p>just add some tags and don't forget to save! this time, data is properly saved to you browser storage</p>
-                <p><i>what's this 'spice' thing?</i> - it's a simple way to filter out kinker stuff from the pool if you're not feeling it.</p>
+                <p>just add some tags and don't forget to save! this time, data is properly saved to you browser storage
+                </p>
+                <p><i>what's this 'spice' thing?</i> - it's a simple way to filter out kinker stuff from the pool if
+                    you're not feeling it.</p>
                 <p>it's absolutely optional.</p>
                 <p>also no time limit yet, sorry...</p>
             </details>
@@ -146,8 +176,12 @@
         // When adding new options:
         // - add default to DEFAULT_SETTINGS
         // - update loadData() and onMenuChange()
+        // - update CURRENT_VERSION
         // When adding buttons:
         // - make sure you add the function to the window somehow
+
+        const CURRENT_VERSION = 3
+
 
         //window setup
         window.tagRoulette={}
@@ -172,39 +206,61 @@
                     sizeHeightRatio: 1
                 },
                 padding: 8,
+            },
+            pisckl: {
+                font: {
+                    name: 'pisckl',
+                    loc: 'Pisckl.ttf',
+                    sizeHeightRatio: .5
+                },
+                padding: 8,
             }
         }
 
         var DEFAULT_SETTINGS = {
+            version: CURRENT_VERSION,
             cardStyle: "matsaleh",
             cardColor: null,
             textSize: 64,
             textColor: null,
             timer: true,
             maxSpice: 1,
-            showRollCount: true
+            showRollCount: true,
+            displayedFields: ['tag','date','roll count','time']
         }
 
         // local roulette stuff
         var currentTag = {name:"Click Roll!",spice:0,desc:"Roll a new tag!"}
         var currentPage;
+        var tagHistory = []
         var rolls = 0
+        var displayedRoll = rolls;
 
         // roulette related
         function rollRoulette() {
+            
+
             //increment
             rolls++
+            displayedRoll = rolls;
 
             //reset stuff
             resetTimerStuff()
 
+            // get new tag
             console.log("rolling roulette...")
-
             currentTag = tr.rollTag(userData.tags, userData.settings.maxSpice ,currentTag)
 
+            // add tag to history
+            let tempCard = currentTag;
+            tempCard.rollIndex = rolls
+            tagHistory.push(tempCard)
+            console.log(tagHistory)
+
+            // menu stuffs
             makeBackup()
             updateGUI()
-            drawCard()
+            drawCard(tagHistory[displayedRoll-1])
 
         }
         window.tagRoulette.rollRoulette = rollRoulette
@@ -322,19 +378,45 @@
             validHex ? userData.settings.cardColor = `#${validHex[1]}` : userData.settings.cardColor =  null
 
             // fields
-            // roll count
-            userData.settings.showRollCount=document.getElementById("field-roll-count").checked
+            userData.settings.displayedFields = menuGetFieldsToDisplay()
+  
 
             updateGUI()
             drawCard()
         }
         window.tagRoulette.onMenuChange = onMenuChange
 
+        let outdatedData = false;
+        function validateUserDataVersion(userData){
+            console.log(`validaing user data... ${userData.settings.version == CURRENT_VERSION}!`)
+            if (userData.settings.version == CURRENT_VERSION){
+                return true
+            } else {
+                outdatedData = true
+                return false
+            }
+            return 
+        }
+        
+        function migrateData(){
+            console.log("migrating data...")
+            userData.settings = DEFAULT_SETTINGS
+
+            saveData()
+            console.log(unsavedData.settings)
+            outdatedData=false
+            updateGUI()
+        }
+        window.tagRoulette.migrateData = migrateData
+
+
         function loadData(){
+
             console.log("loading data into UI...")
             // card style
             // TODO make menu select font
-            document.getElementById("card-style-menu").children
+            document.getElementById("card-style-menu").value=userData.settings.cardStyle
+            console.log(document.getElementById("card-style-menu"))
 
             // card color
             if(userData.settings.cardColor)document.getElementById("bg-color-opt").value =userData.settings.cardColor
@@ -348,8 +430,21 @@
             // text color
             if(userData.settings.textColor) document.getElementById("font-color-opt").value =userData.settings.textColor
 
-            //show roll count
-            document.getElementById("field-roll-count").checked = userData.settings.showRollCount
+            // get displayed fields
+            Array.from(document.getElementById("menu-displayed-fields").children).map((element)=>{
+                if (element.children[0].checked) return element.children[0].checked=false //clear them first
+                
+            })
+            if(userData.settings.displayedFields){
+                 userData.settings.displayedFields.forEach(field=>{
+                    try {
+                        document.getElementById(`m-df-${field.replace(" ","-")}`).checked=true
+                    } catch (error) {
+                        
+                    }
+                })
+                
+            }
         }
 
         function saveData(){
@@ -366,6 +461,7 @@
             let data= {}
             data.rolls = rolls
             data.currentTag = currentTag
+            data.tagHistory = tagHistory
             //data.timeElapsed = timeElapsed // godspeed user; i don't wanna kill your hard drive so i won't bother saving it
             // save date?
             tr.saveUserData(data,"BACKUP_DATA")
@@ -389,7 +485,9 @@
             let backupData = tr.loadUserData("BACKUP_DATA")
             rolls = backupData.rolls
             currentTag = backupData.currentTag 
-            drawCard()
+            tagHistory = backupData.tagHistory
+            displayedRoll=rolls
+            drawCard(tagHistory[rolls-1])
         }
         window.tagRoulette.restoreBackup = restoreBackup
 
@@ -399,12 +497,18 @@
         }
 
         // gui
-        async function drawCard() {
+        async function drawCard(tagData=null) {
+
+            if (tagData==null){
+                tagData = currentTag
+                tagData.rollIndex = rolls
+            } 
 
             console.log('attempting to draw card...')
             // initialize
             let cardStyle = style[userData.settings.cardStyle]
             let font = cardStyle.font
+            
             let minWidth = 0
             let minHeight = 0
             let totalFields = 0
@@ -415,23 +519,47 @@
             //generate fields
             // reset fields
             let currentFields = {}
+            let displayedFields = ['tag']
+            displayedFields = displayedFields.concat(menuGetFieldsToDisplay())
+            console.log(displayedFields)
+            
             // get roulette options
 
             // generate fields
-            currentFields['tag'] = currentTag.name
+            displayedFields.forEach((field)=>{
+                switch (field) {
 
-            let date = (new Date()).toUTCString().slice(5, 16)
-            currentFields['date'] = date
+                    case 'tag':
+                        currentFields['tag'] = tagData.name
+                        break;
 
-            //timer fields
-            if (timerStopped) {
-                currentFields['time'] = printTime(timeElapsed)
-            }
-            // misc fields
-            if (document.getElementById("field-roll-count").checked) currentFields['rolls'] =
-                `${rolls==1?"first try!":rolls}`
+                    case 'date':
+                        let date = (new Date()).toUTCString().slice(5, 16)
+                        currentFields['date'] = date
+                        break;
 
+                    // if valid field not found
+                    case 'roll count':
+                        currentFields['rolls'] = `${tagData.rollIndex==1?"first try!":tagData.rollIndex}`
+                        break;
 
+                    case 'time':
+                        // only if using timer
+                        if(userData.settings.timer){
+                            // only when timer is stopped
+                            if (timerStopped) {
+                                currentFields['time'] = printTime(timeElapsed)
+                            } else currentFields['time'] = "ready to start"
+                        }
+                        break;
+
+                    default:
+                        // do nothing
+                        break;
+                }
+            })
+
+            // prepare labels
             for (const field in currentFields) {
                 let label = `${field.toUpperCase()}: ${currentFields[field].toUpperCase()}`
                 let labelWidth = Math.ceil(ctx.measureText(label).width);
@@ -439,7 +567,6 @@
                 totalFields++
                 labels.push(label)
             }
-
 
             // card size
             minWidth += (4 * cardStyle.padding)
@@ -456,8 +583,8 @@
 
             let currentY = cardStyle.padding
             labels.forEach(label => {
-                ctx.fillText(label, 2 * cardStyle.padding, userData.settings.textSize + currentY);
-                currentY += userData.settings.textSize*font.sizeHeightRatio
+                ctx.fillText(label, 2 * cardStyle.padding, Math.floor(userData.settings.textSize*font.sizeHeightRatio) + currentY);
+                currentY += Math.floor(userData.settings.textSize*font.sizeHeightRatio)
             });
 
             // if Timed
@@ -467,12 +594,46 @@
             document.getElementById("card-measure-width").innerHTML = `${minWidth} px`
             document.getElementById("card-measure-height").innerHTML = `${minHeight} px`
 
+            // history
+
+            if (rolls > 1){
+                if (displayedRoll > 1){
+                    document.getElementById("card-hist-prev").style.display = "flex"
+                    document.getElementById("card-hist-prev").onclick = ()=>{showTag(-1)}
+                } else {
+                    document.getElementById("card-hist-prev").style.display = "none"
+                }
+                if (displayedRoll<rolls) {
+                    document.getElementById("card-hist-next").style.display = "flex"
+                    document.getElementById("card-hist-next").onclick = ()=>{showTag(1)}
+                } else {
+                    document.getElementById("card-hist-next").style.display = "none"
+                }
+
+            }
+
             console.log('card rendering finished!')
+        }
+
+        function showTag(dir){
+            displayedRoll += dir
+            console.log(`displaying roll #${displayedRoll}`)
+            drawCard(tagHistory[displayedRoll-1])
         }
 
         function changeTagPage(page){
             currentPage = page
             updateGUI()
+        }
+
+        // so that adding a field does require cascading changes
+        function menuGetFieldsToDisplay(){
+            let fields = Array.from(document.getElementById("menu-displayed-fields").children).map((element)=>{
+                if (element.children[0].checked) return element.children[0].value
+                
+            })
+            fields=fields.filter(fields => fields!=undefined)
+            return fields
         }
 
         function updateGUI(){
@@ -502,7 +663,14 @@
                 document.getElementById("unsaved-warn").style.display = "none"
             }
 
-            //tag 
+            // unsaved data notif
+            if (outdatedData) {
+                document.getElementById("outdated-warn").style.display = "flex"
+            } else {
+                document.getElementById("outdated-warn").style.display = "none"
+            }
+
+            //tag list
             let pages = []
             let tags = []
             let poolCount = 0
@@ -546,13 +714,11 @@
 
             // max spice 
             let maxSpice = Math.max(...pages) 
-            console.log(maxSpice)
             document.getElementById("max-spice-opt").max = maxSpice
             if (document.getElementById("max-spice-opt").value > maxSpice) document.getElementById("max-spice-opt").value = maxSpice
             document.getElementById("max-spice-opt").value = userData.settings.maxSpice;
             // roulette metadata
             document.getElementById("roulette-meta-data").innerText=`tags in pool: ${poolCount} | max spice: ${userData.settings.maxSpice}`
-
         }
 
         // timer stuff
@@ -819,11 +985,13 @@ worship,2,;
         }else{
             console.log("user data found!",userData)
             // do some validation
+            if (validateUserDataVersion(userData)){
+                // write data to ui
+                loadData()
+            } else {
+                // panik
+            }
         }
-
-        
-        // write data to ui
-        loadData()
 
         // check for backup
         if(backupFound())
